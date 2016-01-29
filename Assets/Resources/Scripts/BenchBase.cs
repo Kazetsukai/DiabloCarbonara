@@ -8,7 +8,9 @@ public class BenchBase : MonoBehaviour
 
 	public virtual IngredientBase Interact()
 	{
-		return contents;
+		var temp = contents;
+		contents = null;
+        return temp;
 	}
 
 	public bool Put(IngredientBase item)
@@ -21,6 +23,11 @@ public class BenchBase : MonoBehaviour
 		// Can I receive this item?
 		if (!CanIReceive(item))
 			return false;
+
+		// Get it
+		item.gameObject.transform.position = transform.position;
+		item.gameObject.transform.parent = transform;
+		contents = item;
 
 		return true;
 	}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PanBench : BenchBase
 {
-	public float progress { get; set; }
+	public float progress;
 
 	private bool progressingThisFrame;
 	private readonly float PROGRESS_SPEED = 3;
@@ -12,7 +12,10 @@ public class PanBench : BenchBase
 	{
 		if (progress >= 1)
 		{
-			return contents;
+			progress = 0;
+			var temp = contents;
+			contents = null;
+            return temp;
 		}
 		else
 		{
