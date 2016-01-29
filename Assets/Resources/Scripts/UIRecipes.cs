@@ -88,7 +88,7 @@ public class UIRecipes : MonoBehaviour {
         return ingredientPanel;
     }
 
-    GameObject MakeIngredient(string ingredientShape)
+    /*GameObject MakeIngredient(string ingredientShape)
     {
         switch (ingredientShape)
         {
@@ -103,7 +103,7 @@ public class UIRecipes : MonoBehaviour {
 
                 break;
         }
-    }
+    }*/
 
     GameObject MakeIngredientTask(IngredientTask task)
     {
