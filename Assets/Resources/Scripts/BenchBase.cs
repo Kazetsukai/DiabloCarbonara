@@ -10,7 +10,7 @@ public class BenchBase : MonoBehaviour
 	{
 		var temp = contents;
 		contents = null;
-        return temp;
+		return temp;
 	}
 
 	public bool Put(IngredientBase item)
@@ -39,6 +39,9 @@ public class BenchBase : MonoBehaviour
 
 	public void Update()
 	{
-		Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
+		if (contents != null)
+		{
+			Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
+		}
 	}
 }

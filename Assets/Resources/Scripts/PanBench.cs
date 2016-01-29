@@ -8,6 +8,8 @@ public class PanBench : BenchBase
 	private bool progressingThisFrame;
 	private readonly float PROGRESS_SPEED = 3;
 
+	public GUITexture progressImage;
+
 	public override IngredientBase Interact()
 	{
 		if (progress >= 1)
