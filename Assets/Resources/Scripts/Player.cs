@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
 		//Move player when horizontal or vertical input is given
 		var input = GetInput();
         var dirVect = new Vector3(input.x, 0, input.y);
+
+        // Redirect based on camera angle
         dirVect = Quaternion.FromToRotation(Vector3.forward, TrimY(Camera.allCameras[0].transform.forward)) * dirVect;
 
         if (input.magnitude > 0)
