@@ -80,13 +80,13 @@ public class Player : MonoBehaviour
             // Do a cheap selection effect
             if (CurrentInteractable != null)
             {
-                var mat = CurrentInteractable.GetComponent<Renderer>().material;
+                var mat = CurrentInteractible.GetComponentInChildren<Renderer>().material;
                 mat.SetColor("_EmissionColor", Color.black);
                 mat.DisableKeyword("_EMISSION");
             }
             if (touchedObject != null)
             {
-                var mat = touchedObject.GetComponent<Renderer>().material;
+                var mat = touchedObject.GetComponentInChildren<Renderer>().material;
                 mat.SetColor("_EmissionColor", SelectColor);
                 mat.EnableKeyword("_EMISSION");
             }
