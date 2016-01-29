@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -19,10 +21,11 @@ public class Player : MonoBehaviour
     public float RotationSpeed = 10f;
     public float InteractReach = 1f;
 
-    public BenchBase CurrentInteractible { get; private set; }
+    public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
 
     public Color SelectColor;
+    private List<BenchBase> _touchedBenches = new List<BenchBase>();
     
 	void Start()
 	{
@@ -64,38 +67,20 @@ public class Player : MonoBehaviour
             transform.forward = Vector3.RotateTowards(transform.forward, _controller.velocity, redirectSpeed * Time.fixedDeltaTime * RotationSpeed, 100);
 
         // Selection
-        RaycastHit rayHit;
-        
-        BenchBase touchedObject = null;
-        for (int down = 0; down < 3; down++)
-        {
-            if (touchedObject == null)
-                for (int i = 0; i < 36; i++)
-                {
-                    // Scan outwards for object
-                    var ray = new Ray(transform.position,
-                        Quaternion.Euler(0, i * 10, 0) * 
-                        (transform.forward + transform.up * (-down / 4)));
-
-                    Debug.DrawRay(transform.position, ray.direction * InteractReach);
-
-                    if (Physics.Raycast(ray, out rayHit, InteractReach))
-                    {
-                        touchedObject = rayHit.collider.gameObject.GetComponent<BenchBase>();
-                        if (touchedObject != null)
-                            break;
-                    }
-                }
-        }
+        BenchBase touchedObject = _touchedBenches.Select(b => new
+            {
+                Me = b,
+                Dist = (b.transform.position - transform.position).magnitude
+            }).OrderBy(x => x.Dist).Select(x => x.Me).FirstOrDefault();
 
 
         // If the thing we are touching is not what we were touching
-        if (touchedObject != CurrentInteractible)
+        if (touchedObject != CurrentInteractable)
         {
             // Do a cheap selection effect
-            if (CurrentInteractible != null)
+            if (CurrentInteractable != null)
             {
-                var mat = CurrentInteractible.GetComponent<Renderer>().material;
+                var mat = CurrentInteractable.GetComponent<Renderer>().material;
                 mat.SetColor("_EmissionColor", Color.black);
                 mat.DisableKeyword("_EMISSION");
             }
@@ -106,7 +91,7 @@ public class Player : MonoBehaviour
                 mat.EnableKeyword("_EMISSION");
             }
 
-            CurrentInteractible = touchedObject;
+            CurrentInteractable = touchedObject;
         }
     }
 
@@ -120,7 +105,7 @@ public class Player : MonoBehaviour
 		if (HeldItem != null)
 		{
 			print("put");
-			if (CurrentInteractible != null && CurrentInteractible.Put(HeldItem))
+			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
 				HeldItem = null;
 			}
@@ -132,7 +117,7 @@ public class Player : MonoBehaviour
 		else
 		{
 			print("get");
-			var item = CurrentInteractible == null ? null : CurrentInteractible.Interact();
+			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
 			if (item != null)
 			{
 				HeldItem = item;
@@ -144,16 +129,23 @@ public class Player : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		print("hit");
-
 		var benchBase = other.gameObject.GetComponent<BenchBase>();
-		if (benchBase != null)
+		if (benchBase != null && !_touchedBenches.Contains(benchBase))
 		{
-			CurrentInteractible = benchBase;
+            _touchedBenches.Add(benchBase);
 		}
-	}
+    }
 
-	Vector2 GetInput()
+    void OnTriggerExit(Collider other)
+    {
+        var benchBase = other.gameObject.GetComponent<BenchBase>();
+        if (benchBase != null && _touchedBenches.Contains(benchBase))
+        {
+            _touchedBenches.Remove(benchBase);
+        }
+    }
+
+    Vector2 GetInput()
 	{
 		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
 	}
