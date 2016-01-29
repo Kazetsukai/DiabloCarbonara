@@ -4,7 +4,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
-	CharacterController controller;
+	private CharacterController _controller;
 
 	[Header("Input Axis Names")]
 	[SerializeField]
@@ -15,14 +15,16 @@ public class Player : MonoBehaviour
 	string InteractButtonAxis;
 
 	[Header("Movement Parameters")]
-	public float MoveSpeed = 1f;
+    public float MoveSpeed = 1f;
+    public float RotationSpeed = 10f;
 
-	public BenchBase CurrentInteractible { get; private set; }
+    public BenchBase CurrentInteractible { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
+    
     
 	void Start()
 	{
-		controller = GetComponent<CharacterController>();
+		_controller = GetComponent<CharacterController>();
 	}
 
 	void Update()
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
 
         if (input.magnitude > 0)
 		{
-			controller.SimpleMove(dirVect * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
+			_controller.SimpleMove(dirVect * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
 		}
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
@@ -50,6 +52,15 @@ public class Player : MonoBehaviour
 			Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
 		}
 	}
+
+    void FixedUpdate()
+    {
+        // Change direction to facing
+        var redirectSpeed = (float)Math.Tanh(_controller.velocity.magnitude / 10f);
+
+        if (redirectSpeed > 0)
+            transform.forward = Vector3.RotateTowards(transform.forward, _controller.velocity, redirectSpeed * Time.fixedDeltaTime * RotationSpeed, 100);
+    }
 
     private Vector3 TrimY(Vector3 forward)
     {
