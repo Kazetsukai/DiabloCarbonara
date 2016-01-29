@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
 
     public BenchBase CurrentInteractible { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
-    
+
+    public Color SelectColor;
     
 	void Start()
 	{
@@ -66,17 +67,25 @@ public class Player : MonoBehaviour
         RaycastHit rayHit;
         
         BenchBase touchedObject = null;
-        for (int i = 0; i < 5; i++)
+        for (int down = 0; down < 3; down++)
         {
-            // Scan outwards for object
-            var ray = new Ray(transform.position, transform.forward + transform.right * i / 4 * Mathf.Pow(-1, i));
-            Debug.DrawRay(transform.position, ray.direction * InteractReach);
+            if (touchedObject == null)
+                for (int i = 0; i < 36; i++)
+                {
+                    // Scan outwards for object
+                    var ray = new Ray(transform.position,
+                        Quaternion.Euler(0, i * 10, 0) * 
+                        (transform.forward + transform.up * (-down / 4)));
 
-            if (Physics.Raycast(ray, out rayHit, InteractReach))
-            {
-                touchedObject = rayHit.collider.gameObject.GetComponent<BenchBase>();
-                break;
-            }
+                    Debug.DrawRay(transform.position, ray.direction * InteractReach);
+
+                    if (Physics.Raycast(ray, out rayHit, InteractReach))
+                    {
+                        touchedObject = rayHit.collider.gameObject.GetComponent<BenchBase>();
+                        if (touchedObject != null)
+                            break;
+                    }
+                }
         }
 
 
@@ -93,7 +102,7 @@ public class Player : MonoBehaviour
             if (touchedObject != null)
             {
                 var mat = touchedObject.GetComponent<Renderer>().material;
-                mat.SetColor("_EmissionColor", Color.yellow);
+                mat.SetColor("_EmissionColor", SelectColor);
                 mat.EnableKeyword("_EMISSION");
             }
 
