@@ -5,7 +5,7 @@ using System.Text;
 
 public class Ingredient
 {
-    public string Shape;
+    public string Type;
 
     public IngredientTask[] Tasks;
 }

@@ -31,7 +31,7 @@ public class UIRecipes : MonoBehaviour {
                 {
                     new Ingredient()
                     {
-                        Shape = "Circle",
+                        Type = "Circle",
                         Tasks = new IngredientTask[]
                         {
                             new IngredientTask()
@@ -48,7 +48,7 @@ public class UIRecipes : MonoBehaviour {
                     },
                     new Ingredient()
                     {
-                        Shape = "Rectangle",
+                        Type = "Rectangle",
                         Tasks = new IngredientTask[]
                         {
                             new IngredientTask()
@@ -72,7 +72,7 @@ public class UIRecipes : MonoBehaviour {
                 {
                     new Ingredient()
                     {
-                        Shape = "Triangle",
+                        Type = "Triangle",
                         Tasks = new IngredientTask[]
                         {
                             new IngredientTask()
@@ -89,7 +89,7 @@ public class UIRecipes : MonoBehaviour {
                     },
                     new Ingredient()
                     {
-                        Shape = "Circle",
+                        Type = "Circle",
                         Tasks = new IngredientTask[]
                         {
                             new IngredientTask()
@@ -136,7 +136,7 @@ public class UIRecipes : MonoBehaviour {
     GameObject MakeIngredientPanel(Ingredient ingredient)
     {
         GameObject ingredientPanel = Instantiate(RecipeIngredient);
-        GameObject ingredientImage = MakeIngredient(ingredient.Shape);
+        GameObject ingredientImage = MakeIngredient(ingredient.Type);
         ingredientImage.transform.SetParent(ingredientPanel.transform, false);
 
         Transform ingredientTasksPanel = ingredientPanel.transform.FindChild("UI-Ingredient-Tasks");
