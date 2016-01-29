@@ -35,6 +35,7 @@ ModelImporter:
     400026: Thigh_R
     4300000: m_player
     7400000: Default Take
+    7400002: WalkAnim
     9500000: //RootNode
     13700000: m_player
   materials:
