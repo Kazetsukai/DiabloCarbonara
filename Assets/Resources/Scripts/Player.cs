@@ -119,21 +119,15 @@ public class Player : MonoBehaviour
 	{
 		if (HeldItem != null)
 		{
-			print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
 				// not holding anymore
 				HeldItem = null;
 				JustInteracted = true;
 			}
-			else
-			{
-				print("failed");
-			}
 		}
 		else
 		{
-			print("get");
 			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
 			if (item != null)
 			{
@@ -142,10 +136,6 @@ public class Player : MonoBehaviour
 				HeldItem.transform.position = transform.position + Vector3.up;
 				HeldItem.transform.parent = transform;
 				JustInteracted = true;
-			}
-			else
-			{
-				print("failed");
 			}
 		}
 	}

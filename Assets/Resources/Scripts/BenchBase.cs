@@ -3,8 +3,9 @@ using System.Collections;
 
 public class BenchBase : MonoBehaviour
 {
-	public IngredientBase contents { get; set; }
-	public bool processed { get; private set; }
+	public Vector3 IngredientOffset;
+	public IngredientBase contents;
+	public bool processed;
 
 	public virtual IngredientBase Interact()
 	{
@@ -25,7 +26,7 @@ public class BenchBase : MonoBehaviour
 			return false;
 
 		// Get it
-		item.gameObject.transform.position = transform.position;
+		item.gameObject.transform.position = transform.position + IngredientOffset;
 		item.gameObject.transform.parent = transform;
 		contents = item;
 
