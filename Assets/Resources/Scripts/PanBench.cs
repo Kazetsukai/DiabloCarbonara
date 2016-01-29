@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PanBench : BenchBase
 {
@@ -8,16 +9,22 @@ public class PanBench : BenchBase
 	private bool progressingThisFrame;
 	private readonly float PROGRESS_SPEED = 3;
 
-	public GUITexture progressImage;
+	public GameObject progressImagePrefab;
+	public GameObject progressImage;
 
 	public override IngredientBase Interact()
 	{
+		if (contents == null)
+		{
+			return null;
+		}
+
 		if (progress >= 1)
 		{
 			progress = 0;
 			var temp = contents;
 			contents = null;
-            return temp;
+			return temp;
 		}
 		else
 		{
@@ -29,6 +36,25 @@ public class PanBench : BenchBase
 	public override bool CanIReceive(IngredientBase item)
 	{
 		return true;
+	}
+
+	public void Start()
+	{
+		progressImage = Instantiate(progressImagePrefab);
+		var canvas = FindObjectOfType<Canvas>();
+		progressImage.transform.parent = canvas.transform;
+    }
+
+	public new void Update()
+	{
+		Vector3 pos = transform.position + Vector3.up * 3;
+		print(pos);
+		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+		print(screenPos);
+		progressImage.GetComponent<RectTransform>().position = screenPos;
+		progressImage.GetComponent<Image>().fillAmount = progress;
+
+		base.Update();
 	}
 
 	public void FixedUpdate()
