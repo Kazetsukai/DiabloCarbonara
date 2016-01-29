@@ -17,14 +17,17 @@ public class Player : MonoBehaviour
 	[Header("Movement Parameters")]
     public float MoveSpeed = 1f;
     public float RotationSpeed = 10f;
+    public float RotateThreshold = 0.3f;
     public float InteractReach = 1f;
 
     public BenchBase CurrentInteractible { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
 
     public Color SelectColor;
-    
-	void Start()
+
+    Vector3 lastVelocity;   //Used for working out rotation target direction
+
+    void Start()
 	{
 		_controller = GetComponent<CharacterController>();
 	}
@@ -57,11 +60,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Change direction to facing
-        var redirectSpeed = (float)Math.Tanh(_controller.velocity.magnitude / 10f);
+        //Rotate towards movement direction
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastVelocity, Vector3.up), RotationSpeed * Time.deltaTime);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
-        if (redirectSpeed > 0.001f)
-            transform.forward = Vector3.RotateTowards(transform.forward, _controller.velocity, redirectSpeed * Time.fixedDeltaTime * RotationSpeed, 100);
+        if (_controller.velocity.magnitude > RotateThreshold)
+        {
+            lastVelocity = _controller.velocity.normalized;
+        }
 
         // Selection
         RaycastHit rayHit;
@@ -156,10 +162,5 @@ public class Player : MonoBehaviour
 	Vector2 GetInput()
 	{
 		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
-	}
-
-	void Move()
-	{
-
 	}
 }
