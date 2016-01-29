@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
     Vector3 lastVelocity;   //Used for working out rotation target direction
 
     private List<BenchBase> _touchedBenches = new List<BenchBase>();
-    
+	private bool JustInteracted;
+
 	void Start()
 	{
 		_controller = GetComponent<CharacterController>();
@@ -52,7 +53,14 @@ public class Player : MonoBehaviour
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
 		{
-			Interact();
+			if (!JustInteracted)
+			{
+				Interact(); 
+			}
+		}
+		else
+		{
+			JustInteracted = false;
 		}
 
 		if (HeldItem != null)
@@ -114,7 +122,9 @@ public class Player : MonoBehaviour
 			print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
+				// not holding anymore
 				HeldItem = null;
+				JustInteracted = true;
 			}
 			else
 			{
@@ -127,9 +137,15 @@ public class Player : MonoBehaviour
 			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
 			if (item != null)
 			{
+				// hold item above head
 				HeldItem = item;
 				HeldItem.transform.position = transform.position + Vector3.up;
 				HeldItem.transform.parent = transform;
+				JustInteracted = true;
+			}
+			else
+			{
+				print("failed");
 			}
 		}
 	}

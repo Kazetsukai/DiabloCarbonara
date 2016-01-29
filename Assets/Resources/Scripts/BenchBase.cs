@@ -36,4 +36,9 @@ public class BenchBase : MonoBehaviour
 	{
 		return true;
 	}
+
+	public void Update()
+	{
+		Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
+	}
 }
