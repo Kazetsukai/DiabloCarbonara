@@ -1,17 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BenchBase : MonoBehaviour {
+public class BenchBase : MonoBehaviour
+{
+	public IngredientBase contents { get; set; }
+	public bool processed { get; private set; }
 
-	public GameObject HeldObject;
-
-	// Use this for initialization
-	void Start () {
-	
+	public virtual IngredientBase Interact()
+	{
+		return contents;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public bool Put(IngredientBase item)
+	{
+
+		// Am I full?
+		if (contents != null)
+			return false;
+
+		// Can I receive this item?
+		if (!CanIReceive(item))
+			return false;
+
+		return true;
+	}
+
+	public virtual bool CanIReceive(IngredientBase item)
+	{
+		return true;
 	}
 }
