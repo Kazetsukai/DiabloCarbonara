@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 	public BenchBase CurrentInteractible { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
-
+    
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
@@ -28,11 +28,13 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		//Move player when horizontal or vertical input is given
-		Vector2 input = GetInput();
+		var input = GetInput();
+        var dirVect = new Vector3(input.x, 0, input.y);
+        dirVect = Quaternion.FromToRotation(Vector3.forward, TrimY(Camera.allCameras[0].transform.forward)) * dirVect;
 
-		if (input.magnitude > 0)
+        if (input.magnitude > 0)
 		{
-			controller.SimpleMove(new Vector3(input.x, 0, input.y) * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
+			controller.SimpleMove(dirVect * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
 		}
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
@@ -47,12 +49,17 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void Interact()
+    private Vector3 TrimY(Vector3 forward)
+    {
+        return new Vector3(forward.x, 0, forward.z);
+    }
+
+    private void Interact()
 	{
 		if (HeldItem != null)
 		{
 			print("put");
-			if (CurrentInteractible.Put(HeldItem))
+			if (CurrentInteractible != null && CurrentInteractible.Put(HeldItem))
 			{
 				HeldItem = null;
 			}
@@ -64,7 +71,7 @@ public class Player : MonoBehaviour
 		else
 		{
 			print("get");
-			var item = CurrentInteractible.Interact();
+			var item = CurrentInteractible == null ? null : CurrentInteractible.Interact();
 			if (item != null)
 			{
 				HeldItem = item;
@@ -87,7 +94,7 @@ public class Player : MonoBehaviour
 
 	Vector2 GetInput()
 	{
-		return new Vector2(Input.GetAxis(HorizontalAxis), -Input.GetAxis(VerticalAxis));    //INVERTED VERTICAL AXIS BECAUSE CAMERA ANGLE
+		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
 	}
 
 	void Move()
