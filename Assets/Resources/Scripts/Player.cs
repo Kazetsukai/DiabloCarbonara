@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    CharacterController characterController;
+    CharacterController controller;
 
     [Header("Input Axis Names")]
     [SerializeField] string HorizontalAxis;
@@ -14,24 +14,26 @@ public class Player : MonoBehaviour
     public float MoveSpeed = 1f;
 
 	void Start ()
-    {       
-        characterController = GetComponent<CharacterController>();	
+    {
+        controller = GetComponent<CharacterController>();	
 	}	
 
 	void Update ()
     {
         //Move player when horizontal or vertical input is given
         Vector2 input = GetInput();
+       
         if (input.magnitude > 0)
         {
-            characterController.SimpleMove(new Vector3(input.x, 0, input.y) * MoveSpeed);
-        }
-	
+            controller.SimpleMove(new Vector3(input.x, 0, input.y) * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
+        }	
+
+        //
 	}
 
     Vector2 GetInput()
     {
-        return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
+        return new Vector2(Input.GetAxis(HorizontalAxis), -Input.GetAxis(VerticalAxis));    //INVERTED VERTICAL AXIS BECAUSE CAMERA ANGLE
     }
 
     void Move()
