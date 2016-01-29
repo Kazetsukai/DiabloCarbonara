@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TomatoBench : BenchBase
+public class IngredientBench : BenchBase
 {
 	public GameObject IngredientPrefab;
 
