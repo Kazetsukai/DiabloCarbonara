@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
             // Do a cheap selection effect
             if (CurrentInteractable != null)
             {
-                var mat = CurrentInteractible.GetComponentInChildren<Renderer>().material;
+                var mat = CurrentInteractable.GetComponentInChildren<Renderer>().material;
                 mat.SetColor("_EmissionColor", Color.black);
                 mat.DisableKeyword("_EMISSION");
             }
