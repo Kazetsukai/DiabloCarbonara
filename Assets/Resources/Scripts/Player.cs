@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	[Header("Movement Parameters")]
     public float MoveSpeed = 1f;
     public float RotationSpeed = 10f;
+    public float InteractReach = 1f;
 
     public BenchBase CurrentInteractible { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
@@ -58,8 +59,46 @@ public class Player : MonoBehaviour
         // Change direction to facing
         var redirectSpeed = (float)Math.Tanh(_controller.velocity.magnitude / 10f);
 
-        if (redirectSpeed > 0)
+        if (redirectSpeed > 0.001f)
             transform.forward = Vector3.RotateTowards(transform.forward, _controller.velocity, redirectSpeed * Time.fixedDeltaTime * RotationSpeed, 100);
+
+        // Selection
+        RaycastHit rayHit;
+        
+        BenchBase touchedObject = null;
+        for (int i = 0; i < 5; i++)
+        {
+            // Scan outwards for object
+            var ray = new Ray(transform.position, transform.forward + transform.right * i / 4 * Mathf.Pow(-1, i));
+            Debug.DrawRay(transform.position, ray.direction * InteractReach);
+
+            if (Physics.Raycast(ray, out rayHit, InteractReach))
+            {
+                touchedObject = rayHit.collider.gameObject.GetComponent<BenchBase>();
+                break;
+            }
+        }
+
+
+        // If the thing we are touching is not what we were touching
+        if (touchedObject != CurrentInteractible)
+        {
+            // Do a cheap selection effect
+            if (CurrentInteractible != null)
+            {
+                var mat = CurrentInteractible.GetComponent<Renderer>().material;
+                mat.SetColor("_EmissionColor", Color.black);
+                mat.DisableKeyword("_EMISSION");
+            }
+            if (touchedObject != null)
+            {
+                var mat = touchedObject.GetComponent<Renderer>().material;
+                mat.SetColor("_EmissionColor", Color.yellow);
+                mat.EnableKeyword("_EMISSION");
+            }
+
+            CurrentInteractible = touchedObject;
+        }
     }
 
     private Vector3 TrimY(Vector3 forward)
