@@ -415,6 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc903d7a61d701c4188344e20697b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IngredientOffset: {x: 0, y: 0, z: 0}
+  contents: {fileID: 0}
+  processed: 0
   IngredientPrefab: {fileID: 0}
 --- !u!1 &1026441537
 GameObject:
