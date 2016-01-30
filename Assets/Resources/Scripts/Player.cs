@@ -58,6 +58,12 @@ public class Player : MonoBehaviour
 	{
 		_controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>();
+
+        var pants = transform.FindChild("Player").FindChild("m_player");
+        if (pants != null)
+        {
+            pants.gameObject.GetComponent<Renderer>().material.color = SelectColor;
+        }
 	}
 
     Vector3 CameraTransformedInput()
