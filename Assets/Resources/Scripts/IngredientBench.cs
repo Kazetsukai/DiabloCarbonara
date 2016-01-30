@@ -10,7 +10,7 @@ public class IngredientBench : BenchBase
 	public override IngredientBase Interact()
 	{
 		var newIngredient = Instantiate(IngredientPrefab);
-		newIngredient.GetComponent<IngredientBase>().Type = "Triangle";
+		newIngredient.GetComponent<IngredientBase>().Type = Type;
 		newIngredient.transform.position = transform.position;
 		return newIngredient.GetComponent<IngredientBase>();
 	}

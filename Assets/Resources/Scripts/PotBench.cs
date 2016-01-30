@@ -11,6 +11,8 @@ public class PotBench : BenchBase
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
 
+	public string TaskType = "Boil";
+
 	public override IngredientBase Interact()
 	{
 		if (contents == null)
@@ -20,6 +22,8 @@ public class PotBench : BenchBase
 
 		if (progress >= 1)
 		{
+			contents.TasksDone.Add(TaskType);
+
 			progress = 0;
 			var temp = contents;
 			contents = null;

@@ -5,7 +5,6 @@ public class BenchBase : MonoBehaviour
 {
 	public Vector3 IngredientOffset;
 	public IngredientBase contents;
-	public bool processed;
     
 	public virtual IngredientBase Interact()
 	{

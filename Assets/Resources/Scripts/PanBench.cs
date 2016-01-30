@@ -12,6 +12,8 @@ public class PanBench : BenchBase
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
 
+	public string TaskType = "Fry";
+
 	public override IngredientBase Interact()
 	{
 		if (contents == null)
@@ -21,6 +23,8 @@ public class PanBench : BenchBase
 
 		if (progress >= 1)
 		{
+			contents.TasksDone.Add(TaskType);
+
 			progress = 0;
 			var temp = contents;
 			contents = null;

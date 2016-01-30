@@ -13,6 +13,8 @@ public class ChopBench : BenchBase
 
 	private GameObject progressImage;
 
+	public string TaskType = "Chop";
+
 	public override IngredientBase Interact()
 	{
 		if (contents == null)
@@ -22,6 +24,8 @@ public class ChopBench : BenchBase
 
 		if (progress >= 1)
 		{
+			contents.TasksDone.Add(TaskType);
+
 			progress = 0;
 			var temp = contents;
 			contents = null;

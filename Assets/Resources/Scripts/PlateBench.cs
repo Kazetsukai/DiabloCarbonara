@@ -52,14 +52,33 @@ public class PlateBench : BenchBase
 
 	private bool IngredientMatches(IngredientBase item, Ingredient ingredient)
 	{
-		throw new NotImplementedException();
+		if (ingredient.Type != item.Type) return false;
+
+		for (int i = 0; i < item.TasksDone.Count; i++)
+		{
+			if (item.TasksDone[i] != ingredient.Tasks[i])
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public void Start()
 	{
+		Ingredients = new List<IngredientBase>();
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.parent = canvas.transform;
+
+		Recipe = new Recipe
+		{
+			Ingredients = new List<Ingredient>
+			{
+				new Ingredient { Type = "Tomato", Tasks = new List<string> { "Fry" } }
+			}
+		};
 	}
 
 	public new void Update()
@@ -68,6 +87,11 @@ public class PlateBench : BenchBase
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = 0;
+		
+		if (Recipe.IsDone())
+		{
+			Debug.DrawLine(transform.position, transform.position + Vector3.up, Color.green);
+		}
 
 		base.Update();
 	}
