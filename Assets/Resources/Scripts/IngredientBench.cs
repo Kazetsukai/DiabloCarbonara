@@ -7,7 +7,7 @@ public class IngredientBench : BenchBase
 	public GameObject IngredientPrefab;
 	public string Type;
 
-	public override IngredientBase Interact()
+	public override IngredientBase Interact(Vector2 input)
 	{
 		var newIngredient = Instantiate(IngredientPrefab);
 		newIngredient.GetComponent<IngredientBase>().Type = Type;

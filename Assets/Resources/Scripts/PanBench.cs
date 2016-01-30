@@ -14,7 +14,7 @@ public class PanBench : BenchBase
 
 	public string TaskType = "Fry";
 
-	public override IngredientBase Interact()
+	public override IngredientBase Interact(Vector2 input)
 	{
 		if (contents == null)
 		{

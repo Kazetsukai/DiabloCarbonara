@@ -5,8 +5,8 @@ public class BenchBase : MonoBehaviour
 {
 	public Vector3 IngredientOffset;
 	public IngredientBase contents;
-    
-	public virtual IngredientBase Interact()
+            
+	public virtual IngredientBase Interact(Vector2 input)
 	{
 		var temp = contents;
 		contents = null;

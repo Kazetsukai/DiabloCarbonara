@@ -140,6 +140,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &125528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 474392}
+  m_Layer: 0
+  m_Name: HandLIdleTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &131722
 GameObject:
   m_ObjectHideFlags: 1
@@ -165,7 +180,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 497930}
   - 33: {fileID: 3357238}
-  - 135: {fileID: 13560088}
   - 23: {fileID: 2318602}
   m_Layer: 0
   m_Name: Sphere
@@ -173,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &139444
 GameObject:
   m_ObjectHideFlags: 1
@@ -243,10 +257,24 @@ GameObject:
   m_Component:
   - 4: {fileID: 459306}
   - 33: {fileID: 3383902}
-  - 135: {fileID: 13527906}
   - 23: {fileID: 2359038}
   m_Layer: 0
   m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &144654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 454526}
+  m_Layer: 0
+  m_Name: HandLHoldingTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,6 +320,36 @@ GameObject:
   - 4: {fileID: 482054}
   m_Layer: 0
   m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &165008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 460160}
+  m_Layer: 0
+  m_Name: HandRHoldingTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &166042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 456378}
+  m_Layer: 0
+  m_Name: HandRIdleTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,6 +586,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 441620}
   m_RootOrder: 0
+--- !u!4 &454526
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144654}
+  m_LocalRotation: {x: 0.5636972, y: 0.42345285, z: -0.49787882, w: -0.50502455}
+  m_LocalPosition: {x: -0.175, y: 0.388, z: 0.623}
+  m_LocalScale: {x: 1.35606, y: 1.3560603, z: 1.3560603}
+  m_Children: []
+  m_Father: {fileID: 482698}
+  m_RootOrder: 6
 --- !u!4 &455338
 Transform:
   m_ObjectHideFlags: 1
@@ -541,6 +611,18 @@ Transform:
   - {fileID: 438658}
   m_Father: {fileID: 422838}
   m_RootOrder: 0
+--- !u!4 &456378
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166042}
+  m_LocalRotation: {x: -0.42254302, y: -0.5840984, z: -0.5097752, w: -0.4694846}
+  m_LocalPosition: {x: 0.37512302, y: -0.07088518, z: 0.054058254}
+  m_LocalScale: {x: 1.35606, y: 1.3560604, z: 1.3560599}
+  m_Children: []
+  m_Father: {fileID: 482698}
+  m_RootOrder: 4
 --- !u!4 &458004
 Transform:
   m_ObjectHideFlags: 1
@@ -593,32 +675,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 479652}
   m_RootOrder: 0
+--- !u!4 &460160
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165008}
+  m_LocalRotation: {x: -0.42254302, y: -0.5840984, z: -0.5097752, w: -0.4694846}
+  m_LocalPosition: {x: 0.215, y: 0.387, z: 0.619}
+  m_LocalScale: {x: 1.3560604, y: 1.3560604, z: 1.3560604}
+  m_Children: []
+  m_Father: {fileID: 482698}
+  m_RootOrder: 5
+--- !u!4 &474392
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125528}
+  m_LocalRotation: {x: 0.5636972, y: 0.42345285, z: -0.49787882, w: -0.50502455}
+  m_LocalPosition: {x: -0.36823654, y: -0.06989038, z: 0.058003902}
+  m_LocalScale: {x: 1.35606, y: 1.3560603, z: 1.3560603}
+  m_Children: []
+  m_Father: {fileID: 482698}
+  m_RootOrder: 3
 --- !u!4 &477574
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21099997, y: 0.46891165, z: 0.72115177}
-  m_LocalScale: {x: 1.3920001, y: 1.3920002, z: 1.3920006}
+  m_LocalRotation: {x: -6.866591e-15, y: -0.0000000056666614, z: -0.000000042146837,
+    w: 1}
+  m_LocalPosition: {x: -0.375123, y: -0.07088518, z: 0.054058254}
+  m_LocalScale: {x: 1.3920001, y: 1.3920001, z: 1.3920006}
   m_Children:
   - {fileID: 497930}
   m_Father: {fileID: 482698}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &479652
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116428}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0.46891165, z: 0.6051518}
-  m_LocalScale: {x: 1.3920001, y: 1.3920002, z: 1.3920006}
+  m_LocalRotation: {x: 0.00000011920929, y: 0.00000006809027, z: 0.000000052683543,
+    w: 1}
+  m_LocalPosition: {x: 0.3682365, y: -0.06989038, z: 0.058003902}
+  m_LocalScale: {x: 1.392, y: 1.3920001, z: 1.3920006}
   m_Children:
   - {fileID: 459306}
   m_Father: {fileID: 482698}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &480452
 Transform:
   m_ObjectHideFlags: 1
@@ -687,8 +795,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458242}
-  - {fileID: 477574}
   - {fileID: 479652}
+  - {fileID: 477574}
+  - {fileID: 474392}
+  - {fileID: 456378}
+  - {fileID: 460160}
+  - {fileID: 454526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &496574
@@ -924,9 +1036,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208ad76db778e5149889b8eacca46c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalAxis: Horizontal_ALL
-  VerticalAxis: Vertical_ALL
-  InteractButtonAxis: Interact_ALL
+  HorizontalAxis: Horizontal_P1
+  VerticalAxis: Vertical_P1
+  InteractButtonAxis: Interact_P1
   MoveSpeed: 10
   RotationSpeed: 16
   RotateThreshold: 0.1
@@ -954,17 +1066,15 @@ MonoBehaviour:
   ArmLeftLower: {fileID: 168958}
   ArmRightLower: {fileID: 142926}
   HeldObjectTransform: {fileID: 139444}
+  ArmIKTarget_R: {fileID: 116428}
+  ArmIKTarget_L: {fileID: 196076}
+  HandIKTarget_Idle_R: {fileID: 166042}
+  HandIKTarget_Idle_L: {fileID: 125528}
+  HandIKTarget_HoldItem_R: {fileID: 165008}
+  HandIKTarget_HoldItem_L: {fileID: 144654}
   TransitionToIdleDuration: 0.2
-  ArmAngle_Idle_LU: {x: 0, y: 0, z: 210}
-  ArmAngle_Idle_RU: {x: 0, y: 180, z: 30}
-  ArmAngle_Idle_LL: {x: 60, y: 280, z: 290}
-  ArmAngle_Idle_RL: {x: 60, y: 255, z: 245}
-  ArmAngle_HoldItem_LU: {x: 0, y: 0, z: 0}
-  ArmAngle_HoldItem_RU: {x: 0, y: 0, z: 0}
-  ArmAngle_HoldItem_LL: {x: 0, y: 0, z: 0}
-  ArmAngle_HoldItem_RL: {x: 0, y: 0, z: 0}
+  TransitionToHoldDuration: 0.2
   SelectColor: {r: 0.6838235, g: 0.6366633, b: 0, a: 0}
-  _anim: {fileID: 0}
 --- !u!114 &11498562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1022,30 +1132,6 @@ MonoBehaviour:
     maintainRotationWeight: 0
     bendModifierWeight: 1
     bendGoal: {fileID: 0}
---- !u!135 &13527906
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13560088
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13700076
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class PlateBench : BenchBase
 	public Recipe Recipe;
 	private List<IngredientBase> Ingredients;
 
-	public override IngredientBase Interact()
+	public override IngredientBase Interact(Vector2 input)
 	{
 		return null;
 	}

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 	public string VerticalAxis;
 	public string InteractButtonAxis;
 
-	[Header("Movement Parameters")]
+    [Header("Movement Parameters")]    
     public float MoveSpeed = 1f;
     public float RotationSpeed = 10f;
     public float RotateThreshold = 0.3f;
@@ -50,8 +50,9 @@ public class Player : MonoBehaviour
 
     private List<BenchBase> _touchedBenches = new List<BenchBase>();
 	private bool JustInteracted;
+   private bool Interacting;
 
-	void Start()
+    void Start()
 	{
 		_controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>();
@@ -69,19 +70,14 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-        //Move player when horizontal or vertical input is given
-        var input = CameraTransformedInput();       
-
-        if (input.magnitude > 0)
-		{
-			_controller.SimpleMove(input * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
-		}
+        Interacting = false;
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
 		{
 			if (!JustInteracted)
 			{
-				Interact(); 
+				Interact();
+                Interacting = true;
 			}
 		}
 		else
@@ -95,10 +91,24 @@ public class Player : MonoBehaviour
 			Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
 		}
 
-        //Update walk animation
-        float speed = _controller.velocity.magnitude;
-        _anim.SetFloat("MoveSpeed", speed);
-        _anim.speed = MoveSpeedVsAnimSpeed.Evaluate(speed);
+        if ((!Interacting) || (HeldItem != null))
+        {
+            //Move player when horizontal or vertical input is given
+            var input = CameraTransformedInput();
+            if (input.magnitude > 0)
+            {
+                _controller.SimpleMove(input * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
+            }
+
+            //Update walk animation
+            float speed = _controller.velocity.magnitude;
+            _anim.SetFloat("MoveSpeed", speed);
+            _anim.speed = MoveSpeedVsAnimSpeed.Evaluate(speed);
+        }
+        else
+        {
+            _anim.SetFloat("MoveSpeed", 0);
+        }     
 	}
 
     void FixedUpdate()
@@ -111,11 +121,11 @@ public class Player : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
         var input = CameraTransformedInput();
-
-        if (input.magnitude > RotateThreshold)
+        
+        if ((input.magnitude > RotateThreshold) && (!Interacting || (HeldItem != null)))
         {
             lastVelocity = input.normalized;
-        }
+        }        
 
         // Selection
         BenchBase touchedObject = _touchedBenches.Select(b => new
@@ -152,8 +162,13 @@ public class Player : MonoBehaviour
     }
 
     private void Interact()
-	{
-		if (HeldItem != null)
+    {
+        if (CurrentInteractable != null)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(CurrentInteractable.transform.position - transform.position, Vector3.up), RotationSpeed * Time.deltaTime);
+        }
+
+        if (HeldItem != null)
 		{
             print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
@@ -161,7 +176,7 @@ public class Player : MonoBehaviour
 				// not holding anymore
 				HeldItem = null;
 				JustInteracted = true;
-                StartCoroutine(TransitionToPose_Idle(TransitionToIdleDuration));    //Animate arms          
+                StartCoroutine(TransitionToPose_Idle(TransitionToIdleDuration));    //Animate arms                      
             }
 			else
 			{
@@ -169,14 +184,14 @@ public class Player : MonoBehaviour
 			}
 		}
 		else
-		{
-			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
+		{           
+            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(GetInput());
 			if (item != null)
 			{
 				// hold item above head
 				HeldItem = item;
                 HeldItem.transform.parent = HeldObjectTransform.transform;         
-                StartCoroutine(LerpItemPosition(HeldItem, HeldItem.gameObject.transform.position, HeldObjectTransform.transform.position, 0.2f));
+                StartCoroutine(DoItemPickupTransition(HeldItem, 0.2f));
                 StartCoroutine(TransitionToPose_HoldItem(TransitionToHoldDuration));    //Animate arms
                 JustInteracted = true;
 			}
@@ -210,13 +225,15 @@ public class Player : MonoBehaviour
 		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
 	}
 
-    IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
+    IEnumerator DoItemPickupTransition(IngredientBase itemToLerp, float duration)
     {
+        Vector3 ItemStartPos = itemToLerp.transform.position;
+
         float t_elapsed = 0;
         do
         {
             t_elapsed += Time.deltaTime;
-            itemToLerp.gameObject.transform.position = Vector3.Lerp(startPos, endPos, t_elapsed / duration);
+            itemToLerp.gameObject.transform.position = Vector3.Lerp(ItemStartPos, HeldObjectTransform.transform.position, t_elapsed / duration);
             yield return null;
         }
         while (t_elapsed / duration < 1f);        
