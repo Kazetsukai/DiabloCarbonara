@@ -28,7 +28,9 @@ public class PanBench : BenchBase
 
     float lastStirAngle;
 
-    public override IngredientBase Interact(Player player, Vector2 input)
+	private ParticleSystem.EmissionModule Emitter;
+
+	public override IngredientBase Interact(Player player, Vector2 input)
     {
 		if (contents == null)
 		{
@@ -105,6 +107,7 @@ public class PanBench : BenchBase
 
 	public void Start()
 	{
+		Emitter = GetComponentInChildren<ParticleSystem>().emission;
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
@@ -136,10 +139,15 @@ public class PanBench : BenchBase
             }
         }
 
+		if (!Emitter.enabled && contents != null)
+		{
+            Emitter.enabled = true;
+		}
+		else if (Emitter.enabled && contents == null)
+		{
+			Emitter.enabled = false;
+		}
+
         base.Update();
 	}
-
-	public void FixedUpdate()
-	{
-    }
 }

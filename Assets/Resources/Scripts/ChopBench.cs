@@ -28,7 +28,8 @@ public class ChopBench : BenchBase
     Vector3 KnifeIdleRotation;
     float InteractKnifeResetTime = 0.1f;
     float InteractKnifeResetElapsed;
-    
+	private ParticleSystem ParticleSystem;
+
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{       
 		if (contents == null)
@@ -48,8 +49,9 @@ public class ChopBench : BenchBase
         if ((input.y <= InputValue_Down) && upTargetReached)
         {
             progress += 1f / HitsRequired;
-            upTargetReached = false;            
-        }
+            upTargetReached = false;
+			ParticleSystem.Emit(30);
+		}
 
         //Do animation for players arms
         player.IKArm_R.solver.target = HandIKTarget_R;  //Set IK target R of player to be IK transform R of this bench
@@ -85,11 +87,13 @@ public class ChopBench : BenchBase
 
 	public override bool CanIReceive(IngredientBase item)
 	{
+		ParticleSystem.startColor = item.Color;
 		return true;
 	}
 
 	public void Start()
 	{
+		ParticleSystem = GetComponentInChildren<ParticleSystem>();
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);

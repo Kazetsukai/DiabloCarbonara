@@ -17,6 +17,7 @@ public class PotBench : BenchBase
     public Color burnColor;
 
 	public string TaskType = "Boil";
+	private ParticleSystem.EmissionModule Emitter;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
     {
@@ -47,6 +48,7 @@ public class PotBench : BenchBase
 
 	public void Start()
 	{
+		Emitter = GetComponentInChildren<ParticleSystem>().emission;
 		progressImage = Instantiate(progressImagePrefab);
 
         burnImage = Instantiate(progressImagePrefab);
@@ -65,9 +67,18 @@ public class PotBench : BenchBase
 		progressImage.GetComponent<Image>().fillAmount = progress;
 
         burnImage.GetComponent<RectTransform>().position = screenPos;
-        //burnImage.GetComponent<Image>().fillAmount = burnt;
+		//burnImage.GetComponent<Image>().fillAmount = burnt;
+		
+		if (!Emitter.enabled && contents != null)
+		{
+			Emitter.enabled = true;
+		}
+		else if (Emitter.enabled && contents == null)
+		{
+			Emitter.enabled = false;
+		}
 
-        base.Update();
+		base.Update();
 	}
 
 	public void FixedUpdate()
