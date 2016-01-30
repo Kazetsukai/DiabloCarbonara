@@ -45,6 +45,9 @@ MonoBehaviour:
   PastaIngredient: {fileID: 21300000, guid: f31b00c5092508d41b5292f93dccdde0, type: 3}
   TomatoIngredient: {fileID: 21300000, guid: d995396245195ca49bc3af16bacb89a0, type: 3}
   MeatIngredient: {fileID: 21300000, guid: e6293460040f27c4cb2b4b6d294e067e, type: 3}
+  ChopIcon: {fileID: 21300000, guid: 0ca4ace8c70004f499c70e7e71a6379b, type: 3}
+  BoilIcon: {fileID: 21300000, guid: 504c765e9b087454a8eb157e240b6b83, type: 3}
+  FryIcon: {fileID: 21300000, guid: 60ee9ebf3e4184145aace4dd5e588dfd, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -66,6 +69,21 @@ Prefab:
       propertyPath: MeatIngredient
       value: 
       objectReference: {fileID: 21300000, guid: 9f090c9e1f80ecf4fa34f3872af93128,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: ChopIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ca4ace8c70004f499c70e7e71a6379b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BoilIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 504c765e9b087454a8eb157e240b6b83,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: FryIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 60ee9ebf3e4184145aace4dd5e588dfd,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

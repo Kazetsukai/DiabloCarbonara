@@ -26,6 +26,10 @@ public class UIRecipes : MonoBehaviour {
     public Sprite TomatoIngredient;
     public Sprite MeatIngredient;
 
+    public Sprite ChopIcon;
+    public Sprite BoilIcon;
+    public Sprite FryIcon;
+
     // Use this for initialization
     void Start () {
         plateBenches = FindObjectsOfType<PlateBench>();
@@ -91,15 +95,26 @@ public class UIRecipes : MonoBehaviour {
         }
     }
 
+    Sprite MakeTask(string taskType)
+    {
+        switch (taskType)
+        {
+            case "Boil":
+                return BoilIcon;
+            case "Fry":
+                return FryIcon;
+            case "Chop":
+            default:
+                return ChopIcon;
+        }
+    }
+
     GameObject MakeIngredientTask(string task)
     {
         GameObject ingredientTask = Instantiate(RecipeIngredientTask);
         Image taskImage = ingredientTask.GetComponent<Image>();
 
-        if (taskColors.ContainsKey(task))
-        {
-            taskImage.color = taskColors[task];
-        }
+        taskImage.sprite = MakeTask(task);
 
         return ingredientTask;
     }
