@@ -22,6 +22,7 @@ public class ManageTheGame : MonoBehaviour
     
     [FMODUnity.EventRef]
     public string eventName = "event:/Italian_Kitchen";
+    
     private EventInstance _musicEvent;
 
     void Awake()
@@ -73,6 +74,13 @@ public class ManageTheGame : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+            _musicEvent.setParameterValue("Parameter 1", 0.0f);
+        if (Input.GetKeyDown(KeyCode.F2))
+            _musicEvent.setParameterValue("Parameter 1", 1.0f);
+        if (Input.GetKeyDown(KeyCode.F3))
+            _musicEvent.setParameterValue("Parameter 1", 2.0f);
     }
 
     IEnumerator BeginGame()
@@ -91,7 +99,7 @@ public class ManageTheGame : MonoBehaviour
             }
 
             _playing = true;
-            SceneManager.LoadScene("GameJam2016_Joe");
+            SceneManager.LoadScene("Kitchen");
         }
     }
 }

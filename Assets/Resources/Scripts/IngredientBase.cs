@@ -21,6 +21,7 @@ public class IngredientBase : MonoBehaviour
     public Sprite BoilIcon;
 
     private int _currentStage = 0;
+	private bool burnt;
 
 	public void Start()
 	{
@@ -62,4 +63,13 @@ public class IngredientBase : MonoBehaviour
             _currentStage++;
         }
     }
+
+	public void Burn()
+	{
+		if (ProcessStages != null)
+		{
+			GetComponent<SpriteRenderer>().sprite = ProcessStages[ProcessStages.Length - 1];
+			burnt = true;
+		}
+	}
 }
