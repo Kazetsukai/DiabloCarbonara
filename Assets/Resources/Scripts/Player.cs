@@ -96,7 +96,10 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //Rotate towards movement direction
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastVelocity, Vector3.up), RotationSpeed * Time.deltaTime);
+        if (lastVelocity.magnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastVelocity, Vector3.up), RotationSpeed * Time.deltaTime);
+        }
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
         var input = CameraTransformedInput();
