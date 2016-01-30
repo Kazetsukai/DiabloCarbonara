@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class RecipeMaster : MonoBehaviour {
+public class RecipeMaster : MonoBehaviour
+{
     public const int MaxRecipies = 3;
 
     public const int MinComplexity = 3;
