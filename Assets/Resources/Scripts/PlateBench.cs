@@ -13,8 +13,8 @@ public class PlateBench : BenchBase
 	public Recipe Recipe;
 	private List<IngredientBase> Ingredients;
 
-	public override IngredientBase Interact(Vector2 input)
-	{
+	public override IngredientBase Interact(Player player, Vector2 input)
+    {
 		return null;
 	}
 
@@ -90,8 +90,9 @@ public class PlateBench : BenchBase
 		base.Update();
 	}
 
-	public void FixedUpdate()
+	public void Clear()
 	{
-
+		Recipe = null;
+		Ingredients = new List<IngredientBase>();
 	}
 }

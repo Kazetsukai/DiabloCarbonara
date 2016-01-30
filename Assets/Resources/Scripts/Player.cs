@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RootMotion.FinalIK;
 
 public class Player : MonoBehaviour
 {
@@ -29,18 +30,21 @@ public class Player : MonoBehaviour
     public GameObject ArmRightUpper;
     public GameObject ArmLeftLower;
     public GameObject ArmRightLower;
+    public GameObject HandLeft;
+    public GameObject HandRight;
     public GameObject HeldObjectTransform;
 
     [Header("Animation Stuff")]
-    public GameObject ArmIKTarget_R;
-    public GameObject ArmIKTarget_L;
+    public LimbIK IKArm_R;
+    public LimbIK IKArm_L;
+    public Transform ArmIKTarget_R;
+    public Transform ArmIKTarget_L;
     public GameObject HandIKTarget_Idle_R;
     public GameObject HandIKTarget_Idle_L;
     public GameObject HandIKTarget_HoldItem_R;
     public GameObject HandIKTarget_HoldItem_L;
     public float TransitionToIdleDuration = 0.2f;
     public float TransitionToHoldDuration = 0.2f;
-
 
     public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
@@ -116,7 +120,7 @@ public class Player : MonoBehaviour
         else
         {
             _anim.SetFloat("MoveSpeed", 0);
-        }     
+        }
 
         //Move towards bench interactTransform if interacting with the bench
         if ((CurrentInteractable != null) && (Interacting))
@@ -130,6 +134,12 @@ public class Player : MonoBehaviour
             {
                 _controller.SimpleMove(dir * MoveSpeed);
             }
+        }
+        if ((CurrentInteractable == null) && (HeldItem == null) && !Interacting) 
+        {
+            //Reset IK targets
+            IKArm_R.solver.target = ArmIKTarget_R;
+            IKArm_L.solver.target = ArmIKTarget_L;
         }
 	}
 
@@ -167,13 +177,16 @@ public class Player : MonoBehaviour
             // Do a cheap selection effect
             if (CurrentInteractable != null)
             {
-                var mat = CurrentInteractable.GetComponentInChildren<Renderer>().material;
-                mat.SetColor("_EmissionColor", Color.black);
-                mat.DisableKeyword("_EMISSION");
+                Transform selectionTransform = CurrentInteractable.transform.FindChild("SelectionHighlight");
+                Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                renderer.enabled = false;
             }
             if (touchedObject != null)
             {
-                var mat = touchedObject.GetComponentInChildren<Renderer>().material;
+                Transform selectionTransform = touchedObject.transform.FindChild("SelectionHighlight");
+                Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                renderer.enabled = true;
+                Material mat = renderer.material;
                 mat.SetColor("_EmissionColor", SelectColor);
                 mat.EnableKeyword("_EMISSION");
             }
@@ -189,7 +202,7 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        Debug.Log("Current Interactable: " + CurrentInteractable);
+       // Debug.Log("Current Interactable: " + CurrentInteractable);
        
         if (HeldItem != null)
 		{
@@ -208,7 +221,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{           
-            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(GetInput());
+            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(this, GetInput());
 			if (item != null)
 			{
 				// hold item above head
@@ -220,7 +233,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				//print("failed");
+				//print("failed");                
 			}
 		}
 	}
@@ -293,6 +306,8 @@ public class Player : MonoBehaviour
         }
         while (t_elapsed / duration < 1f);
     }
+
+
 
 
 

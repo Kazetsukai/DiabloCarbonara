@@ -12,7 +12,7 @@ public class UIRecipes : MonoBehaviour {
         { "Fry", new Color(1,0,0) }
     };
 
-    readonly float fadeOutRate = 0.05f;
+    readonly float fadeOutRate = 0.015f;
 
     PlateBench[] plateBenches;
     Dictionary<PlateBench, Recipe> plateRecipes;
@@ -25,6 +25,10 @@ public class UIRecipes : MonoBehaviour {
     public Sprite PastaIngredient;
     public Sprite TomatoIngredient;
     public Sprite MeatIngredient;
+
+    public Sprite ChopIcon;
+    public Sprite BoilIcon;
+    public Sprite FryIcon;
 
     // Use this for initialization
     void Start () {
@@ -45,7 +49,7 @@ public class UIRecipes : MonoBehaviour {
         Canvas canvas = FindObjectOfType<Canvas>();
         recipePanel.transform.SetParent(canvas.transform);
 
-        Vector3 pos = plateBench.transform.position + Vector3.up * 3;
+        Vector3 pos = plateBench.transform.position + Vector3.up * 3.5f;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         recipePanel.transform.position = screenPos;
 
@@ -67,6 +71,13 @@ public class UIRecipes : MonoBehaviour {
             ingredientTask.transform.SetParent(ingredientTasksPanel, false);
         }
 
+        CanvasRenderer[] renderers = ingredientPanel.GetComponentsInChildren<CanvasRenderer>();
+
+        foreach (CanvasRenderer renderer in renderers)
+        {
+            renderer.SetAlpha(0.6f);
+        }
+
         return ingredientPanel;
     }
 
@@ -84,17 +95,39 @@ public class UIRecipes : MonoBehaviour {
         }
     }
 
+    Sprite MakeTask(string taskType)
+    {
+        switch (taskType)
+        {
+            case "Boil":
+                return BoilIcon;
+            case "Fry":
+                return FryIcon;
+            case "Chop":
+            default:
+                return ChopIcon;
+        }
+    }
+
     GameObject MakeIngredientTask(string task)
     {
         GameObject ingredientTask = Instantiate(RecipeIngredientTask);
         Image taskImage = ingredientTask.GetComponent<Image>();
 
-        if (taskColors.ContainsKey(task))
-        {
-            taskImage.color = taskColors[task];
-        }
+        taskImage.sprite = MakeTask(task);
 
         return ingredientTask;
+    }
+
+    void PartialCompleteRecipePanel(GameObject recipePanel, int ingredientIndex)
+    {
+        Transform ingredientPanel = recipePanel.transform.GetChild(ingredientIndex);
+        CanvasRenderer[] renderers = ingredientPanel.GetComponentsInChildren<CanvasRenderer>();
+
+        foreach (CanvasRenderer renderer in renderers)
+        {
+            renderer.SetAlpha(1f);
+        }
     }
 
     void CompleteRecipePanel(Recipe recipe, GameObject recipePanel)
@@ -156,6 +189,16 @@ public class UIRecipes : MonoBehaviour {
             if (recipePanel.Key.IsDone())
             {
                 CompleteRecipePanel(recipePanel.Key, recipePanel.Value);
+            }
+            else
+            {
+                for (int i = 0; i < recipePanel.Key.Ingredients.Count; i++)
+                {
+                    if (recipePanel.Key.Ingredients[i].IsSatisfied)
+                    {
+                        PartialCompleteRecipePanel(recipePanel.Value, i);
+                    }
+                }
             }
         }
 	}
