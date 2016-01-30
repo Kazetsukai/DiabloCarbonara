@@ -7,5 +7,5 @@ public class Ingredient
 {
     public string Type;
 
-    public IngredientTask[] Tasks;
+    public List<string> Tasks = new List<string>();
 }

@@ -8,7 +8,5 @@ public class Recipe {
         
     }
 
-    public string Name;
-
     public Ingredient[] Ingredients;
 }

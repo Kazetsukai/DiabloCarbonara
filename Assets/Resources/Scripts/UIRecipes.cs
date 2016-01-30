@@ -26,83 +26,41 @@ public class UIRecipes : MonoBehaviour {
         Recipes.AddRange(new Recipe[] {
             new Recipe()
             {
-                Name = "Recipe Test",
                 Ingredients = new Ingredient[]
                 {
                     new Ingredient()
                     {
                         Type = "Circle",
-                        Tasks = new IngredientTask[]
-                        {
-                            new IngredientTask()
-                            {
-                                Name = "Red",
-                                Color = new Color(1,0,0)
-                            },
-                            new IngredientTask()
-                            {
-                                Name = "Blue",
-                                Color = new Color(0,0,1)
-                            }
-                        }
+                        Tasks = new List<string>
+                        (
+                        )
                     },
                     new Ingredient()
                     {
                         Type = "Rectangle",
-                        Tasks = new IngredientTask[]
-                        {
-                            new IngredientTask()
-                            {
-                                Name = "Blue",
-                                Color = new Color(0,0,1)
-                            },
-                            new IngredientTask()
-                            {
-                                Name = "Green",
-                                Color = new Color(0,1,0)
-                            }
-                        }
+                        Tasks = new List<string>
+                        (
+                        )
                     }
                 }
             },
             new Recipe()
             {
-                Name = "Different Recipe",
                 Ingredients = new Ingredient[]
                 {
                     new Ingredient()
                     {
                         Type = "Triangle",
-                        Tasks = new IngredientTask[]
-                        {
-                            new IngredientTask()
-                            {
-                                Name = "Red",
-                                Color = new Color(1,0,0)
-                            },
-                            new IngredientTask()
-                            {
-                                Name = "Green",
-                                Color = new Color(0,1,0)
-                            }
-                        }
+                        Tasks = new List<string>
+                        (
+                        )
                     },
                     new Ingredient()
                     {
                         Type = "Circle",
-                        Tasks = new IngredientTask[]
-                        {
-                            new IngredientTask()
-                            {
-                                Name = "Blue",
-                                Color = new Color(0,0,1)
-                            },
-                            new IngredientTask()
-                            {
-                                Name = "Red",
-                                Color = new Color(1,0,0)
-                            }
-                        }
+                        Tasks = new List<string>
+                        (
+                        )
                     }
                 }
             }
@@ -119,9 +77,6 @@ public class UIRecipes : MonoBehaviour {
     GameObject MakeRecipePanel(Recipe recipe)
     {
         GameObject recipePanel = Instantiate(RecipePanel);
-        Transform label = recipePanel.transform.FindChild("UI-Recipe-Label");
-        Text labelText = label.GetComponent<Text>();
-        labelText.text = recipe.Name;
 
         Transform ingredientsPanel = recipePanel.transform.FindChild("UI-Recipe-Ingredients");
         foreach (Ingredient ingredient in recipe.Ingredients)
@@ -141,7 +96,7 @@ public class UIRecipes : MonoBehaviour {
 
         Transform ingredientTasksPanel = ingredientPanel.transform.FindChild("UI-Ingredient-Tasks");
 
-        foreach (IngredientTask task in ingredient.Tasks)
+        foreach (string task in ingredient.Tasks)
         {
             GameObject ingredientTask = MakeIngredientTask(task);
             ingredientTask.transform.SetParent(ingredientTasksPanel, false);
@@ -164,12 +119,12 @@ public class UIRecipes : MonoBehaviour {
         }
     }
 
-    GameObject MakeIngredientTask(IngredientTask task)
+    GameObject MakeIngredientTask(string task)
     {
         GameObject ingredientTask = Instantiate(RecipeIngredientTask);
         Image taskImage = ingredientTask.GetComponent<Image>();
 
-        taskImage.color = task.Color;
+        //taskImage.color = task.Color;
 
         return ingredientTask;
     }
