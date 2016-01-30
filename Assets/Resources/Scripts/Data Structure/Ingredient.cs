@@ -7,5 +7,7 @@ public class Ingredient
 {
     public string Type;
 
-    public List<string> Tasks = new List<string>();
+	public bool IsSatisfied;
+
+	public List<string> Tasks = new List<string>();
 }

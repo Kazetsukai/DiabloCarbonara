@@ -11,6 +11,7 @@ public class PlateBench : BenchBase
 	public GameObject progressImage;
 
 	private Recipe Recipe;
+	private List<IngredientBase> Ingredients;
 
 	public override IngredientBase Interact()
 	{
@@ -26,7 +27,8 @@ public class PlateBench : BenchBase
 
 		if (MatchesRecipe(item))
 		{
-			//Ingredients.Add(item);
+			Ingredients.Add(item);
+
 			return true;
 		}
 
@@ -35,7 +37,22 @@ public class PlateBench : BenchBase
 
 	private bool MatchesRecipe(IngredientBase item)
 	{
-		return true;
+		var pendingIngredients = Recipe.Ingredients.Where(i => !i.IsSatisfied);
+		foreach (var ingredient in pendingIngredients)
+		{
+			if (IngredientMatches(item, ingredient))
+			{
+				ingredient.IsSatisfied = true;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private bool IngredientMatches(IngredientBase item, Ingredient ingredient)
+	{
+		throw new NotImplementedException();
 	}
 
 	public void Start()

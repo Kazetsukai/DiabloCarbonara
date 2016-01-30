@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Recipe {
     public Recipe()
@@ -9,4 +10,9 @@ public class Recipe {
     }
 
     public Ingredient[] Ingredients;
+
+	public bool IsDone()
+	{
+		return Ingredients.All(i => i.IsSatisfied);
+	}
 }

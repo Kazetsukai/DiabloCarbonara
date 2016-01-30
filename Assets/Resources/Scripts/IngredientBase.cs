@@ -1,15 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IngredientBase : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+public class IngredientBase : MonoBehaviour
+{
+	public string Type;
 }
