@@ -19,7 +19,7 @@ public class BinBench : BenchBase
 
 	public override void GetItem(IngredientBase item)
     {
-        var ritual = FindObjectOfType<RitualMaster>().RemainingRituals<TrashItemRitual>().Where(r => r.ItemType == item.Description).FirstOrDefault();
+        var ritual = FindObjectOfType<RitualMaster>().RemainingRituals<TrashItemRitual>().Where(r => r.ItemDescription == item.Description).FirstOrDefault();
         if (ritual != null)
             ritual.Satisfied = true;
     }
