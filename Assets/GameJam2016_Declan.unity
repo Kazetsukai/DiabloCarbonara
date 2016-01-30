@@ -684,7 +684,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -705,8 +705,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1657791472}
-  m_LocalRotation: {x: 0.47318992, y: 0, z: 0, w: 0.88096046}
-  m_LocalPosition: {x: -4.13, y: 9.56, z: -7.86}
+  m_LocalRotation: {x: 0.3535534, y: 0.3535534, z: -0.14644663, w: 0.85355335}
+  m_LocalPosition: {x: -9.84, y: 9.19, z: -7.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -749,6 +749,18 @@ Prefab:
     - target: {fileID: 482698, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478218, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: HorizontalAxis
+      value: Horizontal_P5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478218, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: VerticalAxis
+      value: Vertical_P5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478218, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: InteractButtonAxis
+      value: Interact_P5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
