@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public GameObject ArmRightUpper;
     public GameObject ArmLeftLower;
     public GameObject ArmRightLower;
+    public GameObject HeldObjectTransform;
 
     public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     Vector3 CameraTransformedInput()
     {
         var input = GetInput();
-         var dirVect = new Vector3(input.x, 0, input.y);
+        var dirVect = new Vector3(input.x, 0, input.y);
 
         // Redirect based on camera angle
         dirVect = Quaternion.FromToRotation(Vector3.forward, TrimY(Camera.allCameras[0].transform.forward)) * dirVect;
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
 	void Update()
 	{
         //Move player when horizontal or vertical input is given
-        var input = CameraTransformedInput();                
+        var input = CameraTransformedInput();       
 
         if (input.magnitude > 0)
 		{
@@ -162,9 +163,10 @@ public class Player : MonoBehaviour
 			{
 				// hold item above head
 				HeldItem = item;
-				HeldItem.transform.position = transform.position + Vector3.up;
-				HeldItem.transform.parent = transform;
-				JustInteracted = true;
+                HeldItem.transform.parent = HeldObjectTransform.transform;
+                StartCoroutine(LerpItemPosition(HeldItem, HeldItem.gameObject.transform.position, HeldObjectTransform.transform.position, 0.2f));
+                         
+                JustInteracted = true;
 			}
 			else
 			{
@@ -195,4 +197,16 @@ public class Player : MonoBehaviour
 	{
 		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
 	}
+
+    public IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
+    {
+        float t_elapsed = 0;
+        do
+        {
+            t_elapsed += Time.deltaTime;
+            itemToLerp.gameObject.transform.position = Vector3.Lerp(startPos, endPos, t_elapsed / duration);
+            yield return null;
+        }
+        while (t_elapsed / duration < 1f);        
+    }
 }
