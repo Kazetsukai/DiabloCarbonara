@@ -104,7 +104,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 444098}
-  - 114: {fileID: 11416738}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -421,17 +420,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11416738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c64af9a2b8bded41bcc16270b574604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11422564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -469,7 +457,7 @@ MonoBehaviour:
   ChopUpTransform: {fileID: 444768}
   ChopDownTransform: {fileID: 470598}
   MaxVarianceZ: 0.38
-  MinVarianceZ: 0.06
+  MinVarianceZ: -0.1
 --- !u!135 &13524156
 SphereCollider:
   m_ObjectHideFlags: 1

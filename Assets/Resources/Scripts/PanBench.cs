@@ -4,35 +4,96 @@ using UnityEngine.UI;
 
 public class PanBench : BenchBase
 {
-	public float progress;
-
-	private bool progressingThisFrame;
-	private readonly float PROGRESS_SPEED = 3;
-
+    [Header("Pan Bench")]
+    public GameObject Spatula;
+    public Transform StirTarget;
+    public float StirRadius = 0.5f;    
+    public float progress;
+    public int StirCount = 10;
+    public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
+    
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
 
 	public string TaskType = "Fry";
 
-	public override IngredientBase Interact(Player player, Vector2 input)
+    public float StirAngle;
+    public float StirAngleProgress;
+
+
+    Vector3 SpatulaIdlePosition;
+    Vector3 SpatulaIdleRotation;
+    float InteractSpatulaResetTime = 0.1f;
+    float InteractSpatulaResetElapsed;
+
+    float lastStirAngle;
+
+    public override IngredientBase Interact(Player player, Vector2 input)
     {
 		if (contents == null)
 		{
 			return null;
 		}
 
-		if (progress >= 1)
+        LastInteractedPlayer = player;
+
+        //Get stir angle from input
+        StirAngle = Vector2.Angle(Vector2.up, input);
+        Vector3 cross = Vector3.Cross(Vector2.up, input);
+        if (cross.z > 0)
+        {
+            StirAngle = 360 - StirAngle;
+        }
+
+        //Update stir angle progress (only allow increases by counter clockwise stirring)
+        float deltaStirAngle = Mathf.Clamp(StirAngle - lastStirAngle, 0, 360);
+
+        if (deltaStirAngle > MinimumStirAngleProgress)  //Prevent cheating by skipping stirring in full circles
+        {
+            StirAngleProgress = 0;
+        }
+        else
+        {
+            StirAngleProgress += deltaStirAngle;
+        }
+
+        if (StirAngleProgress >= 360f)
+        {
+            StirAngleProgress = 0f;
+            progress += 1f / StirCount;
+        }
+        
+        lastStirAngle = StirAngle;
+
+        //Do animation for players arms
+        player.IKArm_R.solver.target = HandIKTarget_R;          //Set IK target R of player to be IK transform R of this bench                                                    
+        player.IKArm_L.solver.target = HandIKTarget_L;          //Set IK target L of player to be IK transform L of this bench
+
+        HandIKTarget_L.transform.position = StirTarget.position;
+
+        //Move stir target for spatula
+        StirTarget.transform.localPosition = new Vector3(StirRadius * Mathf.Cos((-StirAngle + 180) * Mathf.Deg2Rad), StirTarget.transform.position.y, StirRadius * Mathf.Sin((-StirAngle + 180) * Mathf.Deg2Rad));
+
+        //Move spatula accordingly
+        InteractSpatulaResetElapsed = 0;
+        Spatula.transform.position = player.HandLeft.transform.position;
+        Spatula.transform.LookAt(StirTarget.position);              
+
+        if (progress >= 1)
 		{
 			contents.TasksDone.Add(TaskType);
 
-			progress = 0;
+            //Reset player arm IK targets
+            player.IKArm_R.solver.target = player.ArmIKTarget_R;
+            player.IKArm_L.solver.target = player.ArmIKTarget_L;
+
+            progress = 0;
 			var temp = contents;
 			contents = null;
 			return temp;
 		}
 		else
 		{
-			progressingThisFrame = true;
 			return null;
 		}
 	}
@@ -47,6 +108,9 @@ public class PanBench : BenchBase
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
+
+        SpatulaIdlePosition = Spatula.transform.position;
+        SpatulaIdleRotation = Spatula.transform.eulerAngles;
     }
 
 	public new void Update()
@@ -56,15 +120,25 @@ public class PanBench : BenchBase
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
 
-		base.Update();
+        //Update Spatula position
+        InteractSpatulaResetElapsed += Time.deltaTime;
+        if (InteractSpatulaResetElapsed >= InteractSpatulaResetTime)
+        {
+            Spatula.transform.position = SpatulaIdlePosition;
+            Spatula.transform.eulerAngles = SpatulaIdleRotation;
+
+            //Reset player arm IK targets
+            if (LastInteractedPlayer != null)
+            {
+                LastInteractedPlayer.IKArm_R.solver.target = LastInteractedPlayer.ArmIKTarget_R;
+                LastInteractedPlayer.IKArm_L.solver.target = LastInteractedPlayer.ArmIKTarget_L;
+            }
+        }
+
+        base.Update();
 	}
 
 	public void FixedUpdate()
 	{
-		if (progressingThisFrame)
-		{
-			progressingThisFrame = false;
-			progress += Time.fixedDeltaTime / PROGRESS_SPEED;
-		}
-	}
+    }
 }

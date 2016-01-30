@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
     public float TransitionToIdleDuration = 0.2f;
     public float TransitionToHoldDuration = 0.2f;
 
-
     public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
 
