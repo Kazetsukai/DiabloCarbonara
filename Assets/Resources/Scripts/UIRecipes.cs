@@ -10,6 +10,13 @@ public class UIRecipes : MonoBehaviour {
         private set;
     }
 
+    Dictionary<string, Color> taskColors = new Dictionary<string, Color>()
+    {
+        { "red", new Color(1,0,0) },
+        { "green", new Color(0,1,0) },
+        { "blue", new Color(0,0,1) }
+    };
+
     public GameObject RecipePanel;
     public GameObject RecipeIngredient;
     public GameObject RecipeIngredientTask;
@@ -124,7 +131,7 @@ public class UIRecipes : MonoBehaviour {
         GameObject ingredientTask = Instantiate(RecipeIngredientTask);
         Image taskImage = ingredientTask.GetComponent<Image>();
 
-        //taskImage.color = task.Color;
+        
 
         return ingredientTask;
     }

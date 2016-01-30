@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47b04ecc6ed6324383d99d2b1a54cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecipePanel: {fileID: 159716, guid: 9b6a76f1d2d78c04d826c59f96a53506, type: 2}
+  RecipePanel: {fileID: 101262, guid: 9b6a76f1d2d78c04d826c59f96a53506, type: 2}
   RecipeIngredient: {fileID: 163168, guid: 3057772f8afdeb541be001ae01b26b4c, type: 2}
   RecipeIngredientTask: {fileID: 137840, guid: 4e8faf7c2e6fb624e81283709f0cc705, type: 2}
   CircleIngredient: {fileID: 102752, guid: 7ebb0e459cec53d4a87d4f9cca666c7b, type: 2}
@@ -103,8 +103,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 140}
-  m_SizeDelta: {x: 0, y: -280}
+  m_AnchoredPosition: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: -450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
@@ -140,6 +140,10 @@ Prefab:
       propertyPath: TriangleIngredient
       value: 
       objectReference: {fileID: 102752, guid: c559dcddd1f7f094a9f5b41d538ac6c5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: RecipeIngredient
+      value: 
+      objectReference: {fileID: 163168, guid: 3057772f8afdeb541be001ae01b26b4c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116954}
