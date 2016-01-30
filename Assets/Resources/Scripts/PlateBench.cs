@@ -11,7 +11,7 @@ public class PlateBench : BenchBase
 	public GameObject progressImage;
 
 	public Recipe Recipe;
-	private List<IngredientBase> Ingredients;
+	public List<IngredientBase> Ingredients;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
     {
@@ -92,6 +92,11 @@ public class PlateBench : BenchBase
 
 	public void Clear()
 	{
+		var ingArray = Ingredients.ToArray();
+		for (int i = 0; i < ingArray.Length; i++)
+		{
+			Destroy(ingArray[i].gameObject);
+		}
 		Recipe = null;
 		Ingredients = new List<IngredientBase>();
 	}
