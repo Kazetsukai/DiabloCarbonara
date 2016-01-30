@@ -29,14 +29,20 @@ public class BenchBase : MonoBehaviour
 			return false;
 
 		// Move it
-		item.gameObject.transform.parent = transform;
-		StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, IngredientOffsetTransform.position, 0.2f));
+		var target = TargetLocation(item);
+		item.gameObject.transform.SetParent(transform);
+		StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, target, 0.2f));
 
 		// Get it
 		GetItem(item);
 
 		return true;
 	}
+
+	public virtual Vector3 TargetLocation(IngredientBase item)
+	{
+		return IngredientOffsetTransform.position;
+    }
 
 	public virtual void GetItem(IngredientBase item)
 	{

@@ -1,9 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
-using System.Linq;
 
 public class BinBench : BenchBase
 {
@@ -18,4 +13,9 @@ public class BinBench : BenchBase
 	}
 
 	public override void GetItem(IngredientBase item) { }
+
+	public override Vector3 TargetLocation(IngredientBase item)
+	{
+		return IngredientOffsetTransform.position + Random.insideUnitSphere/3;
+    }
 }

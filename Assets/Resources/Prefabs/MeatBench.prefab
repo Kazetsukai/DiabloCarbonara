@@ -252,10 +252,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc903d7a61d701c4188344e20697b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IngredientOffset: {x: 0, y: 0, z: 0}
+  IngredientOffsetTransform: {fileID: 0}
   contents: {fileID: 0}
-  IngredientPrefab: {fileID: 128060, guid: 42a073cfeef68be438578b5434d40d4e, type: 2}
-  Type: Meat
+  HandIKTarget_R: {fileID: 0}
+  HandIKTarget_L: {fileID: 0}
+  LastInteractedPlayer: {fileID: 0}
+  IngredientPrefab: {fileID: 164924, guid: 46a3e65e2858438439f1810ba7114ecf, type: 2}
 --- !u!135 &13501090
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -394,7 +396,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: IngredientPrefab
+      value: 
+      objectReference: {fileID: 164924, guid: 46a3e65e2858438439f1810ba7114ecf, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140462}
