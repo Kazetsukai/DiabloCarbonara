@@ -18,7 +18,7 @@ public class RecipeMaster : MonoBehaviour {
     public const float MinTimeWithNoOrders = 5;
     public const float MaxTimeWithNoOrders = 10;
 
-    private float TimeSinceLastOrder = 0;
+    private float TimeSinceLastOrder = MaxTimeWithNoOrders;
 
     public readonly string[] IngredientTypes = new string[]
     {

@@ -17,7 +17,7 @@ public class Recipe {
         }
     }
 
-    public List<Ingredient> Ingredients;
+    public List<Ingredient> Ingredients = new List<Ingredient>();
 
 	public bool IsDone()
 	{

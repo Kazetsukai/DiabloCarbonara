@@ -2,86 +2,35 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UIRecipes : MonoBehaviour {
-    public List<Recipe> Recipes
-    {
-        get;
-        private set;
-    }
-
     Dictionary<string, Color> taskColors = new Dictionary<string, Color>()
     {
-        { "red", new Color(1,0,0) },
-        { "green", new Color(0,1,0) },
-        { "blue", new Color(0,0,1) }
+        { "Chop", new Color(0,1,0) },
+        { "Boil", new Color(0,0,1) },
+        { "Fry", new Color(1,0,0) }
     };
+
+    PlateBench[] plateBenches;
+    Dictionary<PlateBench, Recipe> plateRecipes;
+    Dictionary<Recipe, GameObject> recipePanels = new Dictionary<Recipe, GameObject>();
 
     public GameObject RecipePanel;
     public GameObject RecipeIngredient;
     public GameObject RecipeIngredientTask;
 
-    public GameObject CircleIngredient;
-    public GameObject RectangleIngredient;
-    public GameObject TriangleIngredient;
+    public GameObject PastaIngredient;
+    public GameObject TomatoIngredient;
+    public GameObject MeatIngredient;
 
     // Use this for initialization
     void Start () {
-        Recipes = new List<Recipe>();
-
-        //Yay, hardcoded test data
-        /*Recipes.AddRange(new Recipe[] {
-            new Recipe()
-            {
-                Ingredients = new Ingredient[]
-                {
-                    new Ingredient()
-                    {
-                        Type = "Circle",
-                        Tasks = new List<string>
-                        (
-                        )
-                    },
-                    new Ingredient()
-                    {
-                        Type = "Rectangle",
-                        Tasks = new List<string>
-                        (
-                        )
-                    }
-                }
-            },
-            new Recipe()
-            {
-                Ingredients = new Ingredient[]
-                {
-                    new Ingredient()
-                    {
-                        Type = "Triangle",
-                        Tasks = new List<string>
-                        (
-                        )
-                    },
-                    new Ingredient()
-                    {
-                        Type = "Circle",
-                        Tasks = new List<string>
-                        (
-                        )
-                    }
-                }
-            }
-        }
-        );*/
-
-        foreach (Recipe recipe in Recipes)
-        {
-            var newPanel = MakeRecipePanel(recipe);
-            newPanel.transform.SetParent(transform);
-        }
+        plateBenches = FindObjectsOfType<PlateBench>();
+        plateRecipes = plateBenches.ToDictionary(p => p, p => (Recipe)null);
     }
 
-    GameObject MakeRecipePanel(Recipe recipe)
+    void MakeRecipePanel(Recipe recipe)
     {
         GameObject recipePanel = Instantiate(RecipePanel);
 
@@ -92,7 +41,8 @@ public class UIRecipes : MonoBehaviour {
             ingredientPanel.transform.SetParent(ingredientsPanel, false);
         }
 
-        return recipePanel;
+        recipePanel.transform.SetParent(transform);
+        recipePanels.Add(recipe, recipePanel);
     }
 
     GameObject MakeIngredientPanel(Ingredient ingredient)
@@ -112,17 +62,17 @@ public class UIRecipes : MonoBehaviour {
         return ingredientPanel;
     }
 
-    GameObject MakeIngredient(string ingredientShape)
+    GameObject MakeIngredient(string ingredientType)
     {
-        switch (ingredientShape)
+        switch (ingredientType)
         {
-            case "Circle":
-                return Instantiate(CircleIngredient);
-            case "Triangle":
-                return Instantiate(TriangleIngredient);
-            case "Rectangle":
+            case "Meat":
+                return Instantiate(MeatIngredient);
+            case "Tomato":
+                return Instantiate(TomatoIngredient);
+            case "Pasta":
             default:
-                return Instantiate(RectangleIngredient);
+                return Instantiate(PastaIngredient);
         }
     }
 
@@ -131,13 +81,48 @@ public class UIRecipes : MonoBehaviour {
         GameObject ingredientTask = Instantiate(RecipeIngredientTask);
         Image taskImage = ingredientTask.GetComponent<Image>();
 
-        
+        if (taskColors.ContainsKey(task))
+        {
+            taskImage.color = taskColors[task];
+        }
 
         return ingredientTask;
     }
 	
-	// Update is called once per frame
+	void RemoveRecipePanel(Recipe recipe)
+    {
+        Destroy(recipePanels[recipe]);
+        recipePanels.Remove(recipe);
+    }
+
+    bool CheckPlateRecipeForChanges(Recipe existingRecipe, Recipe currentRecipe)
+    {
+        if (existingRecipe != currentRecipe)
+        {
+            if (existingRecipe != null)
+            {
+                RemoveRecipePanel(existingRecipe);
+            }
+
+            if (currentRecipe != null)
+            {
+                MakeRecipePanel(currentRecipe);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+    
+    // Update is called once per frame
 	void Update () {
-	
+        foreach (PlateBench plateBench in plateBenches)
+        {
+            if(CheckPlateRecipeForChanges(plateRecipes[plateBench], plateBench.Recipe))
+            {
+                plateRecipes[plateBench] = plateBench.Recipe;
+            }
+        }
 	}
 }

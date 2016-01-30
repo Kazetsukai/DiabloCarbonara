@@ -82,7 +82,7 @@ public class PlateBench : BenchBase
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = 0;
 
-		if (Recipe.IsDone())
+		if (Recipe != null && Recipe.IsDone())
 		{
 			Debug.DrawLine(transform.position, transform.position + Vector3.up*2, Color.green);
 		}
