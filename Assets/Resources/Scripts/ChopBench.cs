@@ -34,8 +34,10 @@ public class ChopBench : BenchBase
 		if (contents == null)
 		{
 			return null;
-		}               
-        
+		}
+
+        LastInteractedPlayer = player;
+
         if (input.y >= InputValue_Up)
         {
             upTargetReached = true;
@@ -109,6 +111,14 @@ public class ChopBench : BenchBase
         {
             Knife.transform.position = KnifeIdlePosition;
             Knife.transform.eulerAngles = KnifeIdleRotation;
+
+            //Reset player arm IK targets
+            if (LastInteractedPlayer != null)
+            {
+                LastInteractedPlayer.IKArm_R.solver.target = LastInteractedPlayer.ArmIKTarget_R;
+                LastInteractedPlayer.IKArm_L.solver.target = LastInteractedPlayer.ArmIKTarget_L;
+                LastInteractedPlayer = null;
+            }
         }
 
 		base.Update();

@@ -8,6 +8,7 @@ public class BenchBase : MonoBehaviour
 	public IngredientBase contents;
     public Transform HandIKTarget_R;
     public Transform HandIKTarget_L;
+    public Player LastInteractedPlayer;
             
 	public virtual IngredientBase Interact(Player player, Vector2 input)
 	{
