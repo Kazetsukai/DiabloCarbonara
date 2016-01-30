@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &104604
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 474298}
-  - 33: {fileID: 3332746}
-  - 65: {fileID: 6578752}
-  - 23: {fileID: 2383874}
-  m_Layer: 0
-  m_Name: PanBenchMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &176410
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,15 +17,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &474298
+--- !u!1 &180286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 445378}
+  - 33: {fileID: 3365252}
+  - 23: {fileID: 2305466}
+  - 65: {fileID: 6504416}
+  m_Layer: 0
+  m_Name: bench
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445378
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104604}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_GameObject: {fileID: 180286}
+  m_LocalRotation: {x: -0.49999994, y: -0.50000006, z: -0.50000006, w: 0.49999994}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 477808}
   m_RootOrder: 0
@@ -53,31 +53,32 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.488742, y: -0, z: -1.2489444}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: -2.41, y: -0, z: 2.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 474298}
+  - {fileID: 445378}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2383874
+--- !u!23 &2305466
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104604}
+  m_GameObject: {fileID: 180286}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f0ee7ddde4e854a47985a844831be51a, type: 2}
+  - {fileID: 2100000, guid: 2964206b4244abd4e81e8ae03df53df4, type: 2}
+  - {fileID: 2100000, guid: b8f15d348bb589e4fbf8e96298b07a97, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
   m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
@@ -86,25 +87,25 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3332746
+--- !u!33 &3365252
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104604}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6578752
+  m_GameObject: {fileID: 180286}
+  m_Mesh: {fileID: 4300000, guid: e8107d28672152740a7c8217a07ff710, type: 3}
+--- !u!65 &6504416
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104604}
+  m_GameObject: {fileID: 180286}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.0000005, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 1.0000002}
 --- !u!114 &11414678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,7 +119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IngredientOffset: {x: 0, y: 0, z: 0}
   contents: {fileID: 0}
-  processed: 0
   progressImagePrefab: {fileID: 186374, guid: aade76294f4284f449d6d5c0503e4ef7, type: 2}
   progressImage: {fileID: 0}
 --- !u!135 &13555448
@@ -131,7 +131,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.6
   m_Center: {x: 0.75, y: 0.75, z: 0}
 --- !u!1001 &100100000
 Prefab:
