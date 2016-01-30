@@ -19,7 +19,7 @@ public class UIRecipes : MonoBehaviour
 	//PlateBench[] plateBenches;
 	//Dictionary<PlateBench, Recipe> plateRecipes;
 	//Dictionary<Recipe, GameObject> recipePanels = new Dictionary<Recipe, GameObject>();
-	Dictionary<PlateBench, PlateInfo> plates;
+	public Dictionary<PlateBench, PlateInfo> plates;
 
 	public GameObject RecipePanel;
 	public GameObject RecipeIngredient;
@@ -49,15 +49,14 @@ public class UIRecipes : MonoBehaviour
 			GameObject ingredientPanel = MakeIngredientPanel(ingredient);
 			ingredientPanel.transform.SetParent(recipePanel.transform, false);
 		}
+        
+        //Parent the recipe panel to the plate label image
+        UIPlateNumberLabel plateLabel = GameObject.FindObjectsOfType<UIPlateNumberLabel>().Where(p => p.PlateNumber == plateInfo.Bench.PlateNumber).ToList()[0];
+        recipePanel.transform.SetParent(plateLabel.transform);
+        recipePanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(90, 0, 0);
+        recipePanel.GetComponent<RectTransform>().localScale = new Vector3(1.8f, 1.8f, 1.8f);
 
-		Canvas canvas = FindObjectOfType<Canvas>();
-		recipePanel.transform.SetParent(canvas.transform);
-
-		Vector3 pos = plateInfo.Bench.transform.position + Vector3.up * 3.5f;
-		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
-		recipePanel.transform.position = screenPos;
-
-		return recipePanel;
+        return recipePanel;
 	}
 
 	GameObject MakeIngredientPanel(Ingredient ingredient)
@@ -149,10 +148,13 @@ public class UIRecipes : MonoBehaviour
 		else
 		{
 			RemoveRecipePanel(plateInfo);
-		}
+
+            //Increment score
+            GameObject.FindObjectOfType<StarsManager>().OrdersCompleted++;
+        }       
 	}
 
-	void RemoveRecipePanel(PlateInfo plateInfo)
+	public void RemoveRecipePanel(PlateInfo plateInfo)
 	{
 		Destroy(plateInfo.UI);
 		plateInfo.Recipe = null;
@@ -224,7 +226,7 @@ public class UIRecipes : MonoBehaviour
 		}
 	}
 
-	private class PlateInfo
+	public class PlateInfo
 	{
 		public PlateBench Bench;
 		public Recipe Recipe;
