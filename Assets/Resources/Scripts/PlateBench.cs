@@ -81,16 +81,18 @@ public class PlateBench : BenchBase
 		};
 	}
 
+	public override void GetItem(IngredientBase item) { }
+
 	public new void Update()
 	{
 		Vector3 pos = transform.position + Vector3.up * 3;
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = 0;
-		
+
 		if (Recipe.IsDone())
 		{
-			Debug.DrawLine(transform.position, transform.position + Vector3.up, Color.green);
+			Debug.DrawLine(transform.position, transform.position + Vector3.up*2, Color.green);
 		}
 
 		base.Update();

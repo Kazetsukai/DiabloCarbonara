@@ -24,13 +24,19 @@ public class BenchBase : MonoBehaviour
 		if (!CanIReceive(item))
 			return false;
 
-        // Get it
-        item.gameObject.transform.parent = transform;
-        StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, transform.position + IngredientOffset, 0.2f));
-	
-		contents = item;
+		// Move it
+		item.gameObject.transform.parent = transform;
+		StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, transform.position + IngredientOffset, 0.2f));
+
+		// Get it
+		GetItem(item);
 
 		return true;
+	}
+
+	public virtual void GetItem(IngredientBase item)
+	{
+		contents = item;
 	}
 
 	public virtual bool CanIReceive(IngredientBase item)
