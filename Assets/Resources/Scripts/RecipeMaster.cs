@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class RecipeMaster : MonoBehaviour {
-    public List<Recipe> CurrentRecipies;
-
     public const int MaxRecipies = 3;
 
     public const int MinComplexity = 3;
@@ -70,18 +69,22 @@ public class RecipeMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (CurrentRecipies.Count < 3)
-        {
-            TimeSinceLastOrder += Time.deltaTime;
+        TimeSinceLastOrder += Time.deltaTime;
+        PlateBench[] plates = FindObjectsOfType<PlateBench>();
+        bool isAPlateFilled = plates.Any(p => p.Recipe != null);
 
-            if (TimeSinceLastOrder > MaxTimeWithNoOrders || (TimeSinceLastOrder > MinTimeWithNoOrders && Random.Range(0, MaxTimeWithNoOrders) > TimeSinceLastOrder))
+        if (!isAPlateFilled || TimeSinceLastOrder > MaxTimeWithNoOrders || (TimeSinceLastOrder > MinTimeWithNoOrders && Random.Range(0, MaxTimeWithNoOrders) > TimeSinceLastOrder))
+        {
+            foreach (PlateBench plate in plates)
             {
-
+                if (plate.Recipe == null)
+                {
+                    plate.Recipe = new Recipe();
+                    break;
+                }
             }
-        }
-        else
-        {
+
             TimeSinceLastOrder = 0;
-        }
+        }            
 	}
 }
