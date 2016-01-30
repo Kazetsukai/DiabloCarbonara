@@ -178,17 +178,23 @@ public class Player : MonoBehaviour
             if (CurrentInteractable != null)
             {
                 Transform selectionTransform = CurrentInteractable.transform.FindChild("SelectionHighlight");
-                Renderer renderer = selectionTransform.GetComponent<Renderer>();
-                renderer.enabled = false;
+                if (selectionTransform != null)
+                {
+                    Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                    renderer.enabled = false;
+                }
             }
             if (touchedObject != null)
             {
                 Transform selectionTransform = touchedObject.transform.FindChild("SelectionHighlight");
-                Renderer renderer = selectionTransform.GetComponent<Renderer>();
-                renderer.enabled = true;
-                Material mat = renderer.material;
-                mat.SetColor("_EmissionColor", SelectColor);
-                mat.EnableKeyword("_EMISSION");
+                if (selectionTransform != null)
+                {
+                    Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                    renderer.enabled = true;
+                    Material mat = renderer.material;
+                    mat.SetColor("_EmissionColor", SelectColor);
+                    mat.EnableKeyword("_EMISSION");
+                }
             }
 
             CurrentInteractable = touchedObject;
