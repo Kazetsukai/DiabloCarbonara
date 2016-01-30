@@ -2,12 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PanBench : BenchBase
+public class PotBench : BenchBase
 {
 	public float progress;
-
-	private bool progressingThisFrame;
-	private readonly float PROGRESS_SPEED = 3;
+	
+	private readonly float PROGRESS_SPEED = 10;
 
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
@@ -28,7 +27,6 @@ public class PanBench : BenchBase
 		}
 		else
 		{
-			progressingThisFrame = true;
 			return null;
 		}
 	}
@@ -57,9 +55,8 @@ public class PanBench : BenchBase
 
 	public void FixedUpdate()
 	{
-		if (progressingThisFrame)
+		if (contents != null)
 		{
-			progressingThisFrame = false;
 			progress += Time.fixedDeltaTime / PROGRESS_SPEED;
 		}
 	}

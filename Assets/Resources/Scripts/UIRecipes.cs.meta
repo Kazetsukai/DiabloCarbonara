@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f47b04ecc6ed6324383d99d2b1a54cea
+timeCreated: 1454108707
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - RecipePanel: {instanceID: 0}
+  - RecipeIngredient: {instanceID: 0}
+  - RecipeIngredientTask: {instanceID: 0}
+  - CircleSprite: {instanceID: 0}
+  - RectangleSprite: {instanceID: 0}
+  - TriangleSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

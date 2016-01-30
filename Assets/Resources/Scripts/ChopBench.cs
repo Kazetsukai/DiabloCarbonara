@@ -2,15 +2,16 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PanBench : BenchBase
+public class ChopBench : BenchBase
 {
 	public float progress;
+	public float HitsRequired;
+	public GameObject progressImagePrefab;
 
 	private bool progressingThisFrame;
-	private readonly float PROGRESS_SPEED = 3;
+	private float progressCooldown = 0f;
 
-	public GameObject progressImagePrefab;
-	public GameObject progressImage;
+	private GameObject progressImage;
 
 	public override IngredientBase Interact()
 	{
@@ -26,9 +27,15 @@ public class PanBench : BenchBase
 			contents = null;
 			return temp;
 		}
+		else if(progressCooldown < Time.fixedTime)
+		{
+			progressCooldown = Time.fixedTime + 0.03f;
+			progressingThisFrame = true;
+			return null;
+		}
 		else
 		{
-			progressingThisFrame = true;
+			progressCooldown = Time.fixedTime + 0.03f;
 			return null;
 		}
 	}
@@ -59,8 +66,8 @@ public class PanBench : BenchBase
 	{
 		if (progressingThisFrame)
 		{
+			progress += 1f/HitsRequired;
 			progressingThisFrame = false;
-			progress += Time.fixedDeltaTime / PROGRESS_SPEED;
 		}
 	}
 }
