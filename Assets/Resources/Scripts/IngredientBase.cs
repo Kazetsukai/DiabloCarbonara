@@ -17,7 +17,6 @@ public class IngredientBase : MonoBehaviour
 
 	public void Start()
 	{
-		Color = GetComponent<MeshRenderer>().material.color;
 	}
 
     public void Process()
