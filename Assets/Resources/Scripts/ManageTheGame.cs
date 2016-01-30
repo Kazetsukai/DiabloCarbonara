@@ -23,8 +23,7 @@ public class ManageTheGame : MonoBehaviour {
         {
             var pNum = i + 1;
             if (Input.GetButtonDown("Interact_P" + pNum) && ActivePlayers[i] == null)
-                ActivePlayers[i] = Instantiate(PlayerProto);
-
+                ActivePlayers[i] = (GameObject)Instantiate(PlayerProto, new Vector3(i * Mathf.Pow(-1, 2), 0, 0), Quaternion.identity);
         }
 	}
 }
