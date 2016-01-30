@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ChopBench : BenchBase
 {
+    [Header("Chop Bench")]
 	public float progress;
 	public float HitsRequired;
 	public GameObject progressImagePrefab;
@@ -15,8 +16,7 @@ public class ChopBench : BenchBase
 
     private bool progressingThisFrame;
 	private GameObject progressImage;    
-
-
+    
 	public override IngredientBase Interact(Vector2 input)
 	{       
 		if (contents == null)

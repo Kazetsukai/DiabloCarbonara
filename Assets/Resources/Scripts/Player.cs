@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float RotateThreshold = 0.3f;
     public float RotateToTargetSpeed = 50f;
     public float InteractReach = 1f;
+    public float InteractOffsetTarget = 1.5f;
     public AnimationCurve MoveSpeedVsAnimSpeed;
 
     [Header("Body parts")]
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
 
     private List<BenchBase> _touchedBenches = new List<BenchBase>();
 	private bool JustInteracted;
-   private bool Interacting;
+    public bool Interacting;
 
     void Start()
 	{
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			JustInteracted = false;
+			JustInteracted = false;           
 		}
 
 		if (HeldItem != null)
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
 			Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
 		}
 
-        if ((!Interacting) || (HeldItem != null))
+        if (!Interacting)
         {
             //Move player when horizontal or vertical input is given
             var input = CameraTransformedInput();
@@ -110,14 +111,32 @@ public class Player : MonoBehaviour
         {
             _anim.SetFloat("MoveSpeed", 0);
         }     
+
+        //Move towards bench interactTransform if interacting with the bench
+        if ((CurrentInteractable != null) && (Interacting))
+        {
+            Vector3 targetPos = CurrentInteractable.transform.position + (CurrentInteractable.transform.right * InteractOffsetTarget);
+            Vector3 dir = (new Vector3(targetPos.x, 0, targetPos.z) - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
+
+            float distanceToTarget = Vector3.Distance(targetPos, new Vector3(transform.position.x, 0, transform.position.z));
+
+            if (distanceToTarget > 0.08f)
+            {
+                _controller.SimpleMove(dir * MoveSpeed);
+            }
+        }
 	}
 
     void FixedUpdate()
     {
         //Rotate towards movement direction
-        if (lastVelocity.magnitude > 0.01f)
+        if ((lastVelocity.magnitude > 0.01f) && (CurrentInteractable == null))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastVelocity, Vector3.up), RotationSpeed * Time.deltaTime);
+        }
+        else if (CurrentInteractable != null)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(new Vector3(CurrentInteractable.transform.position.x, 0, CurrentInteractable.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z), Vector3.up), RotateToTargetSpeed * Time.deltaTime);
         }
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
@@ -164,12 +183,8 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        Debug.Log(CurrentInteractable);
-        if (CurrentInteractable != null)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(new Vector3(CurrentInteractable.transform.position.x, 0, CurrentInteractable.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z), Vector3.up), RotationSpeed * Time.deltaTime);
-        }
-
+        Debug.Log("Current Interactable: " + CurrentInteractable);
+       
         if (HeldItem != null)
 		{
             //print("put");

@@ -282,8 +282,9 @@ MonoBehaviour:
   MoveSpeed: 10
   RotationSpeed: 16
   RotateThreshold: 0.1
-  RotateToTargetSpeed: 50
+  RotateToTargetSpeed: 1000
   InteractReach: 2
+  InteractOffsetTarget: 1.7
   MoveSpeedVsAnimSpeed:
     serializedVersion: 2
     m_Curve:
@@ -316,6 +317,7 @@ MonoBehaviour:
   TransitionToIdleDuration: 0.2
   TransitionToHoldDuration: 0.2
   SelectColor: {r: 0.6838235, g: 0.6366633, b: 0, a: 0}
+  Interacting: 0
 --- !u!1001 &275823487
 Prefab:
   m_ObjectHideFlags: 0
@@ -1702,6 +1704,10 @@ Prefab:
     - target: {fileID: 11496770, guid: 68d42dadb1289f4469da9b0b97a6bf7b, type: 2}
       propertyPath: InputValue_Up
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496770, guid: 68d42dadb1289f4469da9b0b97a6bf7b, type: 2}
+      propertyPath: InteractTransform
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 68d42dadb1289f4469da9b0b97a6bf7b, type: 2}

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BenchBase : MonoBehaviour
 {
+    [Header("Bench base")]
 	public Vector3 IngredientOffset;
 	public IngredientBase contents;
             
