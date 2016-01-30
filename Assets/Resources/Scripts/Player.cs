@@ -9,12 +9,9 @@ public class Player : MonoBehaviour
 	private CharacterController _controller;
 
 	[Header("Input Axis Names")]
-	[SerializeField]
-	string HorizontalAxis;
-	[SerializeField]
-	string VerticalAxis;
-	[SerializeField]
-	string InteractButtonAxis;
+	public string HorizontalAxis;
+	public string VerticalAxis;
+	public string InteractButtonAxis;
 
 	[Header("Movement Parameters")]
     public float MoveSpeed = 1f;
