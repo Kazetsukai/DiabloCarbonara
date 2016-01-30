@@ -5,11 +5,16 @@ using UnityEngine.UI;
 public class PotBench : BenchBase
 {
 	public float progress;
+    public float burnt;
 	
 	private readonly float PROGRESS_SPEED = 10;
+    private readonly float BURNT_SPEED = 15;
 
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
+    public GameObject burnImage;
+
+    public Color burnColor;
 
 	public string TaskType = "Boil";
 
@@ -43,8 +48,13 @@ public class PotBench : BenchBase
 	public void Start()
 	{
 		progressImage = Instantiate(progressImagePrefab);
-		var canvas = FindObjectOfType<Canvas>();
+
+        burnImage = Instantiate(progressImagePrefab);
+        burnImage.GetComponent<Image>().color = burnColor;
+
+        var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
+        burnImage.transform.SetParent(canvas.transform);
     }
 
 	public new void Update()
@@ -54,7 +64,10 @@ public class PotBench : BenchBase
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
 
-		base.Update();
+        burnImage.GetComponent<RectTransform>().position = screenPos;
+        //burnImage.GetComponent<Image>().fillAmount = burnt;
+
+        base.Update();
 	}
 
 	public void FixedUpdate()
@@ -62,6 +75,10 @@ public class PotBench : BenchBase
 		if (contents != null)
 		{
 			progress += Time.fixedDeltaTime / PROGRESS_SPEED;
+            if (progress >= 1)
+            {
+                burnt += Time.fixedDeltaTime / BURNT_SPEED;
+            }
 		}
 	}
 }

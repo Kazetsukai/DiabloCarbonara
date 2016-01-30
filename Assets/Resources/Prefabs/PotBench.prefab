@@ -384,8 +384,11 @@ MonoBehaviour:
   HandIKTarget_L: {fileID: 0}
   LastInteractedPlayer: {fileID: 0}
   progress: 0
+  burnt: 0
   progressImagePrefab: {fileID: 186374, guid: aade76294f4284f449d6d5c0503e4ef7, type: 2}
   progressImage: {fileID: 0}
+  burnImage: {fileID: 0}
+  burnColor: {r: 1, g: 0, b: 0, a: 0}
   TaskType: Boil
 --- !u!135 &13565876
 SphereCollider:
@@ -413,6 +416,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: burnColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: burnColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: burnColor.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
