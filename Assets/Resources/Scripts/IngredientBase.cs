@@ -57,7 +57,7 @@ public class IngredientBase : MonoBehaviour
 
             for (int i = 0; i < TaskIcons.Count; i++)
             {
-                TaskIcons[i].transform.localPosition = new Vector3(TaskIcons.Count > 1 ? startingPoint + (-0.3f * i) : 0, -0.5f, 5);
+                TaskIcons[i].transform.localPosition = new Vector3(TaskIcons.Count > 1 ? startingPoint + (-0.3f * i) : 0, -0.5f, -5);
             }
 
             _currentStage++;
