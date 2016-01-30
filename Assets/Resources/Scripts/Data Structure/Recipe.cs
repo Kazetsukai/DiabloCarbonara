@@ -9,7 +9,15 @@ public class Recipe {
         
     }
 
-    public Ingredient[] Ingredients;
+    public int Complexity
+    {
+        get
+        {
+            return Ingredients.Sum(i => i.Tasks.Count + 1);
+        }
+    }
+
+    public List<Ingredient> Ingredients;
 
 	public bool IsDone()
 	{

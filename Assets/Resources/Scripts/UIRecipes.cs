@@ -30,7 +30,7 @@ public class UIRecipes : MonoBehaviour {
         Recipes = new List<Recipe>();
 
         //Yay, hardcoded test data
-        Recipes.AddRange(new Recipe[] {
+        /*Recipes.AddRange(new Recipe[] {
             new Recipe()
             {
                 Ingredients = new Ingredient[]
@@ -72,7 +72,7 @@ public class UIRecipes : MonoBehaviour {
                 }
             }
         }
-        );
+        );*/
 
         foreach (Recipe recipe in Recipes)
         {
