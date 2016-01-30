@@ -28,7 +28,7 @@ public class RecipeMaster : MonoBehaviour {
 
     List<Ingredient> CreateRandomIngredientList()
     {
-        
+        return null;
     }
 	
 	// Update is called once per frame
