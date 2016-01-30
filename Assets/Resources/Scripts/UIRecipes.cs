@@ -12,7 +12,7 @@ public class UIRecipes : MonoBehaviour {
         { "Fry", new Color(1,0,0) }
     };
 
-    readonly float fadeOutRate = 0.05f;
+    readonly float fadeOutRate = 0.015f;
 
     PlateBench[] plateBenches;
     Dictionary<PlateBench, Recipe> plateRecipes;
@@ -45,7 +45,7 @@ public class UIRecipes : MonoBehaviour {
         Canvas canvas = FindObjectOfType<Canvas>();
         recipePanel.transform.SetParent(canvas.transform);
 
-        Vector3 pos = plateBench.transform.position + Vector3.up * 3;
+        Vector3 pos = plateBench.transform.position + Vector3.up * 3.5f;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         recipePanel.transform.position = screenPos;
 
@@ -65,6 +65,13 @@ public class UIRecipes : MonoBehaviour {
         {
             GameObject ingredientTask = MakeIngredientTask(task);
             ingredientTask.transform.SetParent(ingredientTasksPanel, false);
+        }
+
+        CanvasRenderer[] renderers = ingredientPanel.GetComponentsInChildren<CanvasRenderer>();
+
+        foreach (CanvasRenderer renderer in renderers)
+        {
+            renderer.SetAlpha(0.6f);
         }
 
         return ingredientPanel;
@@ -95,6 +102,17 @@ public class UIRecipes : MonoBehaviour {
         }
 
         return ingredientTask;
+    }
+
+    void PartialCompleteRecipePanel(GameObject recipePanel, int ingredientIndex)
+    {
+        Transform ingredientPanel = recipePanel.transform.GetChild(ingredientIndex);
+        CanvasRenderer[] renderers = ingredientPanel.GetComponentsInChildren<CanvasRenderer>();
+
+        foreach (CanvasRenderer renderer in renderers)
+        {
+            renderer.SetAlpha(1f);
+        }
     }
 
     void CompleteRecipePanel(Recipe recipe, GameObject recipePanel)
@@ -156,6 +174,16 @@ public class UIRecipes : MonoBehaviour {
             if (recipePanel.Key.IsDone())
             {
                 CompleteRecipePanel(recipePanel.Key, recipePanel.Value);
+            }
+            else
+            {
+                for (int i = 0; i < recipePanel.Key.Ingredients.Count; i++)
+                {
+                    if (recipePanel.Key.Ingredients[i].IsSatisfied)
+                    {
+                        PartialCompleteRecipePanel(recipePanel.Value, i);
+                    }
+                }
             }
         }
 	}
