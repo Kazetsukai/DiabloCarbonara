@@ -96,6 +96,7 @@ public class ChopBench : BenchBase
 	{
 		ParticleSystem = GetComponentInChildren<ParticleSystem>();
 		progressImage = Instantiate(progressImagePrefab);
+		progressImage.GetComponent<Image>().color = Color.green;
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
 

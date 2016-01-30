@@ -51,6 +51,7 @@ public class PotBench : BenchBase
 	{
 		Emitter = GetComponentInChildren<ParticleSystem>().emission;
 		progressImage = Instantiate(progressImagePrefab);
+		progressImage.GetComponent<Image>().color = Color.blue;
 
         burnImage = Instantiate(progressImagePrefab);
         burnImage.GetComponent<Image>().color = burnColor;
@@ -68,7 +69,7 @@ public class PotBench : BenchBase
 		progressImage.GetComponent<Image>().fillAmount = progress;
 
         burnImage.GetComponent<RectTransform>().position = screenPos;
-		//burnImage.GetComponent<Image>().fillAmount = burnt;
+		burnImage.GetComponent<Image>().fillAmount = 1;
 		
 		if (!Emitter.enabled && contents != null)
 		{

@@ -110,6 +110,7 @@ public class PanBench : BenchBase
 	{
 		Emitter = GetComponentInChildren<ParticleSystem>().emission;
 		progressImage = Instantiate(progressImagePrefab);
+		progressImage.GetComponent<Image>().color = Color.red;
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
 
