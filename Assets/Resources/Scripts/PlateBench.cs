@@ -27,8 +27,6 @@ public class PlateBench : BenchBase
 
 		if (MatchesRecipe(item))
 		{
-			Ingredients.Add(item);
-
 			return true;
 		}
 
@@ -43,6 +41,8 @@ public class PlateBench : BenchBase
 			if (IngredientMatches(item, ingredient))
 			{
 				ingredient.IsSatisfied = true;
+				Ingredients.Add(item);
+
 				return true;
 			}
 		}
