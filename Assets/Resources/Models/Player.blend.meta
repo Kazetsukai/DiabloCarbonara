@@ -26,6 +26,8 @@ ModelImporter:
     100036: Armature_001
     100038: m_player_001
     100040: ChestRoot
+    100042: Hand_L
+    100044: Hand_R
     400000: Armature
     400002: ArmLower_L
     400004: ArmLower_R
@@ -47,6 +49,8 @@ ModelImporter:
     400036: Armature_001
     400038: m_player_001
     400040: ChestRoot
+    400042: Hand_L
+    400044: Hand_R
     4300000: m_player
     4300002: m_player_001
     7400000: Default Take

@@ -52,7 +52,7 @@ public class BenchBase : MonoBehaviour
 		}
 	}
 
-    public IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
+    IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
     {
         float t_elapsed = 0;
         do

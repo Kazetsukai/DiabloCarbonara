@@ -29,6 +29,17 @@ public class Player : MonoBehaviour
     public GameObject ArmRightLower;
     public GameObject HeldObjectTransform;
 
+    [Header("Animation Stuff")]
+    public GameObject ArmIKTarget_R;
+    public GameObject ArmIKTarget_L;
+    public GameObject HandIKTarget_Idle_R;
+    public GameObject HandIKTarget_Idle_L;
+    public GameObject HandIKTarget_HoldItem_R;
+    public GameObject HandIKTarget_HoldItem_L;
+    public float TransitionToIdleDuration = 0.2f;
+    public float TransitionToHoldDuration = 0.2f;
+
+
     public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
 
@@ -150,7 +161,8 @@ public class Player : MonoBehaviour
 				// not holding anymore
 				HeldItem = null;
 				JustInteracted = true;
-			}
+                StartCoroutine(TransitionToPose_Idle(TransitionToIdleDuration));    //Animate arms          
+            }
 			else
 			{
 				print("failed");
@@ -163,9 +175,9 @@ public class Player : MonoBehaviour
 			{
 				// hold item above head
 				HeldItem = item;
-                HeldItem.transform.parent = HeldObjectTransform.transform;
+                HeldItem.transform.parent = HeldObjectTransform.transform;         
                 StartCoroutine(LerpItemPosition(HeldItem, HeldItem.gameObject.transform.position, HeldObjectTransform.transform.position, 0.2f));
-                         
+                StartCoroutine(TransitionToPose_HoldItem(TransitionToHoldDuration));    //Animate arms
                 JustInteracted = true;
 			}
 			else
@@ -198,7 +210,7 @@ public class Player : MonoBehaviour
 		return new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis));
 	}
 
-    public IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
+    IEnumerator LerpItemPosition(IngredientBase itemToLerp, Vector3 startPos, Vector3 endPos, float duration)
     {
         float t_elapsed = 0;
         do
@@ -209,4 +221,39 @@ public class Player : MonoBehaviour
         }
         while (t_elapsed / duration < 1f);        
     }
+    
+    IEnumerator TransitionToPose_Idle(float duration)
+    {      
+        float t_elapsed = 0;
+        do
+        {
+            t_elapsed += Time.deltaTime;
+            float t = t_elapsed / duration;
+
+            ArmIKTarget_L.transform.position = Vector3.Lerp(ArmIKTarget_L.transform.position, HandIKTarget_Idle_L.transform.position, t);
+            ArmIKTarget_R.transform.position = Vector3.Lerp(ArmIKTarget_R.transform.position, HandIKTarget_Idle_R.transform.position, t);
+
+            yield return null;
+        }
+        while (t_elapsed / duration < 1f);
+    }
+
+    IEnumerator TransitionToPose_HoldItem(float duration)
+    {
+        float t_elapsed = 0;
+        do
+        {
+            t_elapsed += Time.deltaTime;
+            float t = t_elapsed / duration;
+
+            ArmIKTarget_L.transform.position = Vector3.Lerp(ArmIKTarget_L.transform.position, HandIKTarget_HoldItem_L.transform.position, t);
+            ArmIKTarget_R.transform.position = Vector3.Lerp(ArmIKTarget_R.transform.position, HandIKTarget_HoldItem_R.transform.position, t);
+
+            yield return null;
+        }
+        while (t_elapsed / duration < 1f);
+    }
+
+
+
 }
