@@ -213,7 +213,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 57a3aa50e25197642b42676773121061, type: 2}
+  - {fileID: 2100000, guid: 1649246cd3556a3409e47778dc1c9cb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -301,6 +301,7 @@ MonoBehaviour:
   contents: {fileID: 0}
   HandIKTarget_R: {fileID: 0}
   HandIKTarget_L: {fileID: 0}
+  LastInteractedPlayer: {fileID: 0}
 --- !u!135 &13558168
 SphereCollider:
   m_ObjectHideFlags: 1

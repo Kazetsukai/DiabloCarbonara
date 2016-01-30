@@ -465,10 +465,18 @@ MonoBehaviour:
   contents: {fileID: 0}
   HandIKTarget_R: {fileID: 0}
   HandIKTarget_L: {fileID: 0}
+  LastInteractedPlayer: {fileID: 0}
+  Spatula: {fileID: 0}
+  StirTarget: {fileID: 0}
+  StirRadius: 0.5
   progress: 0
+  StirCount: 10
+  MinimumStirAngleProgress: 15
   progressImagePrefab: {fileID: 186374, guid: aade76294f4284f449d6d5c0503e4ef7, type: 2}
   progressImage: {fileID: 0}
   TaskType: Fry
+  StirAngle: 0
+  StirAngleProgress: 0
 --- !u!135 &13527054
 SphereCollider:
   m_ObjectHideFlags: 1
