@@ -83,8 +83,7 @@ public class PanBench : BenchBase
 
         if (progress >= 1)
 		{
-			contents.TasksDone.Add(TaskType);
-            contents.Process();
+            contents.Process(TaskType);
 
             //Reset player arm IK targets
             player.IKArm_R.solver.target = player.ArmIKTarget_R;
