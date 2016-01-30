@@ -6,8 +6,9 @@ using System;
 public class IngredientBase : MonoBehaviour
 {
 	public string Type;
+    public string Description = "something";
 
-	public Color Color;
+    public Color Color;
 
 	public List<string> TasksDone = new List<string>();
 
@@ -28,4 +29,5 @@ public class IngredientBase : MonoBehaviour
             _currentStage++;
         }
     }
+
 }
