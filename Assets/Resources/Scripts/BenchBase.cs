@@ -4,10 +4,12 @@ using System.Collections;
 public class BenchBase : MonoBehaviour
 {
     [Header("Bench base")]
-	public Vector3 IngredientOffset;
+	public Transform IngredientOffsetTransform;
 	public IngredientBase contents;
+    public Transform HandIKTarget_R;
+    public Transform HandIKTarget_L;
             
-	public virtual IngredientBase Interact(Vector2 input)
+	public virtual IngredientBase Interact(Player player, Vector2 input)
 	{
 		var temp = contents;
 		contents = null;
@@ -27,7 +29,7 @@ public class BenchBase : MonoBehaviour
 
 		// Move it
 		item.gameObject.transform.parent = transform;
-		StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, transform.position + IngredientOffset, 0.2f));
+		StartCoroutine(LerpItemPosition(item, item.gameObject.transform.position, IngredientOffsetTransform.position, 0.2f));
 
 		// Get it
 		GetItem(item);

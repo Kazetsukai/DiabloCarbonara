@@ -13,8 +13,8 @@ public class PotBench : BenchBase
 
 	public string TaskType = "Boil";
 
-	public override IngredientBase Interact(Vector2 input)
-	{
+	public override IngredientBase Interact(Player player, Vector2 input)
+    {
 		if (contents == null)
 		{
 			return null;

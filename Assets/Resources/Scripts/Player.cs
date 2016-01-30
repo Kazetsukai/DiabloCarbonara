@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RootMotion.FinalIK;
 
 public class Player : MonoBehaviour
 {
@@ -29,11 +30,15 @@ public class Player : MonoBehaviour
     public GameObject ArmRightUpper;
     public GameObject ArmLeftLower;
     public GameObject ArmRightLower;
+    public GameObject HandLeft;
+    public GameObject HandRight;
     public GameObject HeldObjectTransform;
 
     [Header("Animation Stuff")]
-    public GameObject ArmIKTarget_R;
-    public GameObject ArmIKTarget_L;
+    public LimbIK IKArm_R;
+    public LimbIK IKArm_L;
+    public Transform ArmIKTarget_R;
+    public Transform ArmIKTarget_L;
     public GameObject HandIKTarget_Idle_R;
     public GameObject HandIKTarget_Idle_L;
     public GameObject HandIKTarget_HoldItem_R;
@@ -110,7 +115,7 @@ public class Player : MonoBehaviour
         else
         {
             _anim.SetFloat("MoveSpeed", 0);
-        }     
+        }
 
         //Move towards bench interactTransform if interacting with the bench
         if ((CurrentInteractable != null) && (Interacting))
@@ -124,6 +129,12 @@ public class Player : MonoBehaviour
             {
                 _controller.SimpleMove(dir * MoveSpeed);
             }
+        }
+        if ((CurrentInteractable == null) && (HeldItem == null) && !Interacting) 
+        {
+            //Reset IK targets
+            IKArm_R.solver.target = ArmIKTarget_R;
+            IKArm_L.solver.target = ArmIKTarget_L;
         }
 	}
 
@@ -183,7 +194,7 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        Debug.Log("Current Interactable: " + CurrentInteractable);
+       // Debug.Log("Current Interactable: " + CurrentInteractable);
        
         if (HeldItem != null)
 		{
@@ -202,7 +213,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{           
-            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(GetInput());
+            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(this, GetInput());
 			if (item != null)
 			{
 				// hold item above head
@@ -214,7 +225,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				//print("failed");
+				//print("failed");                
 			}
 		}
 	}
@@ -287,6 +298,8 @@ public class Player : MonoBehaviour
         }
         while (t_elapsed / duration < 1f);
     }
+
+
 
 
 

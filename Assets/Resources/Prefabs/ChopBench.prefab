@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &102132
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 475122}
   - 33: {fileID: 3348540}
   - 23: {fileID: 2328048}
-  - 95: {fileID: 9592850}
+  - 114: {fileID: 11422564}
   m_Layer: 0
-  m_Name: knife
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +31,97 @@ GameObject:
   - 95: {fileID: 9552884}
   m_Layer: 0
   m_Name: choppingBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &109454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 493932}
+  m_Layer: 0
+  m_Name: ItemOffsetTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &117108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 470598}
+  m_Layer: 0
+  m_Name: ChopDownTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &121322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 453740}
+  m_Layer: 0
+  m_Name: HandIKTarget_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &122538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444768}
+  m_Layer: 0
+  m_Name: ChopUpTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &158468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444098}
+  - 114: {fileID: 11416738}
+  m_Layer: 0
+  m_Name: Knife
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &169224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 449236}
+  m_Layer: 0
+  m_Name: HandIKTarget_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,6 +174,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 498938}
   m_RootOrder: 0
+--- !u!4 &444098
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158468}
+  m_LocalRotation: {x: 0.48238292, y: -0.5290703, z: -0.47036815, w: 0.5158927}
+  m_LocalPosition: {x: 0.253, y: 1.347, z: 0.334}
+  m_LocalScale: {x: 0.19999997, y: 0.20000002, z: 0.20000002}
+  m_Children:
+  - {fileID: 475122}
+  m_Father: {fileID: 498938}
+  m_RootOrder: 1
 --- !u!4 &444734
 Transform:
   m_ObjectHideFlags: 1
@@ -95,18 +199,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 498938}
   m_RootOrder: 2
+--- !u!4 &444768
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.126, y: 1.928, z: 0.363}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498938}
+  m_RootOrder: 4
+--- !u!4 &449236
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498938}
+  m_RootOrder: 7
+--- !u!4 &453740
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.393, y: 1.394, z: 0.283}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498938}
+  m_RootOrder: 6
+--- !u!4 &470598
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.011, y: 1.371, z: 0.061}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498938}
+  m_RootOrder: 5
 --- !u!4 &475122
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102132}
-  m_LocalRotation: {x: 0.05123336, y: -0.13074039, z: -0.70524836, w: 0.69491506}
-  m_LocalPosition: {x: -0.084, y: 1.35, z: 0.265}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalRotation: {x: 0.7071068, y: -0.000000052154064, z: 0.0000006218209, w: -0.7071067}
+  m_LocalPosition: {x: -0, y: 0, z: 1.493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 444098}
+  m_RootOrder: 0
+--- !u!4 &493932
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.325, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498938}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!4 &498938
 Transform:
   m_ObjectHideFlags: 1
@@ -114,12 +278,17 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.482248, y: -6.90646e-17, z: 1.6862216}
+  m_LocalPosition: {x: -7.376, y: -7.8778524e-17, z: 2.123698}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439680}
-  - {fileID: 475122}
+  - {fileID: 444098}
   - {fileID: 444734}
+  - {fileID: 493932}
+  - {fileID: 444768}
+  - {fileID: 470598}
+  - {fileID: 453740}
+  - {fileID: 449236}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &2328048
@@ -252,23 +421,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &9592850
-Animator:
-  serializedVersion: 3
+--- !u!114 &11416738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c64af9a2b8bded41bcc16270b574604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11422564
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102132}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 30d2127a95215e54e8b4c0566877c892, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c64af9a2b8bded41bcc16270b574604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11496770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,17 +454,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14280b8068e5f6a4b89328e8e197c0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IngredientOffset: {x: 0, y: 0, z: 0}
+  IngredientOffsetTransform: {fileID: 493932}
   contents: {fileID: 0}
+  HandIKTarget_R: {fileID: 453740}
+  HandIKTarget_L: {fileID: 449236}
   progress: 0
-  HitsRequired: 5
+  HitsRequired: 14
   progressImagePrefab: {fileID: 186374, guid: aade76294f4284f449d6d5c0503e4ef7, type: 2}
   InputValue_Up: 0
   InputValue_Down: -0.9
-  ChopSuccessIncrement: 0.07
-  downTargetReached: 0
   upTargetReached: 0
   TaskType: Chop
+  Knife: {fileID: 158468}
+  ChopUpTransform: {fileID: 444768}
+  ChopDownTransform: {fileID: 470598}
+  MaxVarianceZ: 0.38
+  MinVarianceZ: 0.06
 --- !u!135 &13524156
 SphereCollider:
   m_ObjectHideFlags: 1
