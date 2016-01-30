@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/TitleScreen.unity
   - enabled: 1
     path: Assets/Kitchen.unity
+  - enabled: 1
+    path: Assets/GameJam2016_Joe.unity

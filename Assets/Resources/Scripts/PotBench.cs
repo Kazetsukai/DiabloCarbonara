@@ -29,8 +29,9 @@ public class PotBench : BenchBase
 		if (progress >= 1)
 		{
 			contents.TasksDone.Add(TaskType);
+            contents.Process();
 
-			progress = 0;
+            progress = 0;
 			var temp = contents;
 			contents = null;
 			return temp;

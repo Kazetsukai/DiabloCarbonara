@@ -10,6 +10,6 @@ public class Billboard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.localRotation = Quaternion.LookRotation(-Camera.allCameras[0].transform.forward);
+        transform.rotation = Quaternion.LookRotation(-Camera.allCameras[0].transform.forward);
 	}
 }

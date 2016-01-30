@@ -70,6 +70,7 @@ public class ChopBench : BenchBase
 		{
             upTargetReached = false;
             contents.TasksDone.Add(TaskType);
+            contents.Process();
 
             //Reset player arm IK targets
             player.IKArm_R.solver.target = player.ArmIKTarget_R;
