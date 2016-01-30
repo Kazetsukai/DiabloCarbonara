@@ -20,9 +20,9 @@ public class UIRecipes : MonoBehaviour {
     public GameObject RecipeIngredient;
     public GameObject RecipeIngredientTask;
 
-    public GameObject PastaIngredient;
-    public GameObject TomatoIngredient;
-    public GameObject MeatIngredient;
+    public Sprite PastaIngredient;
+    public Sprite TomatoIngredient;
+    public Sprite MeatIngredient;
 
     // Use this for initialization
     void Start () {
@@ -30,26 +30,32 @@ public class UIRecipes : MonoBehaviour {
         plateRecipes = plateBenches.ToDictionary(p => p, p => (Recipe)null);
     }
 
-    void MakeRecipePanel(Recipe recipe)
+    void MakeRecipePanel(Recipe recipe, PlateBench plateBench)
     {
         GameObject recipePanel = Instantiate(RecipePanel);
 
-        Transform ingredientsPanel = recipePanel.transform.FindChild("UI-Recipe-Ingredients");
         foreach (Ingredient ingredient in recipe.Ingredients)
         {
             GameObject ingredientPanel = MakeIngredientPanel(ingredient);
-            ingredientPanel.transform.SetParent(ingredientsPanel, false);
+            ingredientPanel.transform.SetParent(recipePanel.transform, false);
         }
 
-        recipePanel.transform.SetParent(transform);
+        Canvas canvas = FindObjectOfType<Canvas>();
+        recipePanel.transform.SetParent(canvas.transform);
+
+        Vector3 pos = plateBench.transform.position + Vector3.up * 3;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        recipePanel.transform.position = screenPos;
+
         recipePanels.Add(recipe, recipePanel);
     }
 
     GameObject MakeIngredientPanel(Ingredient ingredient)
     {
         GameObject ingredientPanel = Instantiate(RecipeIngredient);
-        GameObject ingredientImage = MakeIngredient(ingredient.Type);
-        ingredientImage.transform.SetParent(ingredientPanel.transform, false);
+        Transform ingredientImagePanel = ingredientPanel.transform.FindChild("UI-Ingredient-Image");
+        Image ingredientImage = ingredientImagePanel.GetComponent<Image>();
+        ingredientImage.sprite = MakeIngredient(ingredient.Type);
 
         Transform ingredientTasksPanel = ingredientPanel.transform.FindChild("UI-Ingredient-Tasks");
 
@@ -62,17 +68,17 @@ public class UIRecipes : MonoBehaviour {
         return ingredientPanel;
     }
 
-    GameObject MakeIngredient(string ingredientType)
+    Sprite MakeIngredient(string ingredientType)
     {
         switch (ingredientType)
         {
             case "Meat":
-                return Instantiate(MeatIngredient);
+                return MeatIngredient;
             case "Tomato":
-                return Instantiate(TomatoIngredient);
+                return TomatoIngredient;
             case "Pasta":
             default:
-                return Instantiate(PastaIngredient);
+                return PastaIngredient;
         }
     }
 
@@ -95,7 +101,7 @@ public class UIRecipes : MonoBehaviour {
         recipePanels.Remove(recipe);
     }
 
-    bool CheckPlateRecipeForChanges(Recipe existingRecipe, Recipe currentRecipe)
+    bool CheckPlateRecipeForChanges(Recipe existingRecipe, Recipe currentRecipe, PlateBench plateBench)
     {
         if (existingRecipe != currentRecipe)
         {
@@ -106,7 +112,7 @@ public class UIRecipes : MonoBehaviour {
 
             if (currentRecipe != null)
             {
-                MakeRecipePanel(currentRecipe);
+                MakeRecipePanel(currentRecipe, plateBench);
             }
 
             return true;
@@ -119,7 +125,7 @@ public class UIRecipes : MonoBehaviour {
 	void Update () {
         foreach (PlateBench plateBench in plateBenches)
         {
-            if(CheckPlateRecipeForChanges(plateRecipes[plateBench], plateBench.Recipe))
+            if(CheckPlateRecipeForChanges(plateRecipes[plateBench], plateBench.Recipe, plateBench))
             {
                 plateRecipes[plateBench] = plateBench.Recipe;
             }

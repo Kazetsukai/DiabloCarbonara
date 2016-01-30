@@ -16,7 +16,7 @@ public class RecipeMaster : MonoBehaviour {
     public const int MaxSteps = 2;
 
     public const float MinTimeWithNoOrders = 5;
-    public const float MaxTimeWithNoOrders = 10;
+    public const float MaxTimeWithNoOrders = 15;
 
     private float TimeSinceLastOrder = MaxTimeWithNoOrders;
 
@@ -39,6 +39,16 @@ public class RecipeMaster : MonoBehaviour {
 	    
 	}
 
+    string GetRandomIngredient()
+    {
+        return IngredientTypes[Random.Range(0, IngredientTypes.Length)];
+    }
+
+    string GetRandomTask()
+    {
+        return TaskTypes[Random.Range(0, TaskTypes.Length)];
+    }
+
     public Recipe CreateRandomRecipe()
     {
         Recipe recipe;
@@ -51,12 +61,21 @@ public class RecipeMaster : MonoBehaviour {
             for (int i = 0; i < numberOfIngredients; i++)
             {
                 Ingredient ingredient = new Ingredient();
-                ingredient.Type = IngredientTypes[Random.Range(0, IngredientTypes.Length)];
+                ingredient.Type = GetRandomIngredient();
+                if (recipe.Ingredients.Any(ing => ing.Type == ingredient.Type))
+                {
+                    ingredient.Type = GetRandomIngredient();
+                }
 
                 int numberOfTasks = Random.Range(MinSteps, MaxSteps + 1);
                 for (int a = 0; a < numberOfTasks; a++)
                 {
-                    ingredient.Tasks.Add(TaskTypes[Random.Range(0, TaskTypes.Length)]);
+                    string taskType = GetRandomTask();
+                    if (ingredient.Tasks.Any(t => t == taskType))
+                    {
+                        taskType = GetRandomTask();
+                    }
+                    ingredient.Tasks.Add(taskType);
                 }
 
                 recipe.Ingredients.Add(ingredient);
