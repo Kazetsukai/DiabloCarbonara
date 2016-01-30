@@ -69,8 +69,7 @@ public class ChopBench : BenchBase
         if (progress >= 1)
 		{
             upTargetReached = false;
-            contents.TasksDone.Add(TaskType);
-            contents.Process();
+            contents.Process(TaskType);
 
             //Reset player arm IK targets
             player.IKArm_R.solver.target = player.ArmIKTarget_R;
@@ -96,6 +95,7 @@ public class ChopBench : BenchBase
 	{
 		ParticleSystem = GetComponentInChildren<ParticleSystem>();
 		progressImage = Instantiate(progressImagePrefab);
+		progressImage.GetComponent<Image>().color = Color.blue;
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
 
