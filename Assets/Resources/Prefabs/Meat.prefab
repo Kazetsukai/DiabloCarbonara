@@ -48,6 +48,7 @@ MonoBehaviour:
   ProcessStages:
   - {fileID: 21300000, guid: bcefc5280a675c347bb821c89ee33217, type: 3}
   - {fileID: 21300000, guid: 9f090c9e1f80ecf4fa34f3872af93128, type: 3}
+  - {fileID: 21300000, guid: 2444ac8d8d6608045b7386da57f47ddf, type: 3}
 --- !u!114 &11467974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,7 +111,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ProcessStages.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ProcessStages.Array.data[0]
@@ -138,6 +139,11 @@ Prefab:
       propertyPath: Color.a
       value: 0.23529412
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ProcessStages.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2444ac8d8d6608045b7386da57f47ddf,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162434}
