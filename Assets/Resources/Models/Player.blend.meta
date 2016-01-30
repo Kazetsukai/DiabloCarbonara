@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4b558679360c5584699fb4b6c423789d
-timeCreated: 1454103771
+timeCreated: 1454108531
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -19,6 +19,13 @@ ModelImporter:
     100022: Shin_R
     100024: Thigh_L
     100026: Thigh_R
+    100028: Foot_L
+    100030: Foot_R
+    100032: LeftFoot
+    100034: RightFoot
+    100036: Armature_001
+    100038: m_player_001
+    100040: ChestRoot
     400000: Armature
     400002: ArmLower_L
     400004: ArmLower_R
@@ -33,10 +40,22 @@ ModelImporter:
     400022: Shin_R
     400024: Thigh_L
     400026: Thigh_R
+    400028: Foot_L
+    400030: Foot_R
+    400032: LeftFoot
+    400034: RightFoot
+    400036: Armature_001
+    400038: m_player_001
+    400040: ChestRoot
     4300000: m_player
+    4300002: m_player_001
     7400000: Default Take
+    7400002: WalkAnim
+    7400004: Idle
     9500000: //RootNode
+    11100000: //RootNode
     13700000: m_player
+    13700002: m_player_001
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,13 +70,191 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Hips
+        weight: 1
+      - path: Armature/Hips/Thigh_L
+        weight: 1
+      - path: Armature/Hips/Thigh_L/Shin_L
+        weight: 1
+      - path: Armature/Hips/Thigh_R
+        weight: 1
+      - path: Armature/Hips/Thigh_R/Shin_R
+        weight: 1
+      - path: m_player
+        weight: 1
+      - path: m_player/Armature_001
+        weight: 1
+      - path: m_player/Armature_001/Chest
+        weight: 1
+      - path: m_player/Armature_001/Chest/ArmUpper_L
+        weight: 1
+      - path: m_player/Armature_001/Chest/ArmUpper_L/ArmLower_L
+        weight: 1
+      - path: m_player/Armature_001/Chest/ArmUpper_R
+        weight: 1
+      - path: m_player/Armature_001/Chest/ArmUpper_R/ArmLower_R
+        weight: 1
+      - path: m_player/Armature_001/Chest/Head
+        weight: 1
+      - path: m_player_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: WalkAnim
+      takeName: WalkAnim
+      firstFrame: -1
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Hips
+        weight: 1
+      - path: Armature/Hips/Chest
+        weight: 1
+      - path: Armature/Hips/Chest/ArmUpper_L
+        weight: 1
+      - path: Armature/Hips/Chest/ArmUpper_L/ArmLower_L
+        weight: 1
+      - path: Armature/Hips/Chest/ArmUpper_R
+        weight: 1
+      - path: Armature/Hips/Chest/ArmUpper_R/ArmLower_R
+        weight: 1
+      - path: Armature/Hips/Chest/Head
+        weight: 1
+      - path: Armature/Hips/Thigh_L
+        weight: 1
+      - path: Armature/Hips/Thigh_L/Shin_L
+        weight: 1
+      - path: Armature/Hips/Thigh_R
+        weight: 1
+      - path: Armature/Hips/Thigh_R/Shin_R
+        weight: 1
+      - path: m_player
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Hips
+        weight: 1
+      - path: Armature/Hips/Thigh_L
+        weight: 1
+      - path: Armature/Hips/Thigh_L/Shin_L
+        weight: 1
+      - path: Armature/Hips/Thigh_R
+        weight: 1
+      - path: Armature/Hips/Thigh_R/Shin_R
+        weight: 1
+      - path: m_player
+        weight: 1
+      - path: m_player/Armature_001
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest/ArmUpper_L
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest/ArmUpper_L/ArmLower_L
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest/ArmUpper_R
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest/ArmUpper_R/ArmLower_R
+        weight: 1
+      - path: m_player/Armature_001/ChestRoot/Chest/Head
+        weight: 1
+      - path: m_player_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

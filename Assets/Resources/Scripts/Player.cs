@@ -21,6 +21,15 @@ public class Player : MonoBehaviour
     public float RotationSpeed = 10f;
     public float RotateThreshold = 0.3f;
     public float InteractReach = 1f;
+    public AnimationCurve MoveSpeedVsAnimSpeed;
+
+    [Header("Body parts")]
+    public GameObject Head;
+    public GameObject Chest;
+    public GameObject ArmLeftUpper;
+    public GameObject ArmRightUpper;
+    public GameObject ArmLeftLower;
+    public GameObject ArmRightLower;
 
     public BenchBase CurrentInteractable { get; private set; }
 	public IngredientBase HeldItem { get; private set; }
@@ -28,6 +37,7 @@ public class Player : MonoBehaviour
     public Color SelectColor;
 
     Vector3 lastVelocity;   //Used for working out rotation target direction
+    Animator _anim;
 
     private List<BenchBase> _touchedBenches = new List<BenchBase>();
 	private bool JustInteracted;
@@ -35,10 +45,12 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		_controller = GetComponent<CharacterController>();
+        _anim = GetComponentInChildren<Animator>();
 	}
 
 	void Update()
 	{
+        
 		//Move player when horizontal or vertical input is given
 		var input = GetInput();
         var dirVect = new Vector3(input.x, 0, input.y);
@@ -68,6 +80,12 @@ public class Player : MonoBehaviour
 			//draw held item
 			Debug.DrawLine(transform.position, transform.position + Vector3.up * 2, Color.red);
 		}
+
+        //Update walk animation
+        float speed = _controller.velocity.magnitude;
+        _anim.SetFloat("MoveSpeed", speed);
+        _anim.speed = MoveSpeedVsAnimSpeed.Evaluate(speed);
+        Debug.Log(speed);
 	}
 
     void FixedUpdate()
@@ -119,7 +137,7 @@ public class Player : MonoBehaviour
 	{
 		if (HeldItem != null)
 		{
-			print("put");
+			//print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
 				// not holding anymore
@@ -128,12 +146,12 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				print("failed");
+				//print("failed");
 			}
 		}
 		else
 		{
-			print("get");
+			//print("get");
 			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
 			if (item != null)
 			{
@@ -145,7 +163,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				print("failed");
+				//print("failed");
 			}
 		}
 	}
