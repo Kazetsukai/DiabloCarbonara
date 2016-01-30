@@ -10,4 +10,9 @@ public class Ingredient
 	public bool IsSatisfied;
 
 	public List<string> Tasks = new List<string>();
+
+	public override string ToString()
+	{
+		return Type + " (" + string.Join(", ", Tasks.ToArray()) + ")";
+	}
 }

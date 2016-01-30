@@ -71,14 +71,6 @@ public class PlateBench : BenchBase
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.parent = canvas.transform;
-
-		Recipe = new Recipe
-		{
-			Ingredients = new List<Ingredient>
-			{
-				new Ingredient { Type = "Tomato", Tasks = new List<string> { "Fry" } }
-			}
-		};
 	}
 
 	public override void GetItem(IngredientBase item) { }

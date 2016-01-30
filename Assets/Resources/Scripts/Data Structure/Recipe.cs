@@ -23,4 +23,9 @@ public class Recipe {
 	{
 		return Ingredients.All(i => i.IsSatisfied);
 	}
+
+	public override string ToString()
+	{
+		return string.Join(" + ", Ingredients.Select(i => i.ToString()).ToArray());
+	}
 }

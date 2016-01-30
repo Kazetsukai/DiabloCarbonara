@@ -79,7 +79,8 @@ public class RecipeMaster : MonoBehaviour {
             {
                 if (plate.Recipe == null)
                 {
-                    plate.Recipe = new Recipe();
+                    plate.Recipe = CreateRandomRecipe();
+					print(plate.Recipe);
                     break;
                 }
             }
