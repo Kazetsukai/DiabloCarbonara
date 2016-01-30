@@ -446,6 +446,7 @@ MonoBehaviour:
   contents: {fileID: 0}
   HandIKTarget_R: {fileID: 453740}
   HandIKTarget_L: {fileID: 449236}
+  LastInteractedPlayer: {fileID: 0}
   progress: 0
   HitsRequired: 14
   progressImagePrefab: {fileID: 186374, guid: aade76294f4284f449d6d5c0503e4ef7, type: 2}
