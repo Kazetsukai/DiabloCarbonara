@@ -7,10 +7,17 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerTexture_IL
+<<<<<<< HEAD
   m_Shader: {fileID: 4800000, guid: e2561ee36e45bb642a1a8f6d5fb002b4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
+=======
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+>>>>>>> origin/master
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -22,7 +29,7 @@ Material:
 <<<<<<< HEAD
           m_Texture: {fileID: 2800000, guid: 6a13b9f3c8d158b428870f7748c7a5f1, type: 3}
 =======
-          m_Texture: {fileID: 2800000, guid: e05e15ce7946c224b83c52e9d8ee8978, type: 3}
+          m_Texture: {fileID: 2800000, guid: dfdeb409dddee034da55c530a264f1c4, type: 3}
 >>>>>>> origin/master
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
@@ -49,6 +56,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
@@ -64,13 +78,6 @@ Material:
       data:
         first:
           name: _DetailAlbedoMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _OcclusionMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -106,7 +113,11 @@ Material:
       data:
         first:
           name: _Glossiness
+<<<<<<< HEAD
         second: 0
+=======
+        second: 0.5
+>>>>>>> origin/master
       data:
         first:
           name: _BumpScale
