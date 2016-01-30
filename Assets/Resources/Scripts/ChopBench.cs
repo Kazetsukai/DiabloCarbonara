@@ -9,17 +9,13 @@ public class ChopBench : BenchBase
 	public GameObject progressImagePrefab;
     public float InputValue_Up = 0f;
     public float InputValue_Down = -0.9f;
-    public float ChopSuccessIncrement = 0.07f;
-
-    public bool downTargetReached = false;
+    public float ChopSuccessIncrement = 0.07f;    
     public bool upTargetReached = false;
+    public string TaskType = "Chop";
 
     private bool progressingThisFrame;
-	private float progressCooldown = 0f;
+	private GameObject progressImage;    
 
-	private GameObject progressImage;
-    
-	public string TaskType = "Chop";
 
 	public override IngredientBase Interact(Vector2 input)
 	{       
@@ -32,23 +28,15 @@ public class ChopBench : BenchBase
         {
             upTargetReached = true;
         }
-        if (input.y <= InputValue_Down)
-        {
-            downTargetReached = true;
-        }
-
-        if (upTargetReached && downTargetReached)
+        if ((input.y <= InputValue_Down) && upTargetReached)
         {
             progress += ChopSuccessIncrement;
             upTargetReached = false;
-            downTargetReached = false;
         }
 
         if (progress >= 1)
 		{
             upTargetReached = false;
-            downTargetReached = false;
-
             contents.TasksDone.Add(TaskType);
 
 			progress = 0;

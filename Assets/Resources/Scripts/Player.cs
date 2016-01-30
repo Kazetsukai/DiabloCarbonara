@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float MoveSpeed = 1f;
     public float RotationSpeed = 10f;
     public float RotateThreshold = 0.3f;
+    public float RotateToTargetSpeed = 50f;
     public float InteractReach = 1f;
     public AnimationCurve MoveSpeedVsAnimSpeed;
 
@@ -163,14 +164,15 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
+        Debug.Log(CurrentInteractable);
         if (CurrentInteractable != null)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(CurrentInteractable.transform.position - transform.position, Vector3.up), RotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(new Vector3(CurrentInteractable.transform.position.x, 0, CurrentInteractable.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z), Vector3.up), RotationSpeed * Time.deltaTime);
         }
 
         if (HeldItem != null)
 		{
-            print("put");
+            //print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
 				// not holding anymore
@@ -180,7 +182,7 @@ public class Player : MonoBehaviour
             }
 			else
 			{
-				print("failed");
+				//print("failed");
 			}
 		}
 		else
@@ -197,7 +199,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				print("failed");
+				//print("failed");
 			}
 		}
 	}
