@@ -13,6 +13,9 @@ public class ManageTheGame : MonoBehaviour {
 
     public Text StartingText;
 
+    bool _beginning = false;
+    bool _playing = false;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -25,27 +28,30 @@ public class ManageTheGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < MAX_PLAYERS; i++)
+        if (!_playing)
         {
-            var pNum = i + 1;
-
-            if (Input.GetButtonDown("Interact_P" + pNum))
-                Debug.Log( " " + pNum);
-
-            if (Input.GetButtonDown("Interact_P" + pNum))
+            for (int i = 0; i < MAX_PLAYERS; i++)
             {
-                if (ActivePlayers[i] == null)
+                var pNum = i + 1;
+
+                if (Input.GetButtonDown("Interact_P" + pNum))
+                    Debug.Log(" " + pNum);
+
+                if (Input.GetButtonDown("Interact_P" + pNum))
                 {
-                    ActivePlayers[i] = (GameObject)Instantiate(PlayerProto, new Vector3(((int)((i + 1) / 2) * 2) * Mathf.Pow(-1, (i + 1)), 1, 0), Quaternion.identity);
-                    DontDestroyOnLoad(ActivePlayers[i]);
-                    var player = ActivePlayers[i].GetComponent<Player>();
-                    player.HorizontalAxis = "Horizontal_P" + pNum;
-                    player.VerticalAxis = "Vertical_P" + pNum;
-                    player.InteractButtonAxis = "Interact_P" + pNum;
-                }
-                else
-                {
-                    StartCoroutine(BeginGame());
+                    if (ActivePlayers[i] == null)
+                    {
+                        ActivePlayers[i] = (GameObject)Instantiate(PlayerProto, new Vector3(((int)((i + 1) / 2) * 2) * Mathf.Pow(-1, (i + 1)), 1, 0), Quaternion.identity);
+                        DontDestroyOnLoad(ActivePlayers[i]);
+                        var player = ActivePlayers[i].GetComponent<Player>();
+                        player.HorizontalAxis = "Horizontal_P" + pNum;
+                        player.VerticalAxis = "Vertical_P" + pNum;
+                        player.InteractButtonAxis = "Interact_P" + pNum;
+                    }
+                    else
+                    {
+                        StartCoroutine(BeginGame());
+                    }
                 }
             }
         }
@@ -53,12 +59,18 @@ public class ManageTheGame : MonoBehaviour {
 
     IEnumerator BeginGame()
     {
-        for (int i = 0; i < 3; i++)
+        if (!_beginning)
         {
-            StartingText.text = "Beginning in " + (3 - i) + "...";
-            yield return new WaitForSeconds(1);
-        }
+            _beginning = true;
 
-        SceneManager.LoadScene("Kitchen");
+            for (int i = 0; i < 3; i++)
+            {
+                StartingText.text = "Beginning in " + (3 - i) + "...";
+                yield return new WaitForSeconds(1);
+            }
+
+            _playing = true;
+            SceneManager.LoadScene("Kitchen");
+        }
     }
 }
