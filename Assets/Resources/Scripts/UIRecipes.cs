@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class UIRecipes : MonoBehaviour {
-    Dictionary<string, Color> taskColors = new Dictionary<string, Color>()
+    readonly Dictionary<string, Color> taskColors = new Dictionary<string, Color>()
     {
         { "Chop", new Color(0,1,0) },
         { "Boil", new Color(0,0,1) },
         { "Fry", new Color(1,0,0) }
     };
+
+    readonly float fadeOutRate = 0.05f;
 
     PlateBench[] plateBenches;
     Dictionary<PlateBench, Recipe> plateRecipes;
@@ -94,8 +96,26 @@ public class UIRecipes : MonoBehaviour {
 
         return ingredientTask;
     }
-	
-	void RemoveRecipePanel(Recipe recipe)
+
+    void CompleteRecipePanel(Recipe recipe, GameObject recipePanel)
+    {
+        CanvasRenderer[] renderers = recipePanel.GetComponentsInChildren<CanvasRenderer>();
+        float currentAlpha = renderers[0].GetAlpha();
+
+        if (currentAlpha > 0)
+        {
+            foreach (CanvasRenderer renderer in renderers)
+            {
+                renderer.SetAlpha(currentAlpha - fadeOutRate);
+            }
+        }
+        else
+        {
+            RemoveRecipePanel(recipe);
+        }
+    }
+
+    void RemoveRecipePanel(Recipe recipe)
     {
         Destroy(recipePanels[recipe]);
         recipePanels.Remove(recipe);
@@ -105,7 +125,7 @@ public class UIRecipes : MonoBehaviour {
     {
         if (existingRecipe != currentRecipe)
         {
-            if (existingRecipe != null)
+            if (existingRecipe != null && currentRecipe != null)
             {
                 RemoveRecipePanel(existingRecipe);
             }
@@ -128,6 +148,14 @@ public class UIRecipes : MonoBehaviour {
             if(CheckPlateRecipeForChanges(plateRecipes[plateBench], plateBench.Recipe, plateBench))
             {
                 plateRecipes[plateBench] = plateBench.Recipe;
+            }
+        }
+
+        foreach (KeyValuePair<Recipe, GameObject> recipePanel in recipePanels)
+        {
+            if (recipePanel.Key.IsDone())
+            {
+                CompleteRecipePanel(recipePanel.Key, recipePanel.Value);
             }
         }
 	}
