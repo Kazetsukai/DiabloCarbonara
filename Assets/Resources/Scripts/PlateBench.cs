@@ -52,16 +52,22 @@ public class PlateBench : BenchBase
 
 	private bool IngredientMatches(IngredientBase item, Ingredient ingredient)
 	{
+		// not right type
 		if (ingredient.Type != item.Type) return false;
+
+		// incorrect number of operations done
+		if (ingredient.Tasks.Count != item.TasksDone.Count) return false;
 
 		for (int i = 0; i < item.TasksDone.Count; i++)
 		{
 			if (item.TasksDone[i] != ingredient.Tasks[i])
 			{
+				// wrong operation done
 				return false;
 			}
 		}
 
+		// aaaaaaaaaaaaallllllllllllllllgggggggggggggggg
 		return true;
 	}
 
