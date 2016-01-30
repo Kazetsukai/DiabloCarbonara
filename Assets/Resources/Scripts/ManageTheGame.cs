@@ -99,7 +99,7 @@ public class ManageTheGame : MonoBehaviour
             }
 
             _playing = true;
-            SceneManager.LoadScene("GameJam2016_Joe");
+            SceneManager.LoadScene("Kitchen");
         }
     }
 }
