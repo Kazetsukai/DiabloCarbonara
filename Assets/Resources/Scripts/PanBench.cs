@@ -132,6 +132,7 @@ public class PanBench : BenchBase
             {
                 LastInteractedPlayer.IKArm_R.solver.target = LastInteractedPlayer.ArmIKTarget_R;
                 LastInteractedPlayer.IKArm_L.solver.target = LastInteractedPlayer.ArmIKTarget_L;
+                LastInteractedPlayer = null;
             }
         }
 
