@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
 	{
 		if (HeldItem != null)
 		{
-			//print("put");
+            print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
 				// not holding anymore
@@ -146,12 +146,11 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				//print("failed");
+				print("failed");
 			}
 		}
 		else
 		{
-			//print("get");
 			var item = CurrentInteractable == null ? null : CurrentInteractable.Interact();
 			if (item != null)
 			{
@@ -163,7 +162,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				//print("failed");
+				print("failed");
 			}
 		}
 	}
