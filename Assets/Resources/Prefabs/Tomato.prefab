@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: Tomato
-  Color: {r: 0.9044118, g: 0.15960208, b: 0.15960208, a: 0}
+  Color: {r: 0.9044118, g: 0.15960208, b: 0.15960208, a: 0.23529412}
   TasksDone: []
   ProcessStages:
   - {fileID: 21300000, guid: 116ae15abb90c9f4d9505b438f59f0dc, type: 3}
@@ -120,6 +120,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Color.b
       value: 0.15960208
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Color.a
+      value: 0.23529412
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

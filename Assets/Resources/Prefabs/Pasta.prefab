@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: Pasta
-  Color: {r: 1, g: 0.984787, b: 0.44852942, a: 0}
+  Color: {r: 1, g: 0.984787, b: 0.44852942, a: 0.23529412}
   TasksDone: []
   ProcessStages:
   - {fileID: 21300000, guid: 838b2e6fed9b4c04eb500016be2382e2, type: 3}
@@ -120,6 +120,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Color.b
       value: 0.44852942
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Color.a
+      value: 0.23529412
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

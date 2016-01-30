@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: Meat
-  Color: {r: 0.9117647, g: 0.683, b: 0.783, a: 0}
+  Color: {r: 0.9117647, g: 0.683, b: 0.783, a: 0.23529412}
   TasksDone: []
   ProcessStages:
   - {fileID: 21300000, guid: bcefc5280a675c347bb821c89ee33217, type: 3}
@@ -133,6 +133,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Color.b
       value: 0.783
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Color.a
+      value: 0.23529412
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
