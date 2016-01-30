@@ -10,7 +10,7 @@ public class PlateBench : BenchBase
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
 
-	private Recipe Recipe;
+	public Recipe Recipe;
 	private List<IngredientBase> Ingredients;
 
 	public override IngredientBase Interact()
