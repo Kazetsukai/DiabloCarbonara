@@ -48,19 +48,24 @@ public class Player : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
 	}
 
-	void Update()
-	{
-        
-		//Move player when horizontal or vertical input is given
-		var input = GetInput();
-        var dirVect = new Vector3(input.x, 0, input.y);
+    Vector3 CameraTransformedInput()
+    {
+        var input = GetInput();
+         var dirVect = new Vector3(input.x, 0, input.y);
 
         // Redirect based on camera angle
         dirVect = Quaternion.FromToRotation(Vector3.forward, TrimY(Camera.allCameras[0].transform.forward)) * dirVect;
+        return dirVect;
+    }
+
+	void Update()
+	{
+        //Move player when horizontal or vertical input is given
+        var input = CameraTransformedInput();                
 
         if (input.magnitude > 0)
 		{
-			_controller.SimpleMove(dirVect * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
+			_controller.SimpleMove(input * MoveSpeed);  //    DON'T NEED TIME.DELTATIME HERE! SERSLY!      
 		}
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
@@ -85,7 +90,6 @@ public class Player : MonoBehaviour
         float speed = _controller.velocity.magnitude;
         _anim.SetFloat("MoveSpeed", speed);
         _anim.speed = MoveSpeedVsAnimSpeed.Evaluate(speed);
-        Debug.Log(speed);
 	}
 
     void FixedUpdate()
@@ -94,9 +98,11 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lastVelocity, Vector3.up), RotationSpeed * Time.deltaTime);
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
-        if (_controller.velocity.magnitude > RotateThreshold)
+        var input = CameraTransformedInput();
+
+        if (input.magnitude > RotateThreshold)
         {
-            lastVelocity = _controller.velocity.normalized;
+            lastVelocity = input.normalized;
         }
 
         // Selection
