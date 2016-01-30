@@ -144,6 +144,30 @@ Prefab:
       propertyPath: MoveSpeedVsAnimSpeed.m_Curve.Array.data[1].outSlope
       value: -0.033787232
       objectReference: {fileID: 0}
+    - target: {fileID: 13706582, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da17a54074d1204479c59c545b447382, type: 2}
+    - target: {fileID: 13706582, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4b2f0323346f4c4597f0b1c0b2b2d16, type: 2}
+    - target: {fileID: 13775968, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fb862fd280028c40b10925f5f09f6de, type: 2}
+    - target: {fileID: 13775968, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: aea294c1b55ca7c4cacff91de4fda9a1, type: 2}
+    - target: {fileID: 13775968, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3a30ddb7571d0047b1b3b2f976a3431, type: 2}
+    - target: {fileID: 13775968, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 167152995ecbc8245a05ff8a6ac5e72b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
   m_IsPrefabParent: 0
@@ -406,6 +430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc903d7a61d701c4188344e20697b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IngredientOffset: {x: 0, y: 0, z: 0}
+  contents: {fileID: 0}
+  processed: 0
   IngredientPrefab: {fileID: 0}
 --- !u!1 &1026441537
 GameObject:
