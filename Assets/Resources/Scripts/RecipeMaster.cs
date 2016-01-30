@@ -19,6 +19,9 @@ public class RecipeMaster : MonoBehaviour
     public const float MinTimeWithNoOrders = 5;
     public const float MaxTimeWithNoOrders = 15;
 
+    public float MinRecipeTimePerIngredient = 20f;
+    public float MaxRecipeTimePerIngredient = 60f;
+    
     private float TimeSinceLastOrder = MaxTimeWithNoOrders;
 
     public readonly string[] IngredientTypes = new string[]
@@ -36,7 +39,8 @@ public class RecipeMaster : MonoBehaviour
     };
     
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 	    
 	}
 
@@ -84,11 +88,18 @@ public class RecipeMaster : MonoBehaviour
 
         } while (recipe.Complexity < MinComplexity || recipe.Complexity > MaxComplexity);
 
+        //Create time for recipe to be completed by (add a random time, multiplied by the amount of ingredients for difficulty scaling)      
+        foreach (Ingredient ing in recipe.Ingredients)
+        {
+            recipe.MaxTime += Random.Range(MinRecipeTimePerIngredient, MaxRecipeTimePerIngredient);
+        }     
+
         return recipe;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         TimeSinceLastOrder += Time.deltaTime;
         PlateBench[] plates = FindObjectsOfType<PlateBench>();
         bool isAPlateFilled = plates.Any(p => p.Recipe != null);
@@ -106,6 +117,25 @@ public class RecipeMaster : MonoBehaviour
             }
 
             TimeSinceLastOrder = 0;
-        }            
-	}
+        }
+
+        //Decrement remaining times for recipes
+        foreach (PlateBench plate in plates)
+        {
+            if (plate.Recipe != null)
+            {
+                plate.Recipe.TimeElapsed += Time.deltaTime;
+
+                //Plate has not been completed in time! Remove a star from players 
+                if ((plate.Recipe.TimeElapsed >= plate.Recipe.MaxTime) && (!plate.Recipe.IsDone()))
+                {                   
+                    UIRecipes recipes = GameObject.FindObjectOfType<UIRecipes>();
+                    var plateInfo = recipes.plates[plate];
+                    recipes.RemoveRecipePanel(plateInfo);
+
+                    GameObject.FindObjectOfType<StarsManager>().StarsRemaining--;   //Remove a star from players                    
+                }
+            }
+        }
+    }
 }

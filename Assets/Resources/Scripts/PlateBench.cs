@@ -7,6 +7,7 @@ using System.Linq;
 
 public class PlateBench : BenchBase
 {
+    public int PlateNumber;
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
 

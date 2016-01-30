@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public float InteractReach = 1f;
     public float InteractOffsetTarget = 1.5f;
     public AnimationCurve MoveSpeedVsAnimSpeed;
+    public bool MovementLocked = false;
 
     [Header("Body parts")]
     public GameObject Head;
@@ -82,6 +83,11 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+        if (MovementLocked)
+        {
+            return;
+        }
+
         Interacting = false;
 
 		if (Input.GetAxis(InteractButtonAxis) > 0)
@@ -145,6 +151,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (MovementLocked)
+        {
+            return;
+        }
+
         //Rotate towards movement direction
         if ((lastVelocity.magnitude > 0.01f) && (CurrentInteractable == null))
         {
@@ -215,8 +226,17 @@ public class Player : MonoBehaviour
             //print("put");
 			if (CurrentInteractable != null && CurrentInteractable.Put(HeldItem))
 			{
-				// not holding anymore
-				HeldItem = null;
+                SpriteRenderer[] renderers = HeldItem.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in renderers)
+                {
+                    if (renderer.name.StartsWith("TaskIcon"))
+                    {
+                        renderer.enabled = false;
+                    }
+                }
+
+                // not holding anymore
+                HeldItem = null;
 				JustInteracted = true;
                 StartCoroutine(TransitionToPose_Idle(TransitionToIdleDuration));    //Animate arms                      
             }
@@ -232,6 +252,16 @@ public class Player : MonoBehaviour
 			{
 				// hold item above head
 				HeldItem = item;
+
+                SpriteRenderer[] renderers = HeldItem.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in renderers)
+                {
+                    if (renderer.name.StartsWith("TaskIcon"))
+                    {
+                        renderer.enabled = true;
+                    }
+                }
+
                 HeldItem.transform.parent = HeldObjectTransform.transform;         
                 StartCoroutine(DoItemPickupTransition(HeldItem, 0.2f));
                 StartCoroutine(TransitionToPose_HoldItem(TransitionToHoldDuration));    //Animate arms

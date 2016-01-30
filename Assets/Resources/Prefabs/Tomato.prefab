@@ -44,10 +44,15 @@ MonoBehaviour:
   Type: Tomato
   Color: {r: 0.9044118, g: 0.15960208, b: 0.15960208, a: 0.23529412}
   TasksDone: []
+  TaskIcons: []
   ProcessStages:
   - {fileID: 21300000, guid: 116ae15abb90c9f4d9505b438f59f0dc, type: 3}
   - {fileID: 21300000, guid: ab51d81c5653f1f4b87ec38ef317f403, type: 3}
   - {fileID: 21300000, guid: 2444ac8d8d6608045b7386da57f47ddf, type: 3}
+  TaskIcon: {fileID: 133488, guid: 3acfb9aeb38039e4da42a94c83cfcb21, type: 2}
+  FryIcon: {fileID: 21300000, guid: 279a3fc6f5e628440821d9a29aa10571, type: 3}
+  ChopIcon: {fileID: 21300000, guid: b2d216f9e093e39489373b847dc9c58f, type: 3}
+  BoilIcon: {fileID: 21300000, guid: eb902de498fcf0643b308c4d8a3134d6, type: 3}
 --- !u!114 &11481880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +131,25 @@ Prefab:
       propertyPath: Color.a
       value: 0.23529412
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TaskIcon
+      value: 
+      objectReference: {fileID: 133488, guid: 3acfb9aeb38039e4da42a94c83cfcb21, type: 2}
+    - target: {fileID: 0}
+      propertyPath: FryIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 279a3fc6f5e628440821d9a29aa10571,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: ChopIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: b2d216f9e093e39489373b847dc9c58f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BoilIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: eb902de498fcf0643b308c4d8a3134d6,
+        type: 3}
     - target: {fileID: 0}
       propertyPath: ProcessStages.Array.data[2]
       value: 
