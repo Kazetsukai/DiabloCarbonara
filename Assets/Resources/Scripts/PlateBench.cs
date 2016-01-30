@@ -70,7 +70,7 @@ public class PlateBench : BenchBase
 		Ingredients = new List<IngredientBase>();
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
-		progressImage.transform.parent = canvas.transform;
+		progressImage.transform.SetParent(canvas.transform);
 	}
 
 	public override void GetItem(IngredientBase item) { }

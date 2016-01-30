@@ -46,7 +46,7 @@ public class PanBench : BenchBase
 	{
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
-		progressImage.transform.parent = canvas.transform;
+		progressImage.transform.SetParent(canvas.transform);
     }
 
 	public new void Update()

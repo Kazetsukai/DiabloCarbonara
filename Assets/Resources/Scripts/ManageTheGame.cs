@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ManageTheGame : MonoBehaviour {
 
@@ -36,6 +37,7 @@ public class ManageTheGame : MonoBehaviour {
                 if (ActivePlayers[i] == null)
                 {
                     ActivePlayers[i] = (GameObject)Instantiate(PlayerProto, new Vector3(((int)((i + 1) / 2) * 2) * Mathf.Pow(-1, (i + 1)), 1, 0), Quaternion.identity);
+                    DontDestroyOnLoad(ActivePlayers[i]);
                     var player = ActivePlayers[i].GetComponent<Player>();
                     player.HorizontalAxis = "Horizontal_P" + pNum;
                     player.VerticalAxis = "Vertical_P" + pNum;
@@ -51,12 +53,12 @@ public class ManageTheGame : MonoBehaviour {
 
     IEnumerator BeginGame()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             StartingText.text = "Beginning in " + (3 - i) + "...";
             yield return new WaitForSeconds(1);
         }
-        
-        
+
+        SceneManager.LoadScene("Kitchen");
     }
 }
