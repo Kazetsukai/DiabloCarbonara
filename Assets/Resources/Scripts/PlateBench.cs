@@ -90,8 +90,9 @@ public class PlateBench : BenchBase
 		base.Update();
 	}
 
-	public void FixedUpdate()
+	public void Clear()
 	{
-
+		Recipe = null;
+		Ingredients = new List<IngredientBase>();
 	}
 }
