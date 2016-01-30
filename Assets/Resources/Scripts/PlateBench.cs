@@ -11,7 +11,6 @@ public class PlateBench : BenchBase
 	public GameObject progressImage;
 
 	private Recipe Recipe;
-	private IngredientBase[] Ingredients;
 
 	public override IngredientBase Interact()
 	{
@@ -27,7 +26,7 @@ public class PlateBench : BenchBase
 
 		if (MatchesRecipe(item))
 		{
-			Ingredients.Add(item);
+			//Ingredients.Add(item);
 			return true;
 		}
 
@@ -37,15 +36,10 @@ public class PlateBench : BenchBase
 	private bool MatchesRecipe(IngredientBase item)
 	{
 		return true;
-		if (Recipe.Ingredients.Any(x => x.Type == item.Type))
-		{
-
-		}
 	}
 
 	public void Start()
 	{
-		Ingredients = new List<IngredientBase>();
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.parent = canvas.transform;
