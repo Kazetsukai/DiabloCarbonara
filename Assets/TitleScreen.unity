@@ -138,8 +138,6 @@ MonoBehaviour:
   - {r: 0.9338235, g: 0.9080629, b: 0, a: 0}
   PlayerProto: {fileID: 106050, guid: 5c8903d5c7df40c45a295118a5025527, type: 2}
   StartingText: {fileID: 1594608576}
-  eventName: event:/Italian_Kitchen
-  FrypanEvents: []
 --- !u!114 &43239046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +328,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press X to join
+  m_Text: Press A to join
 --- !u!222 &590506090
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -470,6 +468,48 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &1014828786
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1177684842
 GameObject:
   m_ObjectHideFlags: 0
