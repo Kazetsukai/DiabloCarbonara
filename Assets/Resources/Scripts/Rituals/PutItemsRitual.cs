@@ -15,7 +15,7 @@ public class PutItemsRitual : RitualBase {
         //because all benches are derived from BenchBase, need to check that they are actually just BenchBase to get normal benches
         int totalBenches = FindObjectsOfType<BenchBase>().Where(b => b.GetType() == typeof(BenchBase)).Count();
 
-        NumBenches = UnityEngine.Random.Range(1, Math.Max(NumBenches + 1, 3));
+        NumBenches = UnityEngine.Random.Range((totalBenches / 2), NumBenches + 1);
     }
 
     public int GetBenchesCompleted()
