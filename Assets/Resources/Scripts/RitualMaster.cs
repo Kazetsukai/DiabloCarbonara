@@ -98,7 +98,7 @@ public class RitualMaster : MonoBehaviour {
         _demonvisible = false;
     }
 
-    private void TriggerRitual()
+    public void TriggerRitual()
     {
         // Pick unlucky victim
         var players = FindObjectsOfType<Player>();

@@ -57,6 +57,9 @@ public class GameHandler : MonoBehaviour
                 //Ritual was not completed by players! Ritual is failed. Punishment!
                 GameObject.FindObjectOfType<RitualMaster>().FinishRitual(false);
                 RitualInProgress = false;
+
+                //Calculate time to next ritual
+                nextRitualTime = Random.Range(MinTimeBetweenRituals, MaxTimeBetweenRituals);
             }
         }       
         else
@@ -65,6 +68,12 @@ public class GameHandler : MonoBehaviour
 
             //Check if it is time to start a new ritual
             timeSinceLastRitual += Time.deltaTime;
+            if (timeSinceLastRitual >= nextRitualTime)
+            {
+                timeSinceLastRitual = 0;
+                GameObject.FindObjectOfType<RitualMaster>().TriggerRitual();
+                RitualInProgress = true;
+            }
         }
     }
 
