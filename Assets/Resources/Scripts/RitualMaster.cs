@@ -10,18 +10,23 @@ public class RitualMaster : MonoBehaviour {
     public Text DemonText;
     public Image DemonPanel;
     public RitualBase[] RitualProtos;
+    public PunishmentBase[] PunishmentProtos;
 
     bool _demonvisible = false;
     float _opacity = 0;
 
     public Player UnluckyPlayer;
     public RitualBase[] CurrentRitual;
+    private PunishmentBase _punishment;
     private int _numRemaining;
+    private MusicMaster _musicMaster;
 
 
     // Use this for initialization
-    void Start () {
-	}
+    void Start ()
+    {
+        _musicMaster = FindObjectOfType<MusicMaster>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -70,7 +75,7 @@ public class RitualMaster : MonoBehaviour {
                 .Take(descs.Count() - 1)
                 .Select(d => d += ", ")
                 .Concat(new[] { (_numRemaining > 0 ? "and " : "") + descs.Last() });
-            DemonText.text = "I command you to " + string.Join("", descs.ToArray()) + ".";
+            DemonText.text = "I command you to " + string.Join("", descs.ToArray()) + " or I will " + _punishment.Description() + ".";
         }
         else
         {
@@ -80,6 +85,8 @@ public class RitualMaster : MonoBehaviour {
 
     private void FinishRitual()
     {
+        _musicMaster.TransitionMusic(1);
+
         DemonText.text = "Excellent work team!";
         _demonvisible = false;
     }
@@ -104,11 +111,12 @@ public class RitualMaster : MonoBehaviour {
             CurrentRitual[i] = Instantiate(RitualProtos[Random.Range(0, RitualProtos.Length)]);
             CurrentRitual[i].Randomise();
         }
-
-
+        
         // Choose a punishment
+        _punishment = Instantiate(PunishmentProtos[Random.Range(0, PunishmentProtos.Length)]);
 
         // Change up the music
+        _musicMaster.TransitionMusic(2);
 
         _demonvisible = true;
 
