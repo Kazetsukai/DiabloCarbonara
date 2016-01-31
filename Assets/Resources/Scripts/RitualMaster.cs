@@ -62,7 +62,11 @@ public class RitualMaster : MonoBehaviour {
         {
             TriggerRitual();
         }
-	}
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            FinishRitual(false);
+        }
+    }
 
     private void UpdateRitual()
     {
