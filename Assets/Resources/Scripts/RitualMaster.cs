@@ -82,12 +82,15 @@ public class RitualMaster : MonoBehaviour {
             FinishRitual();
         }
     }
-
-    private void FinishRitual()
+    
+    private void FinishRitual(bool good = true)
     {
         _musicMaster.TransitionMusic(1);
 
-        DemonText.text = "Excellent work team!";
+        if (!good)
+            _punishment.ExecutePunishment();
+
+        DemonText.text = good ? "Excellent work team!" : "I'm disappointed in you...";
         _demonvisible = false;
     }
 
