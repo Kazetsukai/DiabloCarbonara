@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameHandler : MonoBehaviour
 {
@@ -20,12 +21,18 @@ public class GameHandler : MonoBehaviour
     [SerializeField] float CurrentRitualDuration;
 
     [SerializeField] float MinTimeBetweenRituals = 20f;
-    [SerializeField] float MaxTimeBetweenRituals = 40f;
- 
+    [SerializeField] float MaxTimeBetweenRituals = 40f; 
 
     [SerializeField] float timeSinceLastRitual;
     [SerializeField] float nextRitualTime;
-    
+
+    [SerializeField] List<Light> LevelLights;
+    [SerializeField] Color NormalLightColor;
+    [SerializeField] Color RitualLightColor;
+    [SerializeField] float RitualFadeDuration = 1f;
+    bool fadingToNormal;
+    bool fadingToRitual;
+
     void Start()
     {
         GameOverText.gameObject.SetActive(false);
@@ -48,6 +55,14 @@ public class GameHandler : MonoBehaviour
         var RitualInProgress = GameObject.FindObjectOfType<RitualMaster>().RitualInProgress;
         if (RitualInProgress)
         {
+            if (!fadingToRitual)
+            {
+                fadingToRitual = true;
+
+                //Turn lights back to ritual mode
+                StartCoroutine(FadeLightsToRitual());
+            }
+
             RitualTimerObj.gameObject.SetActive(true);
             CurrentRitualElapsed += Time.deltaTime;
 
@@ -59,12 +74,21 @@ public class GameHandler : MonoBehaviour
                 GameObject.FindObjectOfType<RitualMaster>().FinishRitual(false);
              
                 //Calculate time to next ritual
-                nextRitualTime = Random.Range(MinTimeBetweenRituals, MaxTimeBetweenRituals);
+                nextRitualTime = Random.Range(MinTimeBetweenRituals, MaxTimeBetweenRituals);                
             }
         }       
         else
         {
+            fadingToRitual = false;
             RitualTimerObj.gameObject.SetActive(false);
+
+            if (!fadingToNormal)
+            {
+                fadingToNormal = true;
+
+                //Turn lights back to ritual mode
+                StartCoroutine(FadeLightsToNormal());
+            }
 
             //Check if it is time to start a new ritual
             timeSinceLastRitual += Time.deltaTime;
@@ -72,8 +96,9 @@ public class GameHandler : MonoBehaviour
             {
                 timeSinceLastRitual = 0;
                 CurrentRitualElapsed = 0;
-                GameObject.FindObjectOfType<RitualMaster>().TriggerRitual();            
-            }
+                GameObject.FindObjectOfType<RitualMaster>().TriggerRitual();
+                fadingToNormal = false;
+            }           
         }
     }
 
@@ -118,4 +143,40 @@ public class GameHandler : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+
+    IEnumerator FadeLightsToRitual()
+    {
+        float fadeElapsed = 0;       
+
+        do
+        {
+            fadeElapsed += Time.deltaTime;
+
+            foreach (Light l in LevelLights)
+            {
+                l.color = Color.Lerp(NormalLightColor, RitualLightColor, fadeElapsed / RitualFadeDuration);
+            }          
+            yield return null;
+        }
+        while (fadeElapsed / RitualFadeDuration < 1f);
+    }
+
+    IEnumerator FadeLightsToNormal()
+    {
+        float fadeElapsed = 0;
+
+        do
+        {
+            fadeElapsed += Time.deltaTime;
+
+            foreach (Light l in LevelLights)
+            {
+                l.color = Color.Lerp(RitualLightColor, NormalLightColor, fadeElapsed / RitualFadeDuration);
+            }
+            yield return null;
+        }
+        while (fadeElapsed / RitualFadeDuration < 1f);        
+    }
+
 }

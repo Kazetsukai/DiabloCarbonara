@@ -4937,7 +4937,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
 --- !u!1001 &1600581060
 Prefab:
   m_ObjectHideFlags: 0
@@ -7790,7 +7790,7 @@ RectTransform:
   - {fileID: 403654823}
   - {fileID: 138074065}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -8163,11 +8163,20 @@ MonoBehaviour:
   restartButton: {fileID: 218561474}
   RitualTimerObj: {fileID: 138074064}
   RitualTimerFill: {fileID: 200345270}
-  RitualInProgress: 0
   CurrentRitualElapsed: 0
   CurrentRitualDuration: 10
   MinTimeBetweenRituals: 10
   MaxTimeBetweenRituals: 10
+  timeSinceLastRitual: 0
+  nextRitualTime: 0
+  LevelLights:
+  - {fileID: 2008574798}
+  - {fileID: 1786964623}
+  - {fileID: 1128286977}
+  - {fileID: 1322270311}
+  NormalLightColor: {r: 1, g: 1, b: 1, a: 0}
+  RitualLightColor: {r: 0.63772804, g: 0, b: 0.7058823, a: 0}
+  RitualFadeDuration: 1
 --- !u!4 &2002177343
 Transform:
   m_ObjectHideFlags: 0
@@ -8179,7 +8188,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
 --- !u!1 &2004056060
 GameObject:
   m_ObjectHideFlags: 0
