@@ -18,7 +18,7 @@ public class BurnPunishment : PunishmentBase
 
     public override void ExecutePunishment()
     {
-        foreach (var food in FindObjectsOfType<IngredientBase>().Where(f => !FindObjectsOfType<PlateBench>().Any(b => b.contents == f)))
+        foreach (var food in FindObjectsOfType<IngredientBase>().Where(f => !FindObjectsOfType<PlateBench>().Any(b => b.Ingredients.Contains(f))))
         {
             food.Burn();
         }
