@@ -13,8 +13,8 @@ public class PanBench : BenchBase
 	public float burning;
 	public float burningCooldown;
 	private const float burnTime = 5f;
-    private readonly float PROGRESS_SPEED = 20;
-    public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
+	public int StirCount = 10;
+	public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
 
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
@@ -52,12 +52,6 @@ public class PanBench : BenchBase
 		{
 			return null;
 		}
-
-        if (contents.burnt)
-        {
-            burnt = true;
-            progress = 100;
-        }
 
 		LastInteractedPlayer = player;
 
@@ -105,6 +99,13 @@ public class PanBench : BenchBase
 		if (StirAngleProgress >= 360f)
 		{
 			StirAngleProgress = 0f;
+			var prevProgress = progress;
+			progress += 1f / StirCount;
+
+			if (prevProgress < 1 && progress > 1)
+			{
+				musicMaster.OneShot("complete", transform.position);
+			}
 
 			burningCooldown = Time.time + 5f;
 			burning = 0;
@@ -155,12 +156,12 @@ public class PanBench : BenchBase
 
             //Turn off burning
             burning = 0;
+			FireLight.TurnOff();
 
 			progress = 0;
 			var temp = contents;
 			contents = null;
-            burnt = false;
-            return temp;
+			return temp;
 		}
 		else
 		{
@@ -170,11 +171,6 @@ public class PanBench : BenchBase
 
 	public override bool CanIReceive(IngredientBase item)
 	{
-        if (item.burnt)
-        {
-            return false;
-        }
-
 		burningCooldown = Time.time + 5f;
 		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		return true;
@@ -280,7 +276,6 @@ public class PanBench : BenchBase
 		else if (mod.enabled && !should)
 		{
 			musicMaster.StopSound(currentFire);
-			FireLight.TurnOff();
 			currentFire = -1;
 			mod.enabled = false;
 		}
@@ -302,21 +297,11 @@ public class PanBench : BenchBase
 	{
 		if (contents != null)
 		{
-            if (Time.time > burningCooldown)
-            {
-                burning += (1f / burnTime) * Time.fixedDeltaTime;
-            }
-            else
-            {
-                var prevProgress = progress;
-                progress += Time.fixedDeltaTime / PROGRESS_SPEED;
-
-                if (prevProgress < 1 && progress > 1)
-                {
-                    musicMaster.OneShot("complete", transform.position);
-                }
-            }
-        }
+			if (Time.time > burningCooldown)
+			{
+				burning += (1f / burnTime) * Time.fixedDeltaTime;
+			}
+		}
 	}
 
   
