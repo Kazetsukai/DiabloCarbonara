@@ -130,6 +130,9 @@ public class PanBench : BenchBase
 			player.IKArm_R.solver.target = player.ArmIKTarget_R;
 			player.IKArm_L.solver.target = player.ArmIKTarget_L;
 
+            //Turn off burning
+            burning = 0;
+
 			progress = 0;
 			var temp = contents;
 			contents = null;
@@ -199,7 +202,8 @@ public class PanBench : BenchBase
 			{
 				if (burning > burnThreshold)
 				{
-					burnt = true;
+                    contents.Burn();
+                    burnt = true;
 					progress = 1;
 					newColor = Color.black;
 					FireEmitter.enabled = true;

@@ -53,8 +53,8 @@ public class PotBench : BenchBase
 			{
 				contents.Process(TaskType);
 			}
-
-			progress = 0;
+            
+            progress = 0;
 			var temp = contents;
 			contents = null;
 			return temp;
