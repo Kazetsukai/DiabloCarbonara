@@ -49,13 +49,35 @@ public class PanBench : BenchBase
 
 		LastInteractedPlayer = player;
 
-		//Get stir angle from input
-		StirAngle = Vector2.Angle(Vector2.up, input);
-		Vector3 cross = Vector3.Cross(Vector2.up, input);
-		if (cross.z > 0)
-		{
-			StirAngle = 360 - StirAngle;
-		}
+        //Get stir angle from input
+        if (player.HorizontalAxis.EndsWith("P5"))
+        {
+            if (input.x > 0)
+            { 
+                if (StirAngle <= 110 || StirAngle >= 250)
+                {
+                    StirAngle = (StirAngle + 20) % 360;
+                }
+            }
+
+            if (input.x < 0)
+            {
+                if (StirAngle >= 70 && StirAngle <= 290)
+                {
+                    StirAngle = (StirAngle + 20) % 360;
+                }
+            }
+        }
+        else
+        {
+            StirAngle = Vector2.Angle(Vector2.up, input);
+            Vector3 cross = Vector3.Cross(Vector2.up, input);
+            if (cross.z > 0)
+            {
+                StirAngle = 360 - StirAngle;
+            }
+        }
+		
 
 		//Update stir angle progress (only allow increases by counter clockwise stirring)
 		float deltaStirAngle = Mathf.Clamp(StirAngle - lastStirAngle, 0, 360);
