@@ -88,7 +88,10 @@ public class RitualMaster : MonoBehaviour {
         _musicMaster.TransitionMusic(1);
 
         DemonText.text = "Excellent work team!";
-        _demonvisible = false;
+
+		_musicMaster.OneShot("ritualSuccess", transform.position);
+
+		_demonvisible = false;
     }
 
     private void TriggerRitual()
@@ -120,7 +123,9 @@ public class RitualMaster : MonoBehaviour {
 
         _demonvisible = true;
 
-        UpdateRitual();
+		_musicMaster.OneShot("demonTalk", transform.position);
+
+		UpdateRitual();
     }
 
     public IEnumerable<T> RemainingRituals<T>() where T : RitualBase
