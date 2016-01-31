@@ -13,8 +13,8 @@ public class PanBench : BenchBase
 	public float burning;
 	public float burningCooldown;
 	private const float burnTime = 5f;
-	public int StirCount = 10;
-	public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
+    private readonly float PROGRESS_SPEED = 20;
+    public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
 
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
@@ -105,13 +105,6 @@ public class PanBench : BenchBase
 		if (StirAngleProgress >= 360f)
 		{
 			StirAngleProgress = 0f;
-			var prevProgress = progress;
-			progress += 1f / StirCount;
-
-			if (prevProgress < 1 && progress > 1)
-			{
-				musicMaster.OneShot("complete", transform.position);
-			}
 
 			burningCooldown = Time.time + 5f;
 			burning = 0;
@@ -308,11 +301,21 @@ public class PanBench : BenchBase
 	{
 		if (contents != null)
 		{
-			if (Time.time > burningCooldown)
-			{
-				burning += (1f / burnTime) * Time.fixedDeltaTime;
-			}
-		}
+            if (Time.time > burningCooldown)
+            {
+                burning += (1f / burnTime) * Time.fixedDeltaTime;
+            }
+            else
+            {
+                var prevProgress = progress;
+                progress += Time.fixedDeltaTime / PROGRESS_SPEED;
+
+                if (prevProgress < 1 && progress > 1)
+                {
+                    musicMaster.OneShot("complete", transform.position);
+                }
+            }
+        }
 	}
 
   
