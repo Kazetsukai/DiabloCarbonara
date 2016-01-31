@@ -29,7 +29,16 @@ public class UIRecipes : MonoBehaviour
 	public Sprite TomatoIngredient;
 	public Sprite MeatIngredient;
 
-	public Sprite ChopIcon;
+    public Sprite PartialPastaIngredient;
+    public Sprite PartialTomatoIngredient;
+    public Sprite PartialMeatIngredient;
+
+    public Sprite DonePastaIngredient;
+    public Sprite DoneTomatoIngredient;
+    public Sprite DoneMeatIngredient;
+
+
+    public Sprite ChopIcon;
 	public Sprite BoilIcon;
 	public Sprite FryIcon;
 
@@ -64,7 +73,7 @@ public class UIRecipes : MonoBehaviour
 		GameObject ingredientPanel = Instantiate(RecipeIngredient);
 		Transform ingredientImagePanel = ingredientPanel.transform.FindChild("UI-Ingredient-Image");
 		Image ingredientImage = ingredientImagePanel.GetComponent<Image>();
-		ingredientImage.sprite = MakeIngredient(ingredient.Type);
+		ingredientImage.sprite = MakeIngredient(ingredient.Type, ingredient.Tasks.Count);
 
 		Transform ingredientTasksPanel = ingredientPanel.transform.FindChild("UI-Ingredient-Tasks");
 
@@ -84,21 +93,45 @@ public class UIRecipes : MonoBehaviour
 		return ingredientPanel;
 	}
 
-	Sprite MakeIngredient(string ingredientType)
-	{
-		switch (ingredientType)
-		{
-			case "Meat":
-				return MeatIngredient;
-			case "Tomato":
-				return TomatoIngredient;
-			case "Pasta":
-			default:
-				return PastaIngredient;
-		}
-	}
+    Sprite MakeIngredient(string ingredientType, int doneness)
+    {
+        switch (ingredientType)
+        {
+            case "Meat":
+                switch (doneness)
+                {
+                    case 0:
+                        return MeatIngredient;
+                    case 1:
+                        return PartialMeatIngredient;
+                    default:
+                        return DoneMeatIngredient;
+                }
+            case "Tomato":
+                switch (doneness)
+                {
+                    case 0:
+                        return TomatoIngredient;
+                    case 1:
+                        return PartialTomatoIngredient;
+                    default:
+                        return DoneTomatoIngredient;
+                }
+            case "Pasta":
+            default:
+                switch (doneness)
+                {
+                    case 0:
+                        return PastaIngredient;
+                    case 1:
+                        return PartialPastaIngredient;
+                    default:
+                        return DonePastaIngredient;
+                }
+        }
+    }
 
-	Sprite MakeTask(string taskType)
+    Sprite MakeTask(string taskType)
 	{
 		switch (taskType)
 		{
@@ -151,6 +184,11 @@ public class UIRecipes : MonoBehaviour
 
             //Increment score
             GameObject.FindObjectOfType<StarsManager>().OrdersCompleted++;
+
+         
+
+            //Do plate animation
+            plateInfo.Bench.DoRecipeCompleteAnim();            
         }       
 	}
 

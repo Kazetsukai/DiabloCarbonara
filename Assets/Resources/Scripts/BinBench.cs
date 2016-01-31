@@ -17,5 +17,10 @@ public class BinBench : BenchBase
 		return true;
 	}
 
-	public override void GetItem(IngredientBase item) { }
+	public override void GetItem(IngredientBase item)
+    {
+        var ritual = FindObjectOfType<RitualMaster>().RemainingRituals<TrashItemRitual>().Where(r => r.ItemType == item.Type.ToLower()).FirstOrDefault();
+        if (ritual != null)
+            ritual.Satisfied = true;
+    }
 }

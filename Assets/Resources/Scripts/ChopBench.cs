@@ -42,14 +42,20 @@ public class ChopBench : BenchBase
 
 		LastInteractedPlayer = player;
 
-        if (input.y >= InputValue_Up)
+        float yInput = input.y;
+        if (player.HorizontalAxis.EndsWith("P5") && yInput < 0)
+        {
+            yInput *= 10;
+        }
+
+        if (yInput >= InputValue_Up)
         {
             upTargetReached = true;
 
             //Move ChopDownTransform to a new random place on the board (within limits)
             ChopDownTransform.localPosition = new Vector3(ChopDownTransform.localPosition.x, ChopDownTransform.localPosition.y, Random.Range(MinVarianceZ, MaxVarianceZ));
         }
-        if ((input.y <= InputValue_Down) && upTargetReached)
+        if ((yInput <= InputValue_Down) && upTargetReached)
 		{
 			progress += 1f / HitsRequired;
 			musicMaster.TransitionSound(currentSound, 1);
@@ -61,7 +67,7 @@ public class ChopBench : BenchBase
 		player.IKArm_R.solver.target = HandIKTarget_R;  //Set IK target R of player to be IK transform R of this bench
 
         //Move IK target based on joystick input
-        float movePercent = Mathf.Abs(Mathf.Clamp(input.y, InputValue_Down, InputValue_Up));        
+        float movePercent = Mathf.Abs(Mathf.Clamp(yInput, InputValue_Down, InputValue_Up));        
         float t = movePercent  / Mathf.Abs(InputValue_Down - InputValue_Up);       
         HandIKTarget_R.transform.position = Vector3.Lerp(ChopUpTransform.position, ChopDownTransform.position, t);
 

@@ -42,9 +42,20 @@ MonoBehaviour:
   RecipePanel: {fileID: 101262, guid: 9b6a76f1d2d78c04d826c59f96a53506, type: 2}
   RecipeIngredient: {fileID: 163168, guid: 3057772f8afdeb541be001ae01b26b4c, type: 2}
   RecipeIngredientTask: {fileID: 137840, guid: 4e8faf7c2e6fb624e81283709f0cc705, type: 2}
-  PastaIngredient: {fileID: 21300000, guid: f31b00c5092508d41b5292f93dccdde0, type: 3}
-  TomatoIngredient: {fileID: 21300000, guid: d995396245195ca49bc3af16bacb89a0, type: 3}
-  MeatIngredient: {fileID: 21300000, guid: e6293460040f27c4cb2b4b6d294e067e, type: 3}
+  PastaIngredient: {fileID: 21300000, guid: 2e7f28c67252d6640afbafbeecdd378a, type: 3}
+  TomatoIngredient: {fileID: 21300000, guid: d9275253960d83f4eb5f43231cdda683, type: 3}
+  MeatIngredient: {fileID: 21300000, guid: cc164806d6ddaa244a9e61715b05ca5d, type: 3}
+  PartialPastaIngredient: {fileID: 21300000, guid: ca9e95847af57824f8e27649f851ba7b,
+    type: 3}
+  PartialTomatoIngredient: {fileID: 21300000, guid: 0f9ff7122f713984f8fc398df002371f,
+    type: 3}
+  PartialMeatIngredient: {fileID: 21300000, guid: 866278861863c0d47b149aeb98ac2ec9,
+    type: 3}
+  DonePastaIngredient: {fileID: 21300000, guid: f31b00c5092508d41b5292f93dccdde0,
+    type: 3}
+  DoneTomatoIngredient: {fileID: 21300000, guid: d995396245195ca49bc3af16bacb89a0,
+    type: 3}
+  DoneMeatIngredient: {fileID: 21300000, guid: e6293460040f27c4cb2b4b6d294e067e, type: 3}
   ChopIcon: {fileID: 21300000, guid: 0ca4ace8c70004f499c70e7e71a6379b, type: 3}
   BoilIcon: {fileID: 21300000, guid: 504c765e9b087454a8eb157e240b6b83, type: 3}
   FryIcon: {fileID: 21300000, guid: 60ee9ebf3e4184145aace4dd5e588dfd, type: 3}
@@ -58,17 +69,17 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: PastaIngredient
       value: 
-      objectReference: {fileID: 21300000, guid: 4eb265270baa32741aa2465a11f8491f,
+      objectReference: {fileID: 21300000, guid: 2e7f28c67252d6640afbafbeecdd378a,
         type: 3}
     - target: {fileID: 0}
       propertyPath: TomatoIngredient
       value: 
-      objectReference: {fileID: 21300000, guid: ab51d81c5653f1f4b87ec38ef317f403,
+      objectReference: {fileID: 21300000, guid: d9275253960d83f4eb5f43231cdda683,
         type: 3}
     - target: {fileID: 0}
       propertyPath: MeatIngredient
       value: 
-      objectReference: {fileID: 21300000, guid: 9f090c9e1f80ecf4fa34f3872af93128,
+      objectReference: {fileID: 21300000, guid: cc164806d6ddaa244a9e61715b05ca5d,
         type: 3}
     - target: {fileID: 0}
       propertyPath: ChopIcon
@@ -84,6 +95,36 @@ Prefab:
       propertyPath: FryIcon
       value: 
       objectReference: {fileID: 21300000, guid: 60ee9ebf3e4184145aace4dd5e588dfd,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: DonePastaIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: f31b00c5092508d41b5292f93dccdde0,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: DoneTomatoIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: d995396245195ca49bc3af16bacb89a0,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: DoneMeatIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: e6293460040f27c4cb2b4b6d294e067e,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: PartialPastaIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: ca9e95847af57824f8e27649f851ba7b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: PartialTomatoIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f9ff7122f713984f8fc398df002371f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: PartialMeatIngredient
+      value: 
+      objectReference: {fileID: 21300000, guid: 866278861863c0d47b149aeb98ac2ec9,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
