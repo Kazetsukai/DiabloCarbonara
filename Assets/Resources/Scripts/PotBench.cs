@@ -34,7 +34,7 @@ public class PotBench : BenchBase
 	private ParticleSystem.EmissionModule FireEmitter;
 
 	private float FLASH_SCALE = 15f;
-	private float burnThreshold = 1f;
+	private float burnThreshold = 0.5f;
 	private MusicMaster musicMaster;
 	private int currentSound;
 
