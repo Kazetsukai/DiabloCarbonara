@@ -58,7 +58,7 @@ public class MusicMaster : MonoBehaviour
 
 		currentSounds = new List<EventInstance>();
 		_musicEvent = FMODUnity.RuntimeManager.CreateInstance(musicEventName);
-		_musicEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+		_musicEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(Camera.allCameras[0].transform.position));
 	}
 
 	private void FillMap(string id, string prefix)
