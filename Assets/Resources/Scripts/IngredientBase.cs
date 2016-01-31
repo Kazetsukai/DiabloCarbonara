@@ -6,7 +6,6 @@ using System;
 public class IngredientBase : MonoBehaviour
 {
 	public string Type;
-    public string Description = "something";
 
     public Color Color;
 

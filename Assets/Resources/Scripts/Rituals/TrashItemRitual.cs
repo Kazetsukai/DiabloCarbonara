@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class TrashItemRitual : RitualBase
 {
-    public string[] ItemDescriptions;
+    public string[] ItemTypes;
 
-    public string ItemDescription;
+    public string ItemType;
     
     public override void Randomise()
     {
-        ItemDescription = ItemDescriptions[Random.Range(0, ItemDescriptions.Length)];
+        ItemType = ItemTypes[Random.Range(0, ItemTypes.Length)];
     }
 
     public override string Description()
     {
-        return "throw " + ItemDescription + " in the trash";
+        return "throw some " + ItemType + " in the trash";
     }
 }
