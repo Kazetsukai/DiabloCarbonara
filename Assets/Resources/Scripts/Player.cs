@@ -94,8 +94,7 @@ public class Player : MonoBehaviour
 		{
 			if (!JustInteracted)
 			{
-				Interact();
-                Interacting = true;
+                Interacting = Interact();
 			}
 		}
 		else
@@ -219,7 +218,7 @@ public class Player : MonoBehaviour
         return new Vector3(forward.x, 0, forward.z);
     }
 
-    private void Interact()
+    private bool Interact()
     {
        // Debug.Log("Current Interactable: " + CurrentInteractable);
        
@@ -246,9 +245,19 @@ public class Player : MonoBehaviour
 			{
 				//print("failed");
 			}
+
+            return true;
 		}
 		else
-		{           
+		{
+            if (CurrentInteractable != null && 
+                CurrentInteractable.LastInteractedPlayer != null && 
+                CurrentInteractable.LastInteractedPlayer.Interacting && 
+                CurrentInteractable.LastInteractedPlayer.CurrentInteractable == CurrentInteractable)
+            {
+                return false;
+            }     
+                  
             var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(this, GetInput());
 			if (item != null)
 			{
@@ -273,7 +282,9 @@ public class Player : MonoBehaviour
 			{
 				//print("failed");                
 			}
-		}
+
+            return true;
+        }
 	}
 
 	void OnTriggerEnter(Collider other)
