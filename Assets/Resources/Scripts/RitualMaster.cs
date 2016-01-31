@@ -6,8 +6,9 @@ using System.Linq;
 
 public class RitualMaster : MonoBehaviour {
 
-    public SpriteRenderer Demon;
+    public Image Demon;
     public Text DemonText;
+    public Image DemonPanel;
     public RitualBase[] RitualProtos;
 
     bool _demonvisible = false;
@@ -35,11 +36,15 @@ public class RitualMaster : MonoBehaviour {
         var opac = Mathf.Clamp(_opacity, 0, 1);
 
         var colour = Demon.color;
-        colour.a = _opacity;
+        colour.a = opac;
         Demon.color = colour;
+    
+        var panelColour = DemonPanel.color;
+        panelColour.a = opac * 0.7f;
+        DemonPanel.color = panelColour;
 
-        var textColour = Demon.color;
-        textColour.a = _opacity;
+        var textColour = DemonText.color;
+        textColour.a = opac;
         DemonText.color = textColour;
         
         if (_numRemaining != RemainingRituals<RitualBase>().Count())

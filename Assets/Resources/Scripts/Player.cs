@@ -130,14 +130,17 @@ public class Player : MonoBehaviour
         //Move towards bench interactTransform if interacting with the bench
         if ((CurrentInteractable != null) && (Interacting))
         {
-            Vector3 targetPos = CurrentInteractable.transform.position + (CurrentInteractable.transform.right * InteractOffsetTarget);
-            Vector3 dir = (new Vector3(targetPos.x, 0, targetPos.z) - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
-
-            float distanceToTarget = Vector3.Distance(targetPos, new Vector3(transform.position.x, 0, transform.position.z));
-
-            if (distanceToTarget > 0.08f)
+            if (CurrentInteractable.GetType() != typeof(BenchBase))
             {
-                _controller.SimpleMove(dir * MoveSpeed);
+                Vector3 targetPos = CurrentInteractable.transform.position + (CurrentInteractable.transform.right * InteractOffsetTarget);
+                Vector3 dir = (new Vector3(targetPos.x, 0, targetPos.z) - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
+
+                float distanceToTarget = Vector3.Distance(targetPos, new Vector3(transform.position.x, 0, transform.position.z));
+
+                if (distanceToTarget > 0.08f)
+                {
+                    _controller.SimpleMove(dir * MoveSpeed);
+                }
             }
         }
         if ((CurrentInteractable == null) && (HeldItem == null) && !Interacting) 
