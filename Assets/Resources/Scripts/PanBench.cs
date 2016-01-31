@@ -52,6 +52,12 @@ public class PanBench : BenchBase
 			return null;
 		}
 
+        if (contents.burnt)
+        {
+            burnt = true;
+            progress = 100;
+        }
+
 		LastInteractedPlayer = player;
 
         //Get stir angle from input
@@ -170,6 +176,11 @@ public class PanBench : BenchBase
 
 	public override bool CanIReceive(IngredientBase item)
 	{
+        if (item.burnt)
+        {
+            return false;
+        }
+
 		burningCooldown = Time.time + 5f;
 		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		return true;

@@ -46,7 +46,12 @@ public class PotBench : BenchBase
 			return null;
 		}
 
-		if (progress >= 1)
+        if (contents.burnt)
+        {
+            progress = 100;
+        }
+
+        if (progress >= 1)
 		{
 			if (burning > burnThreshold)
 			{
@@ -75,7 +80,11 @@ public class PotBench : BenchBase
 	public override bool CanIReceive(IngredientBase item)
 	{
 		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
-		return true;
+        if (item.burnt)
+        {
+            return false;
+        }
+        return true;
 	}
 
 	public void Start()

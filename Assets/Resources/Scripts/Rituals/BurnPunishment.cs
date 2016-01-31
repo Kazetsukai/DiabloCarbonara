@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class BurnPunishment : MonoBehaviour
+public class BurnPunishment : PunishmentBase
 {
-    public virtual void Randomise()
+    public override void Randomise()
     {
 
     }
 
-    public virtual string Description()
+    public override string Description()
     {
         return "burn all your food";
     }
 
-    public virtual void ExecutePunishment()
+    public override void ExecutePunishment()
     {
-        foreach (var food in FindObjectsOfType<IngredientBase>())
+        foreach (var food in FindObjectsOfType<IngredientBase>().Where(f => !FindObjectsOfType<PlateBench>().Any(b => b.contents == f)))
         {
             food.Burn();
         }
