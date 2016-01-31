@@ -38,6 +38,7 @@ public class PotBench : BenchBase
 	private float burnThreshold = 0.5f;
 	private MusicMaster musicMaster;
 	private int currentSound;
+	private int currentFire = -1;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -102,10 +103,10 @@ public class PotBench : BenchBase
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
-        progressImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+		progressImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
 
-        BurnEmitter.enabled = false;
-		FireEmitter.enabled = false;
+		bool onFire = false;
+		bool onSmoke = false;
 		if (contents != null)
 		{
 			Color newColor;
@@ -113,17 +114,16 @@ public class PotBench : BenchBase
 			//burning
 			if (burning > 0)
 			{
-
 				if (burning > burnThreshold)
 				{
 					newColor = Color.black;
-					FireEmitter.enabled = true;
-                    FireLight.TurnOn();
-                }
+					onFire = true;
+
+				}
 				else
 				{
 					newColor = Color.red * ((Mathf.Sin(Time.time * FLASH_SCALE) / 2) + 0.5f);
-					BurnEmitter.enabled = true;
+					onSmoke = true;
 				}
 
 			}
@@ -139,17 +139,42 @@ public class PotBench : BenchBase
 			newColor.a = 0.8f;
 			progressImage.GetComponent<Image>().color = newColor;
 		}
+		else if (currentFire >= 0)
+		{
+		}
 
-		if (!Emitter.enabled && contents != null)
-		{
-			Emitter.enabled = true;
-		}
-		else if (Emitter.enabled && contents == null)
-		{
-			Emitter.enabled = false;
-		}
+		aasd(BurnEmitter, onSmoke);
+		aasdd(FireEmitter, onFire);
+		aasd(Emitter, contents != null);
 
 		base.Update();
+	}
+
+	private void aasdd(ParticleSystem.EmissionModule mod, bool should)
+	{
+		if (!mod.enabled && should)
+		{
+			currentFire = musicMaster.PlaySound("fire", transform.position);
+			mod.enabled = true;
+		}
+		else if (mod.enabled && !should)
+		{
+			musicMaster.StopSound(currentFire);
+			currentFire = -1;
+			mod.enabled = false;
+		}
+	}
+
+	private void aasd(ParticleSystem.EmissionModule mod, bool should)
+	{
+		if (!mod.enabled && should)
+		{
+			mod.enabled = true;
+		}
+		else if (mod.enabled && !should)
+		{
+			mod.enabled = false;
+		}
 	}
 
 	public void FixedUpdate()
