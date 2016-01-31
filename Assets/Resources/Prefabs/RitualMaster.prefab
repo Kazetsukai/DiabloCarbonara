@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 485340}
   - 114: {fileID: 11492788}
+  - 114: {fileID: 11456934}
   m_Layer: 0
   m_Name: RitualProtos
   m_TagString: Untagged
@@ -70,10 +71,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Demon: {fileID: 0}
   DemonText: {fileID: 0}
+  DemonPanel: {fileID: 0}
   RitualProtos:
   - {fileID: 11492788}
   UnluckyPlayer: {fileID: 0}
   CurrentRitual: []
+--- !u!114 &11456934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396823132cee10c4c8ab6b5eba6a81fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Satisfied: 0
+  ItemTypes:
+  - meat
+  - tomato
+  - pasta
+  TaskTypes:
+  - chop
+  - fry
+  - boil
+  ItemType: 
+  TaskType: 
 --- !u!114 &11492788
 MonoBehaviour:
   m_ObjectHideFlags: 1

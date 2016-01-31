@@ -16,6 +16,6 @@ public class TrashItemRitual : RitualBase
 
     public override string Description()
     {
-        return "throw some " + ItemType + " in the trash";
+        return "throw some " + ItemType.ToLower() + " in the trash";
     }
 }

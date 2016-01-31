@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class IngredientBase : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class IngredientBase : MonoBehaviour
     public void Process(string TaskType)
     {
         TasksDone.Add(TaskType);
+
+        var ritual = FindObjectOfType<RitualMaster>().RemainingRituals<ProcessItemRitual>().Where(r => r.ItemType == Type.ToLower() && r.TaskType == TaskType.ToLower()).FirstOrDefault();
+        if (ritual != null)
+        {
+            ritual.Satisfied = true;
+        }
 
         if (ProcessStages != null)
         {
