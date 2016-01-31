@@ -27,7 +27,7 @@ public class StarsManager : MonoBehaviour
         {
 			//Do game over screen
 			musicMaster.OneShot("lose", transform.position);
-            GameObject.FindObjectOfType<GameOverHandler>().DoGameOver();
+            GameObject.FindObjectOfType<GameHandler>().DoGameOver();
         }
 
         //Update stars UI images

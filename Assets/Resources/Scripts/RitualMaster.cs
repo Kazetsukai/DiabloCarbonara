@@ -87,7 +87,7 @@ public class RitualMaster : MonoBehaviour {
         }
     }
     
-    private void FinishRitual(bool good = true)
+    public void FinishRitual(bool good = true)
     {
         _musicMaster.TransitionMusic(1);
 

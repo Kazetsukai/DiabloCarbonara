@@ -24,6 +24,12 @@ public class MusicMaster : MonoBehaviour
 	private string loseSoundName = "event:/Lose Star/LoseStar";
 	private string bellSoundName = "event:/Order Bell/Order_Bell";
 
+    private string demonTalkSoundName = "event:/Demon Talking/Demon_Talking";
+	private string fireSoundName = "event:/Fire/Fire";
+	private string ritualSuccessSoundName = "event:/Ritual/Ritual_Success";
+	private string ritualFailureSoundName = "event:/Ritual/Ritual_Failure";
+	private string smokeAlarmSoundName = "event:/Smoke Alarm/Smoke_Alarm";
+
 	public Dictionary<string, string> soundNameMap;
 	public List<EventInstance> currentSounds;
 
@@ -43,6 +49,12 @@ public class MusicMaster : MonoBehaviour
 		FillMap("drop", dropSoundName);
 		FillMap("lose", loseSoundName);
 		FillMap("bell", bellSoundName);
+
+		FillMap("demonTalk", demonTalkSoundName);
+		FillMap("ritualSuccess", ritualSuccessSoundName);
+		FillMap("ritualFailure", ritualFailureSoundName);
+		FillMap("fire", fireSoundName);
+		FillMap("smokeAlarm", smokeAlarmSoundName);
 
 		currentSounds = new List<EventInstance>();
 		_musicEvent = FMODUnity.RuntimeManager.CreateInstance(musicEventName);

@@ -5539,6 +5539,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 950505773}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 852173884}
   ChopDownTransform: {fileID: 342943677}
   MaxVarianceZ: 0.38
@@ -6314,6 +6315,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 1659889845}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 877906971}
   ChopDownTransform: {fileID: 766673166}
   MaxVarianceZ: 0.38
