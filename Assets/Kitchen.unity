@@ -341,11 +341,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 103971857}
   m_LocalRotation: {x: 0.3535534, y: 0.3535534, z: -0.14644663, w: 0.85355335}
-  m_LocalPosition: {x: -15.58, y: -2.2, z: 6.76}
+  m_LocalPosition: {x: -12.649994, y: -2.1100006, z: 3.9499998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 16
 --- !u!1001 &160113599
 Prefab:
   m_ObjectHideFlags: 0
@@ -851,7 +851,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477808, guid: 577a9525827dce94faf327bdaccf7afd, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 176410, guid: 577a9525827dce94faf327bdaccf7afd, type: 2}
       propertyPath: m_Name
@@ -1014,6 +1014,64 @@ Transform:
   - {fileID: 506077268}
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!1001 &660214844
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11449630, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: RitualProtos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.048967
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.5484958
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.6230783
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: m_RootOrder
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449630, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: Demon
+      value: 
+      objectReference: {fileID: 103971859}
+    - target: {fileID: 11449630, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: DemonText
+      value: 
+      objectReference: {fileID: 889816945}
+    - target: {fileID: 11449630, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+      propertyPath: RitualProtos.Array.data[0]
+      value: 
+      objectReference: {fileID: 893266147}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &730760501
 Prefab:
   m_ObjectHideFlags: 0
@@ -1385,6 +1443,124 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1366868441}
   m_RootOrder: 7
+--- !u!1 &889816943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 889816944}
+  - 222: {fileID: 889816946}
+  - 114: {fileID: 889816945}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &889816944
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889816943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1893087649}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -150, y: -169}
+  m_SizeDelta: {x: 225, y: 81}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &889816945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889816943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8308824, g: 0.006109435, b: 0.006109435, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 16
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: What is this shit? KHABkglur sdi luhglskdj bflskdf ho;sdjbf ksdhflkdshf
+    vksjdfhkljdsfbvkjbf v
+--- !u!222 &889816946
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889816943}
+--- !u!1 &893266146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 893266148}
+  - 114: {fileID: 893266147}
+  m_Layer: 0
+  m_Name: RitualProtos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &893266147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893266146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5edaac48b37a447a66a7c38a529d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemTypes:
+  - meat
+  - tomato
+  - pasta
+  ItemType: 
+--- !u!4 &893266148
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893266146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1548428279}
+  m_RootOrder: 0
 --- !u!1 &923972044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,7 +2591,7 @@ Transform:
   - {fileID: 317949107}
   - {fileID: 2094711613}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 30
 --- !u!1001 &1433181144
 Prefab:
   m_ObjectHideFlags: 0
@@ -2532,50 +2708,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4dda54418c0d844ab0d20f0346bde18, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1548428278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1548428279}
-  - 114: {fileID: 1548428280}
-  m_Layer: 0
-  m_Name: RitualMaster
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1548428279
+--- !u!4 &1548428279 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1548428278}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.048967, y: 2.5484958, z: -4.6230783}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 30
---- !u!114 &1548428280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1548428278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874f97bd686e3d48bec3bc4c392f496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Demon: {fileID: 103971859}
-  DemonText: {fileID: 0}
-  RitualProtos: []
-  UnluckyPlayer: {fileID: 0}
-  CurrentRitual: []
+  m_PrefabParentObject: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
+  m_PrefabInternal: {fileID: 660214844}
 --- !u!1 &1596994653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,7 +2772,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 28
 --- !u!1001 &1600581060
 Prefab:
   m_ObjectHideFlags: 0
@@ -3112,7 +3248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477808, guid: 577a9525827dce94faf327bdaccf7afd, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 577a9525827dce94faf327bdaccf7afd, type: 2}
@@ -4751,7 +4887,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -4788,9 +4924,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 889816944}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

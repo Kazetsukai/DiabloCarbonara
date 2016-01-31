@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RitualBase : MonoBehaviour
 {
-    public bool Satisfied { get; set; }
+    public bool Satisfied;
 
     public virtual void Randomise()
     {

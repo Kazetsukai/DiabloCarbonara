@@ -15,32 +15,37 @@ public class RitualMaster : MonoBehaviour {
 
     public Player UnluckyPlayer;
     public RitualBase[] CurrentRitual;
+    private int _numRemaining;
 
 
     // Use this for initialization
     void Start () {
-        _demonvisible = true;
-        
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	    if (_demonvisible)
         {
-            if (_opacity < 1) _opacity += Time.deltaTime;
+            if (_opacity < 2) _opacity += Time.deltaTime;
         }
         else
         {
             if (_opacity > 0) _opacity -= Time.deltaTime;
         }
-        _opacity = Mathf.Clamp(_opacity, 0, 1);
+        var opac = Mathf.Clamp(_opacity, 0, 1);
 
         var colour = Demon.color;
         colour.a = _opacity;
         Demon.color = colour;
 
-
-
+        var textColour = Demon.color;
+        textColour.a = _opacity;
+        DemonText.color = textColour;
+        
+        if (_numRemaining != RemainingRituals<RitualBase>().Count())
+        {
+            UpdateRitual();
+        }
 
         // Debug
         if (Input.GetKeyDown(KeyCode.F1))
@@ -48,6 +53,31 @@ public class RitualMaster : MonoBehaviour {
             TriggerRitual();
         }
 	}
+
+    private void UpdateRitual()
+    {
+        _numRemaining = RemainingRituals<RitualBase>().Count();
+
+        if (_numRemaining > 0)
+        {
+            var descs = RemainingRituals<RitualBase>().Select(c => c.Description());
+            descs = descs
+                .Take(descs.Count() - 1)
+                .Select(d => d += ", ")
+                .Concat(new[] { (_numRemaining > 0 ? "and " : "") + descs.Last() });
+            DemonText.text = "I command you to " + string.Join("", descs.ToArray()) + ".";
+        }
+        else
+        {
+            FinishRitual();
+        }
+    }
+
+    private void FinishRitual()
+    {
+        DemonText.text = "Excellent work team!";
+        _demonvisible = false;
+    }
 
     private void TriggerRitual()
     {
@@ -76,6 +106,8 @@ public class RitualMaster : MonoBehaviour {
         // Change up the music
 
         _demonvisible = true;
+
+        UpdateRitual();
     }
 
     public IEnumerable<T> RemainingRituals<T>() where T : RitualBase
