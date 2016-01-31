@@ -159,7 +159,8 @@ public class PanBench : BenchBase
 			progress = 0;
 			var temp = contents;
 			contents = null;
-			return temp;
+            burnt = false;
+            return temp;
 		}
 		else
 		{
