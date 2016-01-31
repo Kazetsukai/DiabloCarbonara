@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BenchBase : MonoBehaviour
 {
@@ -98,7 +99,14 @@ public class BenchBase : MonoBehaviour
 		// Get it
 		GetItem(item);
 
-		return true;
+        var ritual = FindObjectOfType<RitualMaster>().RemainingRituals<PutItemsRitual>().Where(r => r.GetBenchesCompleted() >= r.NumBenches).FirstOrDefault();
+        if (ritual != null)
+        {
+            ritual.Satisfied = true;
+        }
+
+
+        return true;
 	}
 
 	public virtual void GetItem(IngredientBase item)
