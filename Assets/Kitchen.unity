@@ -4937,7 +4937,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
 --- !u!1001 &1600581060
 Prefab:
   m_ObjectHideFlags: 0
@@ -7790,7 +7790,7 @@ RectTransform:
   - {fileID: 403654823}
   - {fileID: 138074065}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -8164,9 +8164,9 @@ MonoBehaviour:
   RitualTimerObj: {fileID: 138074064}
   RitualTimerFill: {fileID: 200345270}
   CurrentRitualElapsed: 0
-  CurrentRitualDuration: 10
+  CurrentRitualDuration: 60
   MinTimeBetweenRituals: 10
-  MaxTimeBetweenRituals: 10
+  MaxTimeBetweenRituals: 60
   timeSinceLastRitual: 0
   nextRitualTime: 0
   LevelLights:
@@ -8188,7 +8188,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
 --- !u!1 &2004056060
 GameObject:
   m_ObjectHideFlags: 0
