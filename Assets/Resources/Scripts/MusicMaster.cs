@@ -17,6 +17,8 @@ public class MusicMaster : MonoBehaviour
 	public string frySoundNamePrefix = "event:/Fry Station/Fry_Station_";
 	public string chopSoundNamePrefix = "event:/Boil Station/Boil_Station_";
 
+	public string binSoundNamePrefix = "event:/Bin/Bin";
+
 	public Dictionary<string, string> soundNameMap;
 	public List<EventInstance> currentSounds;
 
@@ -25,8 +27,9 @@ public class MusicMaster : MonoBehaviour
 	{
 		soundNameMap = new Dictionary<string, string>();
 		FillMap("boil", boilSoundNamePrefix, 3);
-        FillMap("fry", frySoundNamePrefix, 3);
+		FillMap("fry", frySoundNamePrefix, 3);
 		FillMap("chop", chopSoundNamePrefix, 3);
+		FillMap("bin", binSoundNamePrefix, 3);
 
 		currentSounds = new List<EventInstance>();
 		_musicEvent = FMODUnity.RuntimeManager.CreateInstance(musicEventName);
@@ -53,16 +56,29 @@ public class MusicMaster : MonoBehaviour
 			TransitionMusic(2f);
 	}
 
+	public void OneShot(string name, Vector3 position)
+	{
+		string soundName = getSoundKey(name);
+		FMODUnity.RuntimeManager.PlayOneShot(soundName, position);
+	}
+
 	public int PlaySound(string name, Vector3 pos)
 	{
-		var keys = soundNameMap.Keys.Where(x => x.StartsWith(name)).ToList();
-		var soundName = soundNameMap[keys[random.Next(1, 3)]];
+		string soundName = getSoundKey(name);
 		var soundEvent = FMODUnity.RuntimeManager.CreateInstance(soundName);
 		soundEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(pos));
 		soundEvent.start();
 
 		currentSounds.Add(soundEvent);
 		return currentSounds.IndexOf(soundEvent);
+	}
+
+	private string getSoundKey(string name)
+	{
+		var keys = soundNameMap.Keys.Where(x => x.StartsWith(name)).ToList();
+		var index = keys.Count > 1 ? keys[random.Next(1, keys.Count)] : keys.First();
+		var soundName = soundNameMap[index];
+		return soundName;
 	}
 
 	public void StopSound(int id)
