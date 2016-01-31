@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 
             //Update walk animation
             float speed = _controller.velocity.magnitude;
-            _anim.SetFloat("MoveSpeed", speed);
+            _anim.SetFloat("MoveSpeed", speed > 0.1f ? speed : 0);
             _anim.speed = MoveSpeedVsAnimSpeed.Evaluate(speed);
         }
         else
