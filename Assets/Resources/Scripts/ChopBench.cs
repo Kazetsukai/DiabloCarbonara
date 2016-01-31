@@ -103,7 +103,10 @@ public class ChopBench : BenchBase
         if (progress >= 1)
 		{
             upTargetReached = false;
-            contents.Process(TaskType);
+            if (!contents.burnt)
+            {
+                contents.Process(TaskType);
+            }            
 
             //Reset player arm IK targets
             player.IKArm_R.solver.target = player.ArmIKTarget_R;
