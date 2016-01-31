@@ -56,8 +56,8 @@ public class PotBench : BenchBase
 				contents.Process(TaskType);
 			}
 			musicMaster.StopSound(currentSound);
-
-			progress = 0;
+            
+            progress = 0;
 			var temp = contents;
 			contents = null;
 			return temp;
