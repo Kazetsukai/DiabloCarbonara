@@ -3716,7 +3716,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454762, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11404024, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: StirIndicator
@@ -4153,6 +4153,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 1855407515}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 2009336817}
   ChopDownTransform: {fileID: 1010710486}
   MaxVarianceZ: 0.38
@@ -7909,7 +7910,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 401652, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11449630, guid: 29360d611147b2d449357aff89adb8ed, type: 2}
       propertyPath: Demon
@@ -8271,6 +8272,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 775986604}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 923972045}
   ChopDownTransform: {fileID: 362016728}
   MaxVarianceZ: 0.38
