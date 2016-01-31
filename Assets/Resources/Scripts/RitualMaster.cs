@@ -96,11 +96,11 @@ public class RitualMaster : MonoBehaviour
 		if (!good)
 		{
 			_punishment.ExecutePunishment();
-			_musicMaster.OneShot("ritualSuccess", transform.position);
+			_musicMaster.OneShot("ritualFailure", transform.position);
 		}
 		else
 		{
-			_musicMaster.OneShot("ritualFailure", transform.position);
+			_musicMaster.OneShot("ritualSuccess", transform.position);
 		}
 
 		DemonText.text = good ? "Excellent work team!" : "I'm disappointed in you...";
