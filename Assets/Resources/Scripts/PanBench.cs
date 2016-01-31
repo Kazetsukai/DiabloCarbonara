@@ -19,7 +19,8 @@ public class PanBench : BenchBase
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
     public GameObject StirIndicator;
-
+    public LightFader FireLight;
+ 
 	public string TaskType = "Fry";
 
 	public float StirAngle;
@@ -41,6 +42,8 @@ public class PanBench : BenchBase
 	private bool burnt;
 	private MusicMaster musicMaster;
 	private int currentSound;
+
+    bool fireLightActive;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -132,7 +135,7 @@ public class PanBench : BenchBase
         else
         {
             StirIndicator.gameObject.SetActive(false);
-        }
+        }               
 
 		if (progress >= 1)
 		{
@@ -152,6 +155,7 @@ public class PanBench : BenchBase
 
             //Turn off burning
             burning = 0;
+            FireLight.TurnOff();
 
 			progress = 0;
 			var temp = contents;
@@ -222,8 +226,8 @@ public class PanBench : BenchBase
         }
 
 		BurnEmitter.enabled = false;
-		FireEmitter.enabled = false;
-		if (contents != null)
+		FireEmitter.enabled = false;     
+        if (contents != null)
 		{
 			Color newColor;
 
@@ -237,6 +241,7 @@ public class PanBench : BenchBase
 					progress = 1;
 					newColor = Color.black;
 					FireEmitter.enabled = true;
+                    FireLight.TurnOn();                                      
 				}
 				else
 				{
@@ -275,4 +280,6 @@ public class PanBench : BenchBase
 			}
 		}
 	}
+
+  
 }

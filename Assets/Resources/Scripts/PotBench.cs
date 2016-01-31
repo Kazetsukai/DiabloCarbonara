@@ -28,8 +28,9 @@ public class PotBench : BenchBase
 	public GameObject progressImage;
 
 	public string TaskType = "Boil";
+    public LightFader FireLight;
 
-	private ParticleSystem.EmissionModule Emitter;
+    private ParticleSystem.EmissionModule Emitter;
 	private ParticleSystem.EmissionModule BurnEmitter;
 	private ParticleSystem.EmissionModule FireEmitter;
 
@@ -56,7 +57,10 @@ public class PotBench : BenchBase
 				contents.Process(TaskType);
 			}
 			musicMaster.StopSound(currentSound);
-            
+
+            //Turn off burning     
+            FireLight.TurnOff();
+
             progress = 0;
 			var temp = contents;
 			contents = null;
@@ -98,9 +102,9 @@ public class PotBench : BenchBase
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
+        progressImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
 
-
-		BurnEmitter.enabled = false;
+        BurnEmitter.enabled = false;
 		FireEmitter.enabled = false;
 		if (contents != null)
 		{
@@ -114,7 +118,8 @@ public class PotBench : BenchBase
 				{
 					newColor = Color.black;
 					FireEmitter.enabled = true;
-				}
+                    FireLight.TurnOn();
+                }
 				else
 				{
 					newColor = Color.red * ((Mathf.Sin(Time.time * FLASH_SCALE) / 2) + 0.5f);
