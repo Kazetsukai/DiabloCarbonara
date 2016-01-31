@@ -18,12 +18,12 @@ public class PanBench : BenchBase
 
 	public GameObject progressImagePrefab;
 	public GameObject progressImage;
+    public GameObject StirIndicator;
 
 	public string TaskType = "Fry";
 
 	public float StirAngle;
 	public float StirAngleProgress;
-
 
 	Vector3 SpatulaIdlePosition;
 	Vector3 SpatulaIdleRotation;
@@ -78,8 +78,7 @@ public class PanBench : BenchBase
             {
                 StirAngle = 360 - StirAngle;
             }
-        }
-		
+        }		
 
 		//Update stir angle progress (only allow increases by counter clockwise stirring)
 		float deltaStirAngle = Mathf.Clamp(StirAngle - lastStirAngle, 0, 360);
@@ -116,6 +115,16 @@ public class PanBench : BenchBase
 		InteractSpatulaResetElapsed = 0;
 		Spatula.transform.position = player.HandLeft.transform.position;
 		Spatula.transform.LookAt(StirTarget.position);
+
+        //Show stir indicator
+        if (contents != null)
+        {
+            StirIndicator.gameObject.SetActive(true);
+        }
+        else
+        {
+            StirIndicator.gameObject.SetActive(false);
+        }
 
 		if (progress >= 1)
 		{
@@ -175,14 +184,15 @@ public class PanBench : BenchBase
 	}
 
 	public new void Update()
-	{
+	{    
 		Vector3 pos = transform.position + Vector3.up * 3;
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
+        progressImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
 
-		//Update Spatula position
-		InteractSpatulaResetElapsed += Time.deltaTime;
+        //Update Spatula position
+        InteractSpatulaResetElapsed += Time.deltaTime;
 		if (InteractSpatulaResetElapsed >= InteractSpatulaResetTime)
 		{
 			Spatula.transform.position = SpatulaIdlePosition;
@@ -195,7 +205,10 @@ public class PanBench : BenchBase
 				LastInteractedPlayer.IKArm_L.solver.target = LastInteractedPlayer.ArmIKTarget_L;
 				LastInteractedPlayer = null;
 			}
-		}
+
+            //Hide stir indicator
+            StirIndicator.gameObject.SetActive(false);
+        }
 
 		BurnEmitter.enabled = false;
 		FireEmitter.enabled = false;
