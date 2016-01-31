@@ -100,7 +100,7 @@ public class PanBench : BenchBase
 		{
 			StirAngleProgress = 0f;
 
-			burningCooldown = Time.time + 5f;
+			burningCooldown = Time.time + 2f;
 			burning = 0;
 		}
 
@@ -170,7 +170,7 @@ public class PanBench : BenchBase
             return false;
         }
 
-		burningCooldown = Time.time + 5f;
+		burningCooldown = Time.time + 2f;
 		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		return true;
 	}
