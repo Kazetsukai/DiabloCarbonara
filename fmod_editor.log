@@ -28,3 +28,5 @@
 [LOG] Thread::callback                         : * FMOD Studio load thread started
 [LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
 [LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)

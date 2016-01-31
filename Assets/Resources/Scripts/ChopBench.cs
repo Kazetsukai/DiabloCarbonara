@@ -143,6 +143,7 @@ public class ChopBench : BenchBase
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
 		progressImage.GetComponent<RectTransform>().position = screenPos;
 		progressImage.GetComponent<Image>().fillAmount = progress;
+        progressImage.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
 
         //Update knife position
         InteractKnifeResetElapsed += Time.deltaTime;

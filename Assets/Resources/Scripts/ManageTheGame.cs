@@ -20,8 +20,9 @@ public class ManageTheGame : MonoBehaviour
     bool _beginning = false;
     bool _playing = false;
 	private MusicMaster musicMaster;
+    private RitualMaster ritualMaster;
 
-	void Awake()
+    void Awake()
     {
         DontDestroyOnLoad(this);
     }
@@ -31,6 +32,11 @@ public class ManageTheGame : MonoBehaviour
     {
 		musicMaster = FindObjectOfType<MusicMaster>();
 		musicMaster.StartIntro();
+        DontDestroyOnLoad(musicMaster);
+        
+        ritualMaster = FindObjectOfType<RitualMaster>();
+        DontDestroyOnLoad(ritualMaster);
+
         ActivePlayers = new GameObject[MAX_PLAYERS];
     }
 

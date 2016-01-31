@@ -4153,6 +4153,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 1855407515}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 2009336817}
   ChopDownTransform: {fileID: 1010710486}
   MaxVarianceZ: 0.38
@@ -4196,7 +4197,7 @@ Transform:
   - {fileID: 1924939380}
   - {fileID: 1788870107}
   m_Father: {fileID: 0}
-  m_RootOrder: 33
+  m_RootOrder: 32
 --- !u!1 &1411474931
 GameObject:
   m_ObjectHideFlags: 0
@@ -4764,48 +4765,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4dda54418c0d844ab0d20f0346bde18, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1614735440
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 401966, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
-      propertyPath: m_RootOrder
-      value: 31
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5ba4cf59be8aa3141a4059aff091c8f5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1619881564
 GameObject:
@@ -8295,6 +8254,7 @@ MonoBehaviour:
   upTargetReached: 0
   TaskType: Chop
   Knife: {fileID: 775986604}
+  chopIndicator: {fileID: 0}
   ChopUpTransform: {fileID: 923972045}
   ChopDownTransform: {fileID: 362016728}
   MaxVarianceZ: 0.38
@@ -8338,7 +8298,7 @@ Transform:
   - {fileID: 621930434}
   - {fileID: 1792968631}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 31
 --- !u!1 &2094711612
 GameObject:
   m_ObjectHideFlags: 0
