@@ -250,15 +250,15 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-            if (CurrentInteractable != null && 
-                CurrentInteractable.LastInteractedPlayer != null && 
-                CurrentInteractable.LastInteractedPlayer.Interacting && 
-                CurrentInteractable.LastInteractedPlayer.CurrentInteractable == CurrentInteractable)
+            if (CurrentInteractable == null || (CurrentInteractable != null && 
+                                                CurrentInteractable.LastInteractedPlayer != null && 
+                                                CurrentInteractable.LastInteractedPlayer.Interacting && 
+                                                CurrentInteractable.LastInteractedPlayer.CurrentInteractable == CurrentInteractable))
             {
                 return false;
             }     
                   
-            var item = CurrentInteractable == null ? null : CurrentInteractable.Interact(this, GetInput());
+            var item = CurrentInteractable.Interact(this, GetInput());
 			if (item != null)
 			{
 				// hold item above head
