@@ -51,3 +51,5 @@
 [LOG] Global::decRef                           : Shut down file system.
 [LOG] SystemI::close                           : done.
 
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
+[LOG] Manager::readBank                        : fileversion = 68, compatVersion = 68 (oldest = 44, newest = 68)
