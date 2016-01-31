@@ -184,6 +184,11 @@ public class UIRecipes : MonoBehaviour
 
             //Increment score
             GameObject.FindObjectOfType<StarsManager>().OrdersCompleted++;
+
+         
+
+            //Do plate animation
+            plateInfo.Bench.DoRecipeCompleteAnim();            
         }       
 	}
 
