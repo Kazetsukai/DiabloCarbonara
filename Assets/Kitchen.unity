@@ -4937,7 +4937,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 25
 --- !u!1001 &1600581060
 Prefab:
   m_ObjectHideFlags: 0
@@ -8176,9 +8176,9 @@ MonoBehaviour:
   RitualTimerObj: {fileID: 138074064}
   RitualTimerFill: {fileID: 200345270}
   CurrentRitualElapsed: 0
-  CurrentRitualDuration: 10
+  CurrentRitualDuration: 60
   MinTimeBetweenRituals: 10
-  MaxTimeBetweenRituals: 10
+  MaxTimeBetweenRituals: 60
   timeSinceLastRitual: 0
   nextRitualTime: 0
 --- !u!4 &2002177343
