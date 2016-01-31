@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BenchBase : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class BenchBase : MonoBehaviour
     public Transform HandIKTarget_R;
     public Transform HandIKTarget_L;
     public Player LastInteractedPlayer;
+
+    List<Player> PlayersLookingAtMe = new List<Player>();
+    
             
 	public virtual IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -16,6 +20,56 @@ public class BenchBase : MonoBehaviour
 		contents = null;
 		return temp;
 	}
+
+    void SetCurrentHighlightColor(Color highlightColor)
+    {
+        Transform selectionTransform = transform.FindChild("SelectionHighlight");
+        if (selectionTransform != null)
+        {
+            Renderer renderer = selectionTransform.GetComponent<Renderer>();
+            renderer.enabled = true;
+            Material mat = renderer.material;
+            mat.SetColor("_EmissionColor", highlightColor);
+            mat.EnableKeyword("_EMISSION");
+        }
+    }
+
+    void RemoveHighlightColor()
+    {
+        Transform selectionTransform = transform.FindChild("SelectionHighlight");
+        if (selectionTransform != null)
+        {
+            Renderer renderer = selectionTransform.GetComponent<Renderer>();
+            renderer.enabled = false;
+        }
+    }
+
+    public void AddLookingAt(Player player)
+    {
+        if (!PlayersLookingAtMe.Contains(player))
+        {
+            PlayersLookingAtMe.Add(player);
+        }
+
+        SetCurrentHighlightColor(player.SelectColor);
+    }
+
+    public void RemoveLookingAt(Player player)
+    {
+        if (PlayersLookingAtMe.Contains(player))
+        {
+            PlayersLookingAtMe.Remove(player);
+        }
+
+        if (PlayersLookingAtMe.Count > 0)
+        {
+            SetCurrentHighlightColor(PlayersLookingAtMe[PlayersLookingAtMe.Count - 1].SelectColor);
+        }
+        else
+        {
+            RemoveHighlightColor();
+        }
+    }
 
 	public bool Put(IngredientBase item)
 	{

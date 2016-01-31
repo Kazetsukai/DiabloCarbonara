@@ -188,24 +188,26 @@ public class Player : MonoBehaviour
             // Do a cheap selection effect
             if (CurrentInteractable != null)
             {
-                Transform selectionTransform = CurrentInteractable.transform.FindChild("SelectionHighlight");
-                if (selectionTransform != null)
-                {
-                    Renderer renderer = selectionTransform.GetComponent<Renderer>();
-                    renderer.enabled = false;
-                }
+                CurrentInteractable.RemoveLookingAt(this);
+                //Transform selectionTransform = CurrentInteractable.transform.FindChild("SelectionHighlight");
+                //if (selectionTransform != null)
+                //{
+                //    Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                //    renderer.enabled = false;
+                //}
             }
             if (touchedObject != null)
             {
-                Transform selectionTransform = touchedObject.transform.FindChild("SelectionHighlight");
-                if (selectionTransform != null)
-                {
-                    Renderer renderer = selectionTransform.GetComponent<Renderer>();
-                    renderer.enabled = true;
-                    Material mat = renderer.material;
-                    mat.SetColor("_EmissionColor", SelectColor);
-                    mat.EnableKeyword("_EMISSION");
-                }
+                touchedObject.AddLookingAt(this);
+                //Transform selectionTransform = touchedObject.transform.FindChild("SelectionHighlight");
+                //if (selectionTransform != null)
+                //{
+                //    Renderer renderer = selectionTransform.GetComponent<Renderer>();
+                //    renderer.enabled = true;
+                //    Material mat = renderer.material;
+                //    mat.SetColor("_EmissionColor", SelectColor);
+                //    mat.EnableKeyword("_EMISSION");
+                //}
             }
 
             CurrentInteractable = touchedObject;
