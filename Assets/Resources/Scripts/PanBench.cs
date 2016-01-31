@@ -13,7 +13,7 @@ public class PanBench : BenchBase
 	public float burning;
 	public float burningCooldown;
 	private const float burnTime = 5f;
-    private readonly float PROGRESS_SPEED = 20;
+    private readonly float PROGRESS_SPEED = 5;
     public float MinimumStirAngleProgress = 15f;        //To stop player skipping stirring full circles
 
 	public GameObject progressImagePrefab;
