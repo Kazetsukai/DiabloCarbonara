@@ -44,6 +44,7 @@ public class PanBench : BenchBase
 	private int currentSound;
 
     bool fireLightActive;
+	private int currentFire = -1;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -161,7 +162,6 @@ public class PanBench : BenchBase
 
             //Turn off burning
             burning = 0;
-            FireLight.TurnOff();
 
 			progress = 0;
 			var temp = contents;
@@ -236,9 +236,9 @@ public class PanBench : BenchBase
             StirIndicator.gameObject.SetActive(false);
         }
 
-		BurnEmitter.enabled = false;
-		FireEmitter.enabled = false;     
-        if (contents != null)
+		bool onFire = false;
+		bool onSmoke = false;
+		if (contents != null)
 		{
 			Color newColor;
 
@@ -251,13 +251,12 @@ public class PanBench : BenchBase
                     burnt = true;
 					progress = 1;
 					newColor = Color.black;
-					FireEmitter.enabled = true;
-                    FireLight.TurnOn();                                      
+					onFire = true;
 				}
 				else
 				{
 					newColor = Color.red * ((Mathf.Sin(Time.time * FLASH_SCALE) / 2) + 0.5f);
-					BurnEmitter.enabled = true;
+					onSmoke = true;
 				}
 			}
 			else
@@ -269,16 +268,40 @@ public class PanBench : BenchBase
 			progressImage.GetComponent<Image>().color = newColor;
 		}
 
-		if (!Emitter.enabled && contents != null)
-		{
-			Emitter.enabled = true;
-		}
-		else if (Emitter.enabled && contents == null)
-		{
-			Emitter.enabled = false;
-		}
+		aasd(BurnEmitter, onSmoke);
+		aasdd(FireEmitter, onFire);
+		aasd(Emitter, contents != null);
 
 		base.Update();
+	}
+
+	private void aasdd(ParticleSystem.EmissionModule mod, bool should)
+	{
+		if (!mod.enabled && should)
+		{
+			currentFire = musicMaster.PlaySound("fire", transform.position);
+			FireLight.TurnOn();
+			mod.enabled = true;
+		}
+		else if (mod.enabled && !should)
+		{
+			musicMaster.StopSound(currentFire);
+			FireLight.TurnOff();
+			currentFire = -1;
+			mod.enabled = false;
+		}
+	}
+
+	private void aasd(ParticleSystem.EmissionModule mod, bool should)
+	{
+		if (!mod.enabled && should)
+		{
+			mod.enabled = true;
+		}
+		else if (mod.enabled && !should)
+		{
+			mod.enabled = false;
+		}
 	}
 
 	public void FixedUpdate()
