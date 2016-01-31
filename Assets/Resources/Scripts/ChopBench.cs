@@ -39,6 +39,12 @@ public class ChopBench : BenchBase
 		{
 			return null;
 		}
+
+        if (contents.burnt)
+        {
+            progress = 100;
+        }
+
 		musicMaster.TransitionSound(currentSound, 0);
 
 		LastInteractedPlayer = player;
@@ -116,7 +122,11 @@ public class ChopBench : BenchBase
 
 	public override bool CanIReceive(IngredientBase item)
 	{
-		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
+        if (item.burnt)
+        {
+            return false;
+        }
+        currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		ParticleSystem.startColor = item.Color;
 		return true;
 	}

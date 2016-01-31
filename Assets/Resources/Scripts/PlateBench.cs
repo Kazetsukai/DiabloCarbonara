@@ -71,6 +71,11 @@ public class PlateBench : BenchBase
 
 	private bool IngredientMatches(IngredientBase item, Ingredient ingredient)
 	{
+        if (item.burnt)
+        {
+            return false;
+        }
+
 		// not right type
 		if (ingredient.Type != item.Type) return false;
 

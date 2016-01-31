@@ -22,7 +22,7 @@ public class IngredientBase : MonoBehaviour
     public Sprite BoilIcon;
 
     private int _currentStage = 0;
-	private bool burnt;
+	public bool burnt;
 
 	public void Start()
 	{
