@@ -95,7 +95,14 @@ public class PanBench : BenchBase
 		if (StirAngleProgress >= 360f)
 		{
 			StirAngleProgress = 0f;
+			var prevProgress = progress;
 			progress += 1f / StirCount;
+
+			if (prevProgress < 1 && progress > 1)
+			{
+				musicMaster.OneShot("complete", transform.position);
+			}
+
 			burningCooldown = Time.time + 5f;
 			burning = 0;
 		}

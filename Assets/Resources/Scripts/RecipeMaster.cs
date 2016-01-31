@@ -37,11 +37,13 @@ public class RecipeMaster : MonoBehaviour
         "Boil",
         "Fry"
     };
-    
+	private MusicMaster musicMaster;
+
 	// Use this for initialization
 	void Start ()
     {
-	    
+
+		musicMaster = FindObjectOfType<MusicMaster>();
 	}
 
     string GetRandomIngredient()
@@ -111,6 +113,7 @@ public class RecipeMaster : MonoBehaviour
                 if (plate.Recipe == null)
                 {
                     plate.Recipe = CreateRandomRecipe();
+					musicMaster.OneShot("bell", transform.position);
 					print(plate.Recipe);
                     break;
                 }
@@ -132,6 +135,7 @@ public class RecipeMaster : MonoBehaviour
                     UIRecipes recipes = GameObject.FindObjectOfType<UIRecipes>();
                     var plateInfo = recipes.plates[plate];
                     recipes.RemoveRecipePanel(plateInfo);
+					musicMaster.OneShot("dishDone", transform.position);
 
                     GameObject.FindObjectOfType<StarsManager>().StarsRemaining--;   //Remove a star from players                    
                 }

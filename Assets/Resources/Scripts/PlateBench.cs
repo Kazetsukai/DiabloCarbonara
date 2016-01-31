@@ -30,7 +30,8 @@ public class PlateBench : BenchBase
     Vector3 plateStartScale;
 
     bool completed;
-    
+	private MusicMaster musicMaster;
+
 	public override IngredientBase Interact(Player player, Vector2 input)
     {
 		return null;
@@ -89,17 +90,23 @@ public class PlateBench : BenchBase
 		return true;
 	}
 
-	public void Start()
+	public new void Start()
 	{
+		musicMaster = FindObjectOfType<MusicMaster>();
 		Ingredients = new List<IngredientBase>();
 		progressImage = Instantiate(progressImagePrefab);
 		var canvas = FindObjectOfType<Canvas>();
 		progressImage.transform.SetParent(canvas.transform);
         plateStartPos = Plate.transform.position;
         plateStartScale = Plate.transform.localScale;
+
+		base.Update();
 	}
 
-	public override void GetItem(IngredientBase item) { }
+	public override void GetItem(IngredientBase item)
+	{
+		musicMaster.OneShot("bin", transform.position);
+	}
 
 	public new void Update()
 	{

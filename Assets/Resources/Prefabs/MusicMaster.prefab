@@ -43,6 +43,7 @@ MonoBehaviour:
   boilSoundNamePrefix: event:/Boil Station/Boil_Station_
   frySoundNamePrefix: event:/Fry Station/Fry_Station_
   chopSoundNamePrefix: event:/Chop Station/Chop_Station_
+  binSoundNamePrefix: event:/Bin/Bin
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -7,17 +7,22 @@ using System.Linq;
 
 public class MusicMaster : MonoBehaviour
 {
-	System.Random random = new System.Random();
-
 	private EventInstance _musicEvent;
 	[FMODUnity.EventRef]
 	public string musicEventName = "event:/Italian_Kitchen";
 
-	public string boilSoundNamePrefix = "event:/Boil Station/Boil_Station_";
-	public string frySoundNamePrefix = "event:/Fry Station/Fry_Station_";
-	public string chopSoundNamePrefix = "event:/Boil Station/Boil_Station_";
+	private string boilSoundNamePrefix = "event:/Boil Station/Boil_Station_";
+	private string frySoundNamePrefix = "event:/Fry Station/Fry_Station_";
+	private string chopSoundNamePrefix = "event:/Chop Station/Chop_Station_";
+	private string binSoundNamePrefix = "event:/Bin/Bin";
+	private string footstepSoundNamePrefix = "event:/Footsteps/Footstep";
+	private string pickSoundNamePrefix = "event:/Ingredient/Ingredient_Grab";
 
-	public string binSoundNamePrefix = "event:/Bin/Bin";
+	private string completeSoundName = "event:/Completion Ding/Completion_Ding";
+	private string dishDoneSoundName = "event:/Dish Completion/Dish_Completion";
+	private string dropSoundName = "event:/Ingredient/Ingredient_Drop";
+	private string loseSoundName = "event:/Lose Star/LoseStar";
+	private string bellSoundName = "event:/Order Bell/Order_Bell";
 
 	public Dictionary<string, string> soundNameMap;
 	public List<EventInstance> currentSounds;
@@ -30,10 +35,23 @@ public class MusicMaster : MonoBehaviour
 		FillMap("fry", frySoundNamePrefix, 3);
 		FillMap("chop", chopSoundNamePrefix, 3);
 		FillMap("bin", binSoundNamePrefix, 3);
+		FillMap("footstep", footstepSoundNamePrefix, 6);
+		FillMap("pick", pickSoundNamePrefix, 3);
+
+		FillMap("complete", completeSoundName);
+		FillMap("dishDone", dishDoneSoundName);
+		FillMap("drop", dropSoundName);
+		FillMap("lose", loseSoundName);
+		FillMap("bell", bellSoundName);
 
 		currentSounds = new List<EventInstance>();
 		_musicEvent = FMODUnity.RuntimeManager.CreateInstance(musicEventName);
 		_musicEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+	}
+
+	private void FillMap(string id, string prefix)
+	{
+		soundNameMap.Add(id, prefix);
 	}
 
 	private void FillMap(string id, string prefix, int count)
@@ -76,8 +94,8 @@ public class MusicMaster : MonoBehaviour
 	private string getSoundKey(string name)
 	{
 		var keys = soundNameMap.Keys.Where(x => x.StartsWith(name)).ToList();
-		var index = keys.Count > 1 ? keys[random.Next(1, keys.Count)] : keys.First();
-		var soundName = soundNameMap[index];
+		var key = keys.Count > 1 ? keys[UnityEngine.Random.Range(0, keys.Count)] : keys.First();
+		var soundName = soundNameMap[key];
 		return soundName;
 	}
 

@@ -57,7 +57,13 @@ public class ChopBench : BenchBase
         }
         if ((yInput <= InputValue_Down) && upTargetReached)
 		{
-			progress += 1f / HitsRequired;
+			var prevProgress = progress;
+            progress += 1f / HitsRequired;
+
+			if (prevProgress < 1 && progress > 1)
+			{
+				musicMaster.OneShot("complete", transform.position);
+			}
 			musicMaster.TransitionSound(currentSound, 1);
 			upTargetReached = false;
 			ParticleSystem.Emit(30);
@@ -94,11 +100,6 @@ public class ChopBench : BenchBase
 		{			
 			return null;
 		}
-	}
-
-	private void stopTans()
-	{
-		musicMaster.TransitionSound(currentSound, 0);
 	}
 
 	public override bool CanIReceive(IngredientBase item)

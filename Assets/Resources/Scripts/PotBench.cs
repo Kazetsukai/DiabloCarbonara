@@ -151,7 +151,14 @@ public class PotBench : BenchBase
 	{
 		if (contents != null)
 		{
+			var prevProgress = progress;
+
 			progress += Time.fixedDeltaTime / PROGRESS_SPEED;
+
+			if (prevProgress < 1 && progress > 1)
+			{
+				musicMaster.OneShot("complete", transform.position);
+			}
 		}
 	}
 }

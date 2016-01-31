@@ -9,11 +9,12 @@ public class StarsManager : MonoBehaviour
 
     public Text OrdersCompleteText;
     public int OrdersCompleted = 0;
+	private MusicMaster musicMaster;
 
-    void Start()
+	void Start()
     {
-
-    }
+		musicMaster = FindObjectOfType<MusicMaster>();
+	}
 
     public void ResetStars()
     {
@@ -24,7 +25,8 @@ public class StarsManager : MonoBehaviour
     {
         if (StarsRemaining <= 0)
         {
-            //Do game over screen
+			//Do game over screen
+			musicMaster.OneShot("lose", transform.position);
             GameObject.FindObjectOfType<GameOverHandler>().DoGameOver();
         }
 
