@@ -29,6 +29,8 @@ public class ChopBench : BenchBase
     float InteractKnifeResetTime = 0.1f;
     float InteractKnifeResetElapsed;
 	private ParticleSystem ParticleSystem;
+	private MusicMaster musicMaster;
+	private int currentSound;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{       
@@ -36,8 +38,9 @@ public class ChopBench : BenchBase
 		{
 			return null;
 		}
+		musicMaster.TransitionSound(currentSound, 0);
 
-        LastInteractedPlayer = player;
+		LastInteractedPlayer = player;
 
         if (input.y >= InputValue_Up)
         {
@@ -47,14 +50,15 @@ public class ChopBench : BenchBase
             ChopDownTransform.localPosition = new Vector3(ChopDownTransform.localPosition.x, ChopDownTransform.localPosition.y, Random.Range(MinVarianceZ, MaxVarianceZ));
         }
         if ((input.y <= InputValue_Down) && upTargetReached)
-        {
-            progress += 1f / HitsRequired;
-            upTargetReached = false;
+		{
+			progress += 1f / HitsRequired;
+			musicMaster.TransitionSound(currentSound, 1);
+			upTargetReached = false;
 			ParticleSystem.Emit(30);
 		}
 
-        //Do animation for players arms
-        player.IKArm_R.solver.target = HandIKTarget_R;  //Set IK target R of player to be IK transform R of this bench
+		//Do animation for players arms
+		player.IKArm_R.solver.target = HandIKTarget_R;  //Set IK target R of player to be IK transform R of this bench
 
         //Move IK target based on joystick input
         float movePercent = Mathf.Abs(Mathf.Clamp(input.y, InputValue_Down, InputValue_Up));        
@@ -73,8 +77,9 @@ public class ChopBench : BenchBase
 
             //Reset player arm IK targets
             player.IKArm_R.solver.target = player.ArmIKTarget_R;
+			musicMaster.TransitionSound(currentSound, 2);
 
-            progress = 0;
+			progress = 0;
 			var temp = contents;
 			contents = null;
 			return temp;
@@ -85,14 +90,21 @@ public class ChopBench : BenchBase
 		}
 	}
 
+	private void stopTans()
+	{
+		musicMaster.TransitionSound(currentSound, 0);
+	}
+
 	public override bool CanIReceive(IngredientBase item)
 	{
+		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		ParticleSystem.startColor = item.Color;
 		return true;
 	}
 
 	public void Start()
 	{
+		musicMaster = FindObjectOfType<MusicMaster>();
 		ParticleSystem = GetComponentInChildren<ParticleSystem>();
 		progressImage = Instantiate(progressImagePrefab);
 		progressImage.GetComponent<Image>().color = Color.blue;

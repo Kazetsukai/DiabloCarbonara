@@ -39,6 +39,8 @@ public class PanBench : BenchBase
 	private float FLASH_SCALE = 15f;
 	private float burnThreshold = 1f;
 	private bool burnt;
+	private MusicMaster musicMaster;
+	private int currentSound;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -103,6 +105,7 @@ public class PanBench : BenchBase
 			{
 				contents.Process(TaskType);
 			}
+			musicMaster.StopSound(currentSound);
 
 			//Reset player arm IK targets
 			player.IKArm_R.solver.target = player.ArmIKTarget_R;
@@ -122,11 +125,14 @@ public class PanBench : BenchBase
 	public override bool CanIReceive(IngredientBase item)
 	{
 		burningCooldown = Time.time + 5f;
+		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		return true;
 	}
 
 	public void Start()
 	{
+		musicMaster = FindObjectOfType<MusicMaster>();
+
 		var particleSystems = GetComponentsInChildren<ParticleSystem>();
 		var psDict = particleSystems.ToDictionary(ps => ps.gameObject.name, ps => ps.emission);
 

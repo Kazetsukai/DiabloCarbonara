@@ -19,13 +19,9 @@ public class ManageTheGame : MonoBehaviour
 
     bool _beginning = false;
     bool _playing = false;
-    
-    [FMODUnity.EventRef]
-    public string eventName = "event:/Italian_Kitchen";
-    
-    private EventInstance _musicEvent;
+	private MusicMaster musicMaster;
 
-    void Awake()
+	void Awake()
     {
         DontDestroyOnLoad(this);
     }
@@ -33,13 +29,9 @@ public class ManageTheGame : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		musicMaster = FindObjectOfType<MusicMaster>();
+		musicMaster.StartIntro();
         ActivePlayers = new GameObject[MAX_PLAYERS];
-        _musicEvent = FMODUnity.RuntimeManager.CreateInstance(eventName);
-        _musicEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
-        _musicEvent.start();
-
-        // Intro music
-        _musicEvent.setParameterValue("Parameter 1", 0);
     }
 
     // Update is called once per frame
@@ -74,21 +66,13 @@ public class ManageTheGame : MonoBehaviour
                 }
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.F1))
-            _musicEvent.setParameterValue("Parameter 1", 0.0f);
-        if (Input.GetKeyDown(KeyCode.F2))
-            _musicEvent.setParameterValue("Parameter 1", 1.0f);
-        if (Input.GetKeyDown(KeyCode.F3))
-            _musicEvent.setParameterValue("Parameter 1", 2.0f);
     }
 
     IEnumerator BeginGame()
     {
         if (!_beginning)
         {
-
-            _musicEvent.setParameterValue("Parameter 1", 1.0f);
+			musicMaster.TransitionMusic(1f);
 
             _beginning = true;
 

@@ -35,6 +35,8 @@ public class PotBench : BenchBase
 
 	private float FLASH_SCALE = 15f;
 	private float burnThreshold = 1f;
+	private MusicMaster musicMaster;
+	private int currentSound;
 
 	public override IngredientBase Interact(Player player, Vector2 input)
 	{
@@ -53,6 +55,7 @@ public class PotBench : BenchBase
 			{
 				contents.Process(TaskType);
 			}
+			musicMaster.StopSound(currentSound);
 
 			progress = 0;
 			var temp = contents;
@@ -67,11 +70,14 @@ public class PotBench : BenchBase
 
 	public override bool CanIReceive(IngredientBase item)
 	{
+		currentSound = musicMaster.PlaySound(TaskType.ToLowerInvariant(), transform.position);
 		return true;
 	}
 
 	public void Start()
 	{
+		musicMaster = FindObjectOfType<MusicMaster>();
+
 		var particleSystems = GetComponentsInChildren<ParticleSystem>();
 		var psDict = particleSystems.ToDictionary(ps => ps.gameObject.name, ps => ps.emission);
 

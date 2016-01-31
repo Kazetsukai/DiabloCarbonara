@@ -225,7 +225,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454762, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 189494, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: m_Name
@@ -1964,6 +1964,45 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a93ab54a974f177459e506caf8f86e55, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &271239082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 271239084}
+  - 114: {fileID: 271239083}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &271239083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 271239082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9da104d4c0bd9e408f4e2c9c51bc750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &271239084
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 271239082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 278.57812, y: -35.797943, z: -112.14889}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
 --- !u!1 &293220135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,6 +2705,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1220806785}
   m_RootOrder: 6
+--- !u!1 &716853544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 716853546}
+  - 114: {fileID: 716853545}
+  m_Layer: 0
+  m_Name: MusicMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &716853545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716853544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2eba5c83aefa8749b444bb47b915fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicEventName: event:/Music/Italian_Kitchen
+  boilSoundNamePrefix: event:/Boil Station/Boil_Station_
+  frySoundNamePrefix: event:/Fry Station/Fry_Station_
+  chopSoundNamePrefix: event:/Chop Station/Chop_Station_
+--- !u!4 &716853546
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716853544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
 --- !u!1001 &730760501
 Prefab:
   m_ObjectHideFlags: 0
@@ -6375,7 +6457,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454762, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: m_RootOrder
-      value: 29
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 189494, guid: 454723510b9d0dc4386b5fa90443f03f, type: 2}
       propertyPath: m_Name
