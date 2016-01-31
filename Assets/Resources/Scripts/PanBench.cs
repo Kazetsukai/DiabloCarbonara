@@ -53,12 +53,6 @@ public class PanBench : BenchBase
 			return null;
 		}
 
-        if (contents.burnt)
-        {
-            burnt = true;
-            progress = 100;
-        }
-
 		LastInteractedPlayer = player;
 
         //Get stir angle from input
@@ -155,6 +149,7 @@ public class PanBench : BenchBase
 
             //Turn off burning
             burning = 0;
+			FireLight.TurnOff();
 
 			progress = 0;
 			var temp = contents;
