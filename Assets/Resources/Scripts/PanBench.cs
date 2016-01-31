@@ -127,6 +127,7 @@ public class PanBench : BenchBase
         if (contents != null)
         {
             StirIndicator.gameObject.SetActive(true);
+            StirIndicator.transform.position = LastInteractedPlayer.transform.position + new Vector3(0, 1.3f, 0);
         }
         else
         {
@@ -188,7 +189,10 @@ public class PanBench : BenchBase
 
 		SpatulaIdlePosition = Spatula.transform.position;
 		SpatulaIdleRotation = Spatula.transform.eulerAngles;
-	}
+
+        //Face stir indicator to camera on start (must be this direction for rotation to be right!!)
+        StirIndicator.transform.forward = Camera.main.transform.forward;
+    }
 
 	public new void Update()
 	{    

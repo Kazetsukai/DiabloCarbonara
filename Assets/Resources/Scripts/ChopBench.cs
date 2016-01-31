@@ -14,6 +14,7 @@ public class ChopBench : BenchBase
     public bool upTargetReached = false;
     public string TaskType = "Chop";
     public GameObject Knife;
+    public GameObject chopIndicator;
 
     [Header("Animation Stuff")]
     public Transform ChopUpTransform;
@@ -82,6 +83,17 @@ public class ChopBench : BenchBase
         Knife.transform.position = player.HandRight.transform.position;        
         Knife.transform.forward = -player.ArmRightLower.transform.right;
 
+        //Show chop indicator
+        if (contents != null)
+        {
+            chopIndicator.gameObject.SetActive(true);
+            chopIndicator.transform.position = LastInteractedPlayer.transform.position + new Vector3(0, 1.3f, 0);
+        }
+        else
+        {
+            chopIndicator.gameObject.SetActive(false);
+        }
+
         if (progress >= 1)
 		{
             upTargetReached = false;
@@ -120,6 +132,9 @@ public class ChopBench : BenchBase
 
         KnifeIdlePosition = Knife.transform.position;
         KnifeIdleRotation = Knife.transform.eulerAngles;
+
+        //Face chop indicator to camera on start
+        chopIndicator.transform.forward = -Camera.main.transform.forward;
     }
 
 	public new void Update()
@@ -143,6 +158,9 @@ public class ChopBench : BenchBase
                 LastInteractedPlayer.IKArm_L.solver.target = LastInteractedPlayer.ArmIKTarget_L;
                 LastInteractedPlayer = null;
             }
+
+            //Hide chop indicator
+            chopIndicator.gameObject.SetActive(false);
         }
 
 		base.Update();
