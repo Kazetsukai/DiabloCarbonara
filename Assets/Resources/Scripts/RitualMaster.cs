@@ -21,6 +21,7 @@ public class RitualMaster : MonoBehaviour {
     private int _numRemaining;
     private MusicMaster _musicMaster;
 
+    public bool RitualInProgress;
 
     // Use this for initialization
     void Start ()
@@ -74,60 +75,72 @@ public class RitualMaster : MonoBehaviour {
 
         if (_numRemaining > 0)
         {
-            var descs = RemainingRituals<RitualBase>().Select(c => c.Description());
-            descs = descs
-                .Take(descs.Count() - 1)
-                .Select(d => d += ", ")
-                .Concat(new[] { (_numRemaining > 0 ? "and " : "") + descs.Last() });
-            DemonText.text = "I command you to " + string.Join("", descs.ToArray()) + " or I will " + _punishment.Description() + ".";
+            if (RitualInProgress)
+            {
+                var descs = RemainingRituals<RitualBase>().Select(c => c.Description());
+                descs = descs
+                    .Take(descs.Count() - 1)
+                    .Select(d => d += ", ")
+                    .Concat(new[] { (_numRemaining > 0 ? "and " : "") + descs.Last() });
+                DemonText.text = "I command you to " + string.Join("", descs.ToArray()) + " or I will " + _punishment.Description() + ".";
+            }
         }
         else
         {
-            FinishRitual();
+            FinishRitual();           
         }
     }
     
     public void FinishRitual(bool good = true)
     {
-        _musicMaster.TransitionMusic(1);
+        if (RitualInProgress)
+        {
+            RitualInProgress = false;
+            _musicMaster.TransitionMusic(1);
 
-        if (!good)
-            _punishment.ExecutePunishment();
+            if (!good)
+                _punishment.ExecutePunishment();
 
-        DemonText.text = good ? "Excellent work team!" : "I'm disappointed in you...";
-        _demonvisible = false;
+            DemonText.text = good ? "Excellent work team!" : "I'm disappointed in you...";
+            _demonvisible = false;
+        }
     }
 
     public void TriggerRitual()
     {
-        // Pick unlucky victim
-        var players = FindObjectsOfType<Player>();
-        UnluckyPlayer = players[Random.Range(0, players.Length)];
-        
-        // Clean up old rituals
-        foreach (var ritual in CurrentRitual)
+        if (!RitualInProgress)
         {
-            Destroy(ritual);
+            RitualInProgress = true;
+
+            // Pick unlucky victim
+            var players = FindObjectsOfType<Player>();
+            UnluckyPlayer = players[Random.Range(0, players.Length)];
+
+            // Clean up old rituals
+            foreach (var ritual in CurrentRitual)
+            {
+                Destroy(ritual);
+            }
+
+            // Come up with a ritual
+            var ritualLength = 3;
+            CurrentRitual = new RitualBase[ritualLength];
+            for (int i = 0; i < ritualLength; i++)
+            {
+                CurrentRitual[i] = Instantiate(RitualProtos[Random.Range(0, RitualProtos.Length)]);
+                CurrentRitual[i].Randomise();
+            }
+
+            // Choose a punishment
+            _punishment = Instantiate(PunishmentProtos[Random.Range(0, PunishmentProtos.Length)]);
+
+            // Change up the music
+            _musicMaster.TransitionMusic(2);
+
+            _demonvisible = true;
+
+            UpdateRitual();
         }
-
-        // Come up with a ritual
-        var ritualLength = 3;
-        CurrentRitual = new RitualBase[ritualLength];
-        for (int i = 0; i < ritualLength; i++)
-        {
-            CurrentRitual[i] = Instantiate(RitualProtos[Random.Range(0, RitualProtos.Length)]);
-            CurrentRitual[i].Randomise();
-        }
-        
-        // Choose a punishment
-        _punishment = Instantiate(PunishmentProtos[Random.Range(0, PunishmentProtos.Length)]);
-
-        // Change up the music
-        _musicMaster.TransitionMusic(2);
-
-        _demonvisible = true;
-
-        UpdateRitual();
     }
 
     public IEnumerable<T> RemainingRituals<T>() where T : RitualBase

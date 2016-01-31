@@ -15,16 +15,16 @@ public class GameHandler : MonoBehaviour
 
     [Header("Rituals")]
     [SerializeField] GameObject RitualTimerObj;
-    [SerializeField] Image RitualTimerFill;
-    [SerializeField] bool RitualInProgress;
+    [SerializeField] Image RitualTimerFill;   
     [SerializeField] float CurrentRitualElapsed;
     [SerializeField] float CurrentRitualDuration;
 
     [SerializeField] float MinTimeBetweenRituals = 20f;
     [SerializeField] float MaxTimeBetweenRituals = 40f;
+ 
 
-    float timeSinceLastRitual;
-    float nextRitualTime;
+    [SerializeField] float timeSinceLastRitual;
+    [SerializeField] float nextRitualTime;
     
     void Start()
     {
@@ -45,6 +45,7 @@ public class GameHandler : MonoBehaviour
  
     void Update()
     {
+        var RitualInProgress = GameObject.FindObjectOfType<RitualMaster>().RitualInProgress;
         if (RitualInProgress)
         {
             RitualTimerObj.gameObject.SetActive(true);
@@ -52,12 +53,11 @@ public class GameHandler : MonoBehaviour
 
             RitualTimerFill.fillAmount = 1f - (CurrentRitualElapsed / CurrentRitualDuration);
 
-            if (CurrentRitualDuration >= CurrentRitualElapsed)
+            if (CurrentRitualElapsed >= CurrentRitualDuration)
             {
                 //Ritual was not completed by players! Ritual is failed. Punishment!
                 GameObject.FindObjectOfType<RitualMaster>().FinishRitual(false);
-                RitualInProgress = false;
-
+             
                 //Calculate time to next ritual
                 nextRitualTime = Random.Range(MinTimeBetweenRituals, MaxTimeBetweenRituals);
             }
@@ -71,8 +71,8 @@ public class GameHandler : MonoBehaviour
             if (timeSinceLastRitual >= nextRitualTime)
             {
                 timeSinceLastRitual = 0;
-                GameObject.FindObjectOfType<RitualMaster>().TriggerRitual();
-                RitualInProgress = true;
+                CurrentRitualElapsed = 0;
+                GameObject.FindObjectOfType<RitualMaster>().TriggerRitual();            
             }
         }
     }
